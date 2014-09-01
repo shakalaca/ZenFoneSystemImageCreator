@@ -37,8 +37,11 @@ fi
 
 # build for make_ext4fs
 cd libselinux/src
-# -DDARWIN for OS X
-gcc -DHOST -I../include -I../../core/include \
+CFLAGS=-DHOST
+if [ "$(uname)" == "Darwin" ]; then
+  CFLAGS="$CFLAGS -DDARWIN"
+fi
+gcc $CFLAGS -I../include -I../../core/include \
     -c callbacks.c check_context.c freecon.c init.c label.c label_file.c \
        label_android_property.c
 ar rcs libselinux.a *.o
