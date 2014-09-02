@@ -21,7 +21,7 @@ rm -rf unzipped_rom
 
 cp -R ../root/* system
 
-read -p 'Press any key to build system.img ..'
+read -p 'Press any key and enter sudo password to build system.img .. '
 
 sudo ../scripts/$LINK_PERM_SETUP_FILE
 sudo ../scripts/link_and_set_perm_root
