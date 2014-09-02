@@ -16,6 +16,9 @@ unzip $ZIP_FILE -d unzipped_rom
 #cd ..
 
 mv unzipped_rom/system .
+rm -rf $ZIP_FILE
+rm -rf unzipped_rom
+
 cp -R ../root/* system
 
 read -p 'Press any key to build system.img ..'
