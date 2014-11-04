@@ -5,25 +5,26 @@ source ../scripts/func.bash
 symlink Roboto-Bold.ttf /system/fonts/DroidSans-Bold.ttf
 symlink Roboto-Regular.ttf /system/fonts/DroidSans.ttf
 symlink alsa_aplay /system/bin/alsa_arecord
-symlink gralloc.redhookbay.so.1.11.2630400 /system/vendor/lib/hw/gralloc.redhookbay.so /system/vendor/lib/hw/gralloc.redhookbay.so.1
-symlink libEGL_POWERVR_SGX544_115.so.1.11.2630400 /system/vendor/lib/egl/libEGL_POWERVR_SGX544_115.so /system/vendor/lib/egl/libEGL_POWERVR_SGX544_115.so.1
-symlink libGLESv1_CM_POWERVR_SGX544_115.so.1.11.2630400 /system/vendor/lib/egl/libGLESv1_CM_POWERVR_SGX544_115.so /system/vendor/lib/egl/libGLESv1_CM_POWERVR_SGX544_115.so.1
+symlink gralloc.redhookbay.so.1.12.2701748 /system/vendor/lib/hw/gralloc.redhookbay.so /system/vendor/lib/hw/gralloc.redhookbay.so.1
+symlink libEGL_POWERVR_SGX544_115.so.1.12.2701748 /system/vendor/lib/egl/libEGL_POWERVR_SGX544_115.so /system/vendor/lib/egl/libEGL_POWERVR_SGX544_115.so.1
+symlink libGLESv1_CM_POWERVR_SGX544_115.so.1.12.2701748 /system/vendor/lib/egl/libGLESv1_CM_POWERVR_SGX544_115.so /system/vendor/lib/egl/libGLESv1_CM_POWERVR_SGX544_115.so.1
 symlink libGLESv2.so /system/lib/libGLESv3.so
-symlink libGLESv2_POWERVR_SGX544_115.so.1.11.2630400 /system/vendor/lib/egl/libGLESv2_POWERVR_SGX544_115.so /system/vendor/lib/egl/libGLESv2_POWERVR_SGX544_115.so.1
-symlink libIMGegl.so.1.11.2630400 /system/vendor/lib/libIMGegl.so /system/vendor/lib/libIMGegl.so.1
-symlink libPVROCL.so.1.11.2630400 /system/vendor/lib/libPVROCL.so /system/vendor/lib/libPVROCL.so.1
-symlink libPVRRS.so.1.11.2630400 /system/vendor/lib/libPVRRS.so /system/vendor/lib/libPVRRS.so.1
-symlink libPVRScopeServices.so.1.11.2630400 /system/vendor/lib/libPVRScopeServices.so /system/vendor/lib/libPVRScopeServices.so.1
-symlink libglslcompiler.so.1.11.2630400 /system/vendor/lib/libglslcompiler.so /system/vendor/lib/libglslcompiler.so.1
-symlink libhoudini.so.3.4.8a.45022 /system/lib/libhoudini.so
-symlink liboclcompiler.so.1.11.2630400 /system/vendor/lib/liboclcompiler.so /system/vendor/lib/liboclcompiler.so.1
-symlink libpvr2d.so.1.11.2630400 /system/vendor/lib/libpvr2d.so /system/vendor/lib/libpvr2d.so.1
-symlink libpvrANDROID_WSEGL.so.1.11.2630400 /system/vendor/lib/libpvrANDROID_WSEGL.so /system/vendor/lib/libpvrANDROID_WSEGL.so.1
-symlink librsccompiler.so.1.11.2630400 /system/vendor/lib/librsccompiler.so /system/vendor/lib/librsccompiler.so.1
-symlink librsccore.bc.1.11.2630400 /system/vendor/lib/librsccore.bc /system/vendor/lib/librsccore.bc.1
-symlink libsrv_init.so.1.11.2630400 /system/vendor/lib/libsrv_init.so /system/vendor/lib/libsrv_init.so.1
-symlink libsrv_um.so.1.11.2630400 /system/vendor/lib/libsrv_um.so /system/vendor/lib/libsrv_um.so.1
-symlink libusc.so.1.11.2630400 /system/vendor/lib/libusc.so /system/vendor/lib/libusc.so.1
+symlink libGLESv2_POWERVR_SGX544_115.so.1.12.2701748 /system/vendor/lib/egl/libGLESv2_POWERVR_SGX544_115.so /system/vendor/lib/egl/libGLESv2_POWERVR_SGX544_115.so.1
+symlink libIMGegl.so.1.12.2701748 /system/vendor/lib/libIMGegl.so /system/vendor/lib/libIMGegl.so.1
+symlink libPVROCL.so.1.12.2701748 /system/vendor/lib/libPVROCL.so /system/vendor/lib/libPVROCL.so.1
+symlink libPVRRS.so.1.12.2701748 /system/vendor/lib/libPVRRS.so /system/vendor/lib/libPVRRS.so.1
+symlink libPVRScopeServices.so.1.12.2701748 /system/vendor/lib/libPVRScopeServices.so /system/vendor/lib/libPVRScopeServices.so.1
+symlink libglslcompiler.so.1.12.2701748 /system/vendor/lib/libglslcompiler.so /system/vendor/lib/libglslcompiler.so.1
+symlink libhoudini.so.4.0.8.45720 /system/lib/libhoudini.so
+symlink liboclcompiler.so.1.12.2701748 /system/vendor/lib/liboclcompiler.so /system/vendor/lib/liboclcompiler.so.1
+symlink libpvr2d.so.1.12.2701748 /system/vendor/lib/libpvr2d.so /system/vendor/lib/libpvr2d.so.1
+symlink libpvrANDROID_WSEGL.so.1.12.2701748 /system/vendor/lib/libpvrANDROID_WSEGL.so /system/vendor/lib/libpvrANDROID_WSEGL.so.1
+symlink librsccompiler.so.1.12.2701748 /system/vendor/lib/librsccompiler.so /system/vendor/lib/librsccompiler.so.1
+symlink librsccore.bc.1.12.2701748 /system/vendor/lib/librsccore.bc /system/vendor/lib/librsccore.bc.1
+symlink libsrv_init.so.1.12.2701748 /system/vendor/lib/libsrv_init.so /system/vendor/lib/libsrv_init.so.1
+symlink libsrv_um.so.1.12.2701748 /system/vendor/lib/libsrv_um.so /system/vendor/lib/libsrv_um.so.1
+symlink libusc.so.1.12.2701748 /system/vendor/lib/libusc.so /system/vendor/lib/libusc.so.1
+symlink memtrack.redhookbay.so.1.12.2701748 /system/vendor/lib/hw/memtrack.redhookbay.so /system/vendor/lib/hw/memtrack.redhookbay.so.1
 symlink mksh /system/bin/sh
 symlink toolbox /system/bin/cat /system/bin/chcon
 symlink toolbox /system/bin/chmod /system/bin/chown /system/bin/clear
@@ -36,19 +37,19 @@ symlink toolbox /system/bin/iftop /system/bin/insmod /system/bin/ioctl
 symlink toolbox /system/bin/ionice /system/bin/kill /system/bin/ln
 symlink toolbox /system/bin/load_policy /system/bin/log /system/bin/ls
 symlink toolbox /system/bin/lsmod /system/bin/lsof /system/bin/md5
-symlink toolbox /system/bin/mkdir /system/bin/mount /system/bin/mv
-symlink toolbox /system/bin/nandread /system/bin/netstat
+symlink toolbox /system/bin/mkdir /system/bin/mkswap /system/bin/mount
+symlink toolbox /system/bin/mv /system/bin/nandread /system/bin/netstat
 symlink toolbox /system/bin/newfs_msdos /system/bin/notify /system/bin/printenv
-symlink toolbox /system/bin/ps /system/bin/reboot /system/bin/renice
+symlink toolbox /system/bin/ps /system/bin/readlink /system/bin/renice
 symlink toolbox /system/bin/restorecon /system/bin/rm /system/bin/rmdir
 symlink toolbox /system/bin/rmmod /system/bin/route /system/bin/runcon
 symlink toolbox /system/bin/schedtop /system/bin/sendevent
 symlink toolbox /system/bin/setconsole /system/bin/setenforce
 symlink toolbox /system/bin/setprop /system/bin/setsebool /system/bin/sleep
 symlink toolbox /system/bin/smd /system/bin/start /system/bin/stop
-symlink toolbox /system/bin/sync /system/bin/top /system/bin/touch
-symlink toolbox /system/bin/umount /system/bin/uptime /system/bin/vmstat
-symlink toolbox /system/bin/watchprops
+symlink toolbox /system/bin/swapoff /system/bin/swapon /system/bin/sync
+symlink toolbox /system/bin/top /system/bin/touch /system/bin/umount
+symlink toolbox /system/bin/uptime /system/bin/vmstat /system/bin/watchprops
 symlink toolbox /system/bin/wipe
 
 set_perm_recursive 0 0 0755 0644 /system
@@ -62,12 +63,12 @@ set_perm_recursive 0 0 0755 0555 /system/etc/ppp
 set_perm 0 2000 0755 /system/vendor
 set_perm_recursive 0 2000 0755 0755 /system/vendor/bin
 set_perm 0 2000 0755 /system/vendor/etc
+set_perm 0 2000 0755 /system/vendor/firmware
 set_perm 0 2000 0755 /system/vendor/lib
 set_perm_recursive 0 2000 0755 0644 /system/vendor/lib/drm
 set_perm 0 0 0644 /system/vendor/lib/drm/libdrmwvmplugin.so
 set_perm 0 2000 0755 /system/vendor/lib/egl
-set_perm_recursive 0 2000 0755 0644 /system/vendor/lib/hw
-set_perm 0 0 0644 /system/vendor/lib/hw/gralloc.redhookbay.so.1.11.2630400
+set_perm 0 2000 0755 /system/vendor/lib/hw
 set_perm_recursive 0 2000 0755 0644 /system/vendor/lib/mediadrm
 set_perm 0 0 0644 /system/vendor/lib/mediadrm/libwvdrmengine.so
 set_perm 0 2000 0755 /system/vendor/media

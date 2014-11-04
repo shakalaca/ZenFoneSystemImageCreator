@@ -19,7 +19,6 @@
 # Empty directories
 /lost\+found		u:object_r:rootfs:s0
 /proc			u:object_r:rootfs:s0
-/sys			u:object_r:rootfs:s0
 
 # SELinux policy files
 /file_contexts		u:object_r:rootfs:s0
@@ -148,13 +147,16 @@
 /system/bin/racoon	u:object_r:racoon_exec:s0
 /system/etc/ppp(/.*)?	u:object_r:ppp_system_file:s0
 /system/etc/dhcpcd(/.*)? u:object_r:dhcp_system_file:s0
-/system/vendor/bin/gpsd u:object_r:gpsd_exec:s0
-/system/bin/ping    u:object_r:ping_exec:s0
 /system/xbin/su		u:object_r:system_file:s0
 /system/xbin/daemonsu	u:object_r:system_file:s0
 /system/xbin/sugote	u:object_r:zygote_exec:s0
 /system/xbin/sugote-mksh	u:object_r:system_file:s0
 /system/bin/.ext/.su	u:object_r:system_file:s0
+/system/vendor/bin/gpsd u:object_r:gpsd_exec:s0
+/system/bin/ping    u:object_r:ping_exec:s0
+/system/bin/dnsmasq     u:object_r:dnsmasq_exec:s0
+/system/bin/hostapd     u:object_r:hostapd_exec:s0
+/system/bin/clatd	u:object_r:clatd_exec:s0
 #############################
 # Vendor files
 #
@@ -218,8 +220,12 @@
 #############################
 # asec containers
 /mnt/asec(/.*)?         u:object_r:asec_apk_file:s0
+/mnt/secure/asec(/.*)?  u:object_r:asec_image_file_ext:s0
 /data/app-asec(/.*)?    u:object_r:asec_image_file:s0
 #############################
 # APD files
 #
 /apd(/.*)?		u:object_r:system_file:s0
+#line 1 "device/intel/clovertrail/redhookbay/sepolicy/file_contexts"
+# label graphics device with a new type
+/dev/dri/card0   u:object_r:gpu_device:s0
