@@ -15,7 +15,7 @@ cd src
 #DO_NOT_FETCH=1
 
 if [ -z "$DO_NOT_FETCH" ]; then
-  BRANCH=android-4.4.4_r2
+  BRANCH=android-5.0.0_r7
   #BRANCH=android-4.3_r3
 
   #git clone -b $BRANCH https://android.googlesource.com/platform/external/libselinux
@@ -72,6 +72,7 @@ gcc -DHOST -DANDROID \
     -o make_ext4fs \
        make_ext4fs_main.c make_ext4fs.c ext4fixup.c ext4_utils.c \
        allocate.c contents.c extent.c indirect.c uuid.c sha1.c wipe.c crc16.c \
+       ext4_sb.c canned_fs_config.c \
        ../../libselinux/src/libselinux.a \
        ../../core/libsparse/libsparse.a \
        ../../zlib/src/libz.a

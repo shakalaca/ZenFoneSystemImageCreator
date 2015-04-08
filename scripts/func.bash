@@ -39,6 +39,10 @@ symlink() {
         	TARGET=${TARGET:1}
                 XPATH=${TARGET%/*}
                 XFILE=${TARGET##*/}
+                
+                if [ ! -d $XPATH ]; then
+                        mkdir -p $XPATH
+                fi
 
                 pushd $XPATH
                 $LINK $SOURCE $XFILE

@@ -36,7 +36,5 @@ if [ -n "$FILE_CONTEXT" ]; then
     FCOPT="-S ../scripts/$FILE_CONTEXT"
 fi
     
-# not sure if needed in 4.4
-#sudo ./make_ext4fs -s -l 1363148800 -a system  -S ../file_contexts system.img system
 sudo ./make_ext4fs -s -l $SYSTEM_SIZE -a system $FCOPT system.img system
 
