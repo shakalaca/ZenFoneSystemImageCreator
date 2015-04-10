@@ -11,7 +11,6 @@ symlink /system/lib/libprintspooler_jni.so /system/app/PrintSpooler/lib/x86/libp
 symlink /system/lib/libthermalJNI.so /system/priv-app/ituxd/lib/x86/libthermalJNI.so
 symlink /system/lib/libttscompat.so /system/app/PicoTts/lib/x86/libttscompat.so
 symlink /system/lib/libttspico.so /system/app/PicoTts/lib/x86/libttspico.so
-symlink /system/lib/libwebviewchromium_aosp.so /system/app/webview/lib/x86/libwebviewchromium_aosp.so
 symlink Roboto-Bold.ttf /system/fonts/DroidSans-Bold.ttf
 symlink Roboto-Regular.ttf /system/fonts/DroidSans.ttf
 symlink app_process32 /system/bin/app_process
@@ -42,7 +41,6 @@ symlink toolbox /system/bin/swapoff /system/bin/swapon /system/bin/sync
 symlink toolbox /system/bin/top /system/bin/touch /system/bin/umount
 symlink toolbox /system/bin/uptime /system/bin/vmstat /system/bin/watchprops
 symlink toolbox /system/bin/wipe
-
 set_metadata_recursive /system 0 0 0755 0644
 set_metadata_recursive /system/bin 0 2000 0755 0755
 set_metadata /system/bin/app_process32 0 2000 0755
