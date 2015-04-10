@@ -6,12 +6,7 @@ cd work
 
 # change version here
 wget -c $ROM_URL -O dl_rom.zip
-if [ -n "$ZIP_FILE" ]; then
-  unzip dl_rom.zip
-  unzip $ZIP_FILE -d unzipped_rom
-else
-  unzip dl_rom.zip -d unzipped_rom
-fi
+unzip dl_rom.zip -d unzipped_rom
 
 # just to get file_contexts
 #./unpack_intel UL-ASUS_T00F-WW-1.17.40.16-user/boot.img bzImage ramdisk.cpio.gz
@@ -20,9 +15,6 @@ fi
 #cd ..
 
 mv unzipped_rom/system .
-if [ -f $ZIP_FILE ]; then
-  rm -rf $ZIP_FILE
-fi
 rm -rf unzipped_rom
 
 cp -R ../root/* system
