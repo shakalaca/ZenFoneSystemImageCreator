@@ -5,7 +5,7 @@ source scripts/setup.bash
 cd work
 
 # change version here
-wget -c $ROM_URL -O dl_rom.zip
+#wget -c $ROM_URL -O dl_rom.zip
 unzip dl_rom.zip -d unzipped_rom
 
 # just to get file_contexts
@@ -15,6 +15,7 @@ unzip dl_rom.zip -d unzipped_rom
 #cd ..
 
 mv unzipped_rom/system .
+../scripts/create_link_file.sh unzipped_rom/META-INF/com/google/android/updater-script ../scripts/$LINK_PERM_SETUP_FILE
 rm -rf unzipped_rom
 
 cp -R ../root/* system
