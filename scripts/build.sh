@@ -5,7 +5,10 @@ source scripts/setup.bash
 cd work
 
 # change version here
-#wget -c $ROM_URL -O dl_rom.zip
+wget -c $ROM_URL -O dl_rom.zip
+if [ -n "$OTA_URL" ]; then
+  wget -c $OTA_URL -O ota.zip
+fi
 unzip dl_rom.zip -d unzipped_rom
 
 # just to get file_contexts
@@ -23,6 +26,7 @@ cp -R ../root/* system
 read -p 'Press any key and enter sudo password to build system.img .. '
 
 sudo ../scripts/$LINK_PERM_SETUP_FILE
+sudo ../scripts/apply_ota.sh
 sudo ../scripts/link_and_set_perm_root
 
 if [ -n "$FILE_CONTEXT" ]; then
