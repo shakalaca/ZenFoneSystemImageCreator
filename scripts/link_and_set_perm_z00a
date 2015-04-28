@@ -106,33 +106,15 @@ set_metadata /system/vendor/Khronos/OpenCL/vendors 0 2000 0755
 set_metadata_recursive /system/vendor/bin 0 2000 0755 0755
 set_metadata /system/vendor/bin/pvrsrvctl 0 2000 0755
 set_metadata_recursive /system/vendor/etc 0 2000 0755 0644
-set_metadata_recursive /system/vendor/etc/BH/ASUS/Launcher/default_workspace 0 0 0755 0644
-set_metadata /system/vendor/etc/BH/ASUS/Launcher/default_workspace 0 2000 0755
-set_metadata_recursive /system/vendor/etc/BR/ASUS/Launcher/default_workspace 0 0 0755 0644
-set_metadata /system/vendor/etc/BR/ASUS/Launcher/default_workspace 0 2000 0755
 set_metadata_recursive /system/vendor/etc/CN/ASUS/Launcher/default_workspace 0 0 0755 0644
 set_metadata /system/vendor/etc/CN/ASUS/Launcher/default_workspace 0 2000 0755
 set_metadata /system/vendor/etc/CsmConfig.xml 0 0 0644
 set_metadata_recursive /system/vendor/etc/Generic/Launcher/default_workspace 0 0 0755 0644
 set_metadata /system/vendor/etc/Generic/Launcher/default_workspace 0 2000 0755
-set_metadata_recursive /system/vendor/etc/HK/ASUS/Launcher/default_workspace 0 0 0755 0644
-set_metadata /system/vendor/etc/HK/ASUS/Launcher/default_workspace 0 2000 0755
-set_metadata_recursive /system/vendor/etc/ID/ASUS/Launcher/default_workspace 0 0 0755 0644
-set_metadata /system/vendor/etc/ID/ASUS/Launcher/default_workspace 0 2000 0755
 set_metadata_recursive /system/vendor/etc/JP/ASUS/Launcher/default_workspace 0 0 0755 0644
 set_metadata /system/vendor/etc/JP/ASUS/Launcher/default_workspace 0 2000 0755
-set_metadata_recursive /system/vendor/etc/KR/ASUS/Launcher/default_workspace 0 0 0755 0644
-set_metadata /system/vendor/etc/KR/ASUS/Launcher/default_workspace 0 2000 0755
-set_metadata_recursive /system/vendor/etc/RU/ASUS/Launcher/default_workspace 0 0 0755 0644
-set_metadata /system/vendor/etc/RU/ASUS/Launcher/default_workspace 0 2000 0755
-set_metadata_recursive /system/vendor/etc/SG/ASUS/Launcher/default_workspace 0 0 0755 0644
-set_metadata /system/vendor/etc/SG/ASUS/Launcher/default_workspace 0 2000 0755
-set_metadata_recursive /system/vendor/etc/TR/ASUS/Launcher/default_workspace 0 0 0755 0644
-set_metadata /system/vendor/etc/TR/ASUS/Launcher/default_workspace 0 2000 0755
 set_metadata_recursive /system/vendor/etc/TW/ASUS/Launcher/default_workspace 0 0 0755 0644
 set_metadata /system/vendor/etc/TW/ASUS/Launcher/default_workspace 0 2000 0755
-set_metadata_recursive /system/vendor/etc/US/ASUS/Launcher/default_workspace 0 0 0755 0644
-set_metadata /system/vendor/etc/US/ASUS/Launcher/default_workspace 0 2000 0755
 set_metadata_recursive /system/vendor/etc/WW/ASUS/Launcher/default_workspace 0 0 0755 0644
 set_metadata /system/vendor/etc/WW/ASUS/Launcher/default_workspace 0 2000 0755
 set_metadata /system/vendor/etc/audio_effects.conf 0 0 0644
