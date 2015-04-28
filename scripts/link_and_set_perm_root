@@ -10,10 +10,10 @@ cp system/xbin/su system/xbin/daemonsu
 
 rm system/bin/app_process
 ln -s /system/xbin/daemonsu system/bin/app_process
-mv system/bin/app_process32 system/bin/app_process32_original
-ln -s /system/xbin/daemonsu system/bin/app_process32
-cp system/bin/app_process32_original system/bin/app_process_init
-set_perm 0 2000 755 /system/bin/app_process_init
+#mv system/bin/app_process32 system/bin/app_process32_original
+#ln -s /system/xbin/daemonsu system/bin/app_process32
+#cp system/bin/app_process32_original system/bin/app_process_init
+#set_perm 0 2000 755 /system/bin/app_process_init
 
 set_perm 0 0 0777 /system/bin/.ext
 set_perm 0 0 0755 /system/bin/.ext/.su
