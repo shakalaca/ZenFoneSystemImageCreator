@@ -90,9 +90,11 @@ sed -e 's/\"\/system/delete \/system/' -e 's/\"//g' delete_pass2 > delete.sh
 rm -f delete_pass*
 rm -f delete.sh
 
-pushd ota/system > /dev/null
-tar cf - . | (cd ../../system; tar xfp -)
-popd > /dev/null
+if [ -d ota/system ]; then
+  pushd ota/system > /dev/null
+  tar cf - . | (cd ../../system; tar xfp -)
+  popd > /dev/null
+fi
 
 sed -e 's/set_metadata_recursive(\"/set_metadata_recursive /' -e 's/set_metadata(\"/set_metadata /' set_perm_pass1 >  set_perm_pass2
 sed -e 's/\", \"uid\",//' -e 's/, \"gid\",//' -e 's/, \"dmode\",//' -e 's/, \"fmode\",//' -e 's/, \"mode\",//' set_perm_pass2 > set_perm_pass3
