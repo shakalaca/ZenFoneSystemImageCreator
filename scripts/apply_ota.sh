@@ -55,7 +55,12 @@ do
     APPLY_PATCH_DONE=false
   elif [[ "$line" == "delete("* ]]; then
     DELETE_CMD=$line
-    DELETE_CMD_DONE=false
+    if [[ "$line" == *");" ]]; then
+      DELETE_CMD_DONE=true
+      echo $DELETE_CMD >> delete_pass1
+    else
+      DELETE_CMD_DONE=false
+    fi
   elif [[ "$line" == "set_metadata"* ]]; then
     echo $line >> set_perm_pass1
   elif !($APPLY_PATCH_DONE); then
