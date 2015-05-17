@@ -117,6 +117,15 @@ index b34ec2a..b9fb174 100644
  #include "mincrypt/sha.h"
  #include "applypatch.h"
  
+@@ -63,7 +67,7 @@ void ShowBSDiffLicense() {
+         );
+ }
+
+-static off_t offtin(u_char *buf)
++static off_t offtin(unsigned char *buf)
+ {
+     off_t y;
+
 diff --git a/applypatch/freecache.c b/applypatch/freecache.c
 index 9827fda..d308a57 100644
 --- a/applypatch/freecache.c
@@ -136,3 +145,17 @@ index 9827fda..d308a57 100644
  #include <unistd.h>
  #include <dirent.h>
  #include <ctype.h>
+
+diff --git a/applypatch/imgpatch.c b/applypatch/imgpatch.c
+index 33c4487..38cbbd8 100644
+--- a/applypatch/imgpatch.c
++++ b/applypatch/imgpatch.c
+@@ -36,7 +36,7 @@
+  * file, and update the SHA context with the output data as well.
+  * Return 0 on success.
+  */
+-int ApplyImagePatch(const unsigned char* old_data, ssize_t old_size __unused,
++int ApplyImagePatch(const unsigned char* old_data, ssize_t old_size,
+                     const Value* patch,
+                     SinkFn sink, void* token, SHA_CTX* ctx,
+                     const Value* bonus_data) {
