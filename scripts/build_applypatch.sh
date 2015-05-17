@@ -50,10 +50,13 @@ gcc -c rsa.c sha.c sha256.c -I ../include
 ar rcs libmincrypt.a *.o
 cd ../..
 
-cd recovery/mtdutils
-gcc -O3 -DUSE_MMAP -c {mounts,mtdutils}.{h,c}
-ar rcs libmtdutils.a *.o
-cd ../..
+if [ "$(uname)" != "Darwin" ]; then
+  cd recovery/mtdutils
+  gcc -O3 -DUSE_MMAP -c {mounts,mtdutils}.{h,c}
+  ar rcs libmtdutils.a *.o
+  cd ../..
+  LIB_MTDUTILS=../mtdutils/libmtdutils.a
+fi
 
 cd recovery/applypatch
 gcc -I ../../core/include -I .. \
@@ -61,7 +64,6 @@ gcc -I ../../core/include -I .. \
     main.c applypatch.c bsdiff.c freecache.c imgpatch.c utils.c bspatch.c \
     ../../core/libmincrypt/libmincrypt.a \
     ../../zlib/src/libz.a \
-    ../../bzip2/libbz.a \
-    ../mtdutils/libmtdutils.a
+    ../../bzip2/libbz.a $LIB_MTDUTILS
 cp applypatch $WORK_DIR
 cd ../..
