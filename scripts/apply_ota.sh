@@ -114,6 +114,12 @@ if [ -d ota/system ]; then
   popd > /dev/null
 fi
 
+if [ -d ota/recovery ]; then
+  pushd ota/recovery > /dev/null
+  tar cf - . | (cd ../../system; tar xfp -)
+  popd > /dev/null
+fi
+
 sed -e 's/rename(\"/rename /' -e 's/\", \"/ /g' -e 's/\");//' -e 's/\",//' rename_pass1 > rename.sh
 
 . rename.sh
