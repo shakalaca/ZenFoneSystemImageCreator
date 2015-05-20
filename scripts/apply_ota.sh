@@ -12,6 +12,7 @@ CHMOD="$ECHO chmod"
 FIND="$ECHO find"
 RM="$ECHO rm"
 RMDIR="$ECHO rmdir"
+RENAME="$ECHO mv"
 
 apply_patch() {
   TARGET=${1:1}
@@ -43,6 +44,16 @@ set_metadata() {
   $CHMOD $4 $TARGET
 }
 
+rename() {
+  SOURCE=$1
+  TARGET=$2
+  XPATH=${TARGET%/*}
+  if [ ! -d $XPATH ]; then
+    mkdir -p $XPATH
+  fi
+  $RENAME $SOURCE $TARGET
+}
+
 APPLY_PATCH_DONE=true
 DELETE_CMD_DONE=true
 
@@ -61,6 +72,8 @@ do
     else
       DELETE_CMD_DONE=false
     fi
+  elif [[ "$line" == "rename"* ]]; then
+    echo $line >> rename_pass1
   elif [[ "$line" == "set_metadata"* ]]; then
     echo $line >> set_perm_pass1
   elif !($APPLY_PATCH_DONE); then
@@ -101,6 +114,13 @@ if [ -d ota/system ]; then
   popd > /dev/null
 fi
 
+sed -e 's/rename(\"/rename /' -e 's/\", \"/ /g' -e 's/\");//' -e 's/\",//' rename_pass1 > rename.sh
+
+. rename.sh
+
+rm -f rename_pass*
+rm -f rename.sh
+
 sed -e 's/set_metadata_recursive(\"/set_metadata_recursive /' -e 's/set_metadata(\"/set_metadata /' set_perm_pass1 >  set_perm_pass2
 sed -e 's/\", \"uid\",//' -e 's/, \"gid\",//' -e 's/, \"dmode\",//' -e 's/, \"fmode\",//' -e 's/, \"mode\",//' set_perm_pass2 > set_perm_pass3
 sed -e 's/\", \"/ /g' -e 's/\");//' -e 's/\",//' set_perm_pass3 > set_perm_pass4
@@ -110,3 +130,4 @@ awk -F , '{print $1}' set_perm_pass4 > set_perm.sh
 
 rm -f set_perm_pass*
 rm -f set_perm.sh
+
