@@ -103,6 +103,7 @@ AsusBackup
 #DeskClock
 # must installed with DeskClock
 #PowerSaving2
+FlipCover2
 
 ########## Optional Packages ##########
 # Google
@@ -178,7 +179,6 @@ WeatherTime
 WhatsNext
 #FileManager2
 FlashLight
-FlipCover2
 MicroFilm
 
 # ASUS apps
