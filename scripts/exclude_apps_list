@@ -76,7 +76,7 @@
 # ZenUI (system)
 #AsusHoudiniXmlUpdater
 #AsusSettings
-#AsusSetupWizard
+AsusSetupWizard
 #AsusSystemUI
 #AsusSensorService
 QuickMemoService
