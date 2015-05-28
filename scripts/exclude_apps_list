@@ -60,6 +60,7 @@
 #ManagedProvisioning
 #ConfigUpdater
 #DefaultContainerService
+#Keyboard
 
 # Intel stuff
 #AwareResource
@@ -91,6 +92,7 @@ QuickMemoService
 #AsusCellBroadcast
 #AsusDrawRes
 #PAIStub
+#XT9IME
 
 # ZenUI apps cannot working outside of system
 AsusBackup
@@ -142,7 +144,6 @@ PhotoTable
 # Fonts
 #Syndor
 #Flipfont
-#Keyboard
 #MFinanceHK-Bold
 #MYingHei_18030-M
 #MYuppyHK_Medium
@@ -179,7 +180,6 @@ WhatsNext
 FlashLight
 FlipCover2
 MicroFilm
-#XT9IME
 
 # ASUS apps
 MyASUS
