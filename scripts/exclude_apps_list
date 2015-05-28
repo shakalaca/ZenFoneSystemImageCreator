@@ -151,7 +151,9 @@ PhotoTable
 
 # Link tools
 PCLinkBinary
+# To use PCLink this should be in system
 PCLinkManager
+# Use with AsusCamera
 PartyRimBinary
 RemoteLink
 ShareRimBinary
@@ -159,6 +161,7 @@ ShareRimBinary
 # ZenUI app
 ASUSBrowser
 ASUSGallery
+# Use with AsusCamera
 ASUSGalleryBurst
 AsusCalculator
 AsusCalendar
