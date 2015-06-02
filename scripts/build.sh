@@ -40,7 +40,7 @@ sudo ../scripts/link_and_set_perm_root
 #sudo ../scripts/exclude_apps.sh
 
 if [ -n "$FILE_CONTEXT" ]; then
-    FCOPT="-S ../scripts/$FILE_CONTEXT"
+    FCOPT="-S ../assets/$FILE_CONTEXT"
 fi
     
 # not sure if needed in 4.4
