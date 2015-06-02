@@ -38,6 +38,8 @@ sudo ../scripts/apply_ota.sh
 sudo ../scripts/link_and_set_perm_root
 # Uncomment to remove apps listed in exclude_apps_list
 #sudo ../scripts/exclude_apps.sh
+# Uncomment to enable sdcard write permission in platform.xml
+#sudo ../scripts/enable_sdcard_write.sh
 
 if [ -n "$FILE_CONTEXT" ]; then
     FCOPT="-S ../assets/$FILE_CONTEXT"
