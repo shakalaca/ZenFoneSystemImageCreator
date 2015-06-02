@@ -29,3 +29,6 @@ FILE_CONTEXT=file_contexts_z00a
 #ROM_URL=http://dlcdnet.asus.com/pub/ASUS/ZenFone/UL-ASUS_T00G-WW-3.23.40.52-user.zip
 #SYSTEM_SIZE=1363148800
 #FILE_CONTEXT=file_contexts_t00g
+
+# Uncomment to remove supersu fix notification
+#FIX_SU_NOTIFICATION=1

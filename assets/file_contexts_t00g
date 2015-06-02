@@ -152,11 +152,7 @@
 /system/bin/tf_daemon	u:object_r:tee_exec:s0
 /system/bin/racoon	u:object_r:racoon_exec:s0
 # for root
-/system/xbin/su		u:object_r:system_file:s0
-/system/xbin/daemonsu	u:object_r:system_file:s0
 /system/xbin/sugote	u:object_r:zygote_exec:s0
-/system/xbin/sugote-mksh	u:object_r:system_file:s0
-/system/bin/.ext/.su	u:object_r:system_file:s0
 /system/bin/app_process32_original	u:object_r:zygote_exec:s0
 /system/bin/app_process_init	u:object_r:zygote_exec:s0
 #

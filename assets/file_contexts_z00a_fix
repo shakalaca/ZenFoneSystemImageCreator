@@ -67,6 +67,7 @@
 /dev/mtd(/.*)?		u:object_r:mtd_device:s0
 /dev/mtp_usb		u:object_r:mtp_device:s0
 /dev/pn544		u:object_r:nfc_device:s0
+/dev/bcm2079x-i2c       u:object_r:nfc_device:s0
 /dev/ppp		u:object_r:ppp_device:s0
 /dev/ptmx		u:object_r:ptmx_device:s0
 /dev/pvrsrvkm		u:object_r:gpu_device:s0
@@ -126,11 +127,10 @@
 # System files
 #
 /system(/.*)?		u:object_r:system_file:s0
+/system/bin/info_setting	u:object_r:shell_exec:s0
 /system/bin/sh		--	u:object_r:shell_exec:s0
 /system/bin/run-as	--	u:object_r:runas_exec:s0
 /system/bin/bootanimation u:object_r:bootanim_exec:s0
-/system/bin/app_process32	u:object_r:zygote_exec:s0
-/system/bin/app_process64	u:object_r:zygote_exec:s0
 /system/bin/servicemanager	u:object_r:servicemanager_exec:s0
 /system/bin/surfaceflinger	u:object_r:surfaceflinger_exec:s0
 /system/bin/drmserver	u:object_r:drmserver_exec:s0
@@ -166,7 +166,6 @@
 /system/bin/uncrypt     u:object_r:uncrypt_exec:s0
 /system/bin/logwrapper  u:object_r:system_file:s0
 /system/bin/vdc         u:object_r:vdc_exec:s0
-/system/bin/install-recovery.sh u:object_r:install_recovery_exec:s0
 /system/bin/dex2oat     u:object_r:dex2oat_exec:s0
 # patchoat executable has (essentially) the same requirements as dex2oat.
 /system/bin/patchoat    u:object_r:dex2oat_exec:s0
@@ -186,7 +185,7 @@
 /data/security(/.*)?	u:object_r:security_file:s0
 /data/system/ndebugsocket	u:object_r:system_ndebug_socket:s0
 /data/drm(/.*)?		u:object_r:drm_data_file:s0
-#/data/gps(/.*)?		u:object_r:gps_data_file:s0
+/data/gps(/.*)?		u:object_r:gps_data_file:s0
 /data/resource-cache(/.*)? u:object_r:resourcecache_data_file:s0
 /data/themepack-module(/.*)? u:object_r:themepack_module_file:s0
 /data/dalvik-cache(/.*)? u:object_r:dalvikcache_data_file:s0
@@ -225,8 +224,6 @@
 /data/misc/wifi/sockets/wpa_ctrl.*   u:object_r:system_wpa_socket:s0
 /data/misc/wifi/hostapd(/.*)?   u:object_r:wpa_socket:s0
 /data/misc/zoneinfo(/.*)?       u:object_r:zoneinfo_data_file:s0
-/data/gps/brcm_gps_unix_socket  u:object_r:bluetooth_data_file:s0
-/data/gps(/.*)?                 u:object_r:bluetooth_data_file:s0
 
 # Wallpaper file for other users
 /data/system/users/[0-9]+/wallpaper		u:object_r:wallpaper_file:s0
@@ -262,12 +259,11 @@
 /mnt/asec/[^/]+/lib(/.*)?   u:object_r:asec_public_file:s0
 /data/app-asec(/.*)?        u:object_r:asec_image_file:s0
 /mnt/secure/asec(/.*)?      u:object_r:asec_image_file_ext:s0
-
 #############################
 # APD files
 #
-/apd(/.*)?            u:object_r:system_file:s0
-#line 1 "vendor/asus/tools/logtool/sepolicy/file_contexts"
+/apd(/.*)?		u:object_r:system_file:s0
+#line 1 "device/intel/moorefield/mofd_v1/config/logtool/sepolicy/file_contexts"
 #logtool
 /system/bin/asuslogcat  u:object_r:logtoold_exec:s0
 /system/bin/fdcmts      u:object_r:logtoold_exec:s0
@@ -278,67 +274,77 @@
 /system/bin/toolconnect           u:object_r:logtoold_exec:s0
 /dev/socket/toolconnect           u:object_r:logtoold_socket:s0
 /dev/socket/fdcmdm[0-9]*          u:object_r:logtoold_socket:s0
-/dev/mdmTrace          u:object_r:mdmTrace_device:s0
 #line 1 "device/intel/common/sepolicy/file_contexts"
 # Additional file_contexts
 # ASF securityfile service
 /system/bin/securityfileservice u:object_r:asf_exec:s0
-#line 1 "device/intel/clovertrail/sepolicy/file_contexts"
+#line 1 "device/intel/moorefield/sepolicy/file_contexts"
 # Additional file_contexts
 # label graphics device with a new type
-/dev/dri/card0              u:object_r:gpu_device:s0
+/dev/dri/card0                  u:object_r:gpu_device:s0
+/dev/pvr_sync                   u:object_r:gpu_device:s0
+/dev/sw_sync                    u:object_r:graphics_device:s0
+/dev/intel_sst_ctrl             u:object_r:intel_sst_ctrl_device:s0
+/dev/switch_ctrl                u:object_r:switch_ctrl_device:s0
 
-# sep (Symantec endpoint protection) device, since app domain doesn't have access to tee device
-/dev/sep_sec_driver         u:object_r:sep_device:s0
+# chaabi uses sep_device
+/dev/dx_sep_q(.*)               u:object_r:sep_device:s0
 
 # GPS
-# remove?
-/dev/gsmtty7                u:object_r:gps_device:s0
-/system/bin/gpsd            u:object_r:gpsd_exec:s0
-/system/bin/gpslogd         u:object_r:gpsd_exec:s0
-/system/bin/gpscerd         u:object_r:gpsd_exec:s0
+/dev/gsmtty(.*)?                u:object_r:tty_device:s0
+/dev/ttyMFD(.*)?                u:object_r:tty_device:s0
+/system/bin/gpsd                u:object_r:gpsd_exec:s0
+/system/bin/gpscerd             u:object_r:gpsd_exec:s0
 
 # mmgr
-#/dev/socket/mmgr            u:object_r:mmgr_socket:s0
-/dev/socket/mmgr[0-9]*      u:object_r:mmgr_socket:s0
-/system/bin/mmgr            u:object_r:mmgr_exec:s0
-/sys/devices/pci0000:00/0000:00:05.1/power/control          u:object_r:sysfs_uart_power_ctrl:s0
-/dev/mdm_ctrl(.*)?          u:object_r:tty_device:s0
-/dev/ttyXMM(.*)?            u:object_r:tty_device:s0
+/dev/socket/mmgr[0-9]*          u:object_r:mmgr_socket:s0
+/system/bin/mmgr                u:object_r:mmgr_exec:s0
+/sys/devices/pci0000:00/0000:00:10.0/hsic/hsic0/hsic_enable u:object_r:sysfs_hsic_enable:s0
+/sys/devices/pci0000:00/0000:00:10.0/hsic_enable            u:object_r:sysfs_hsic_enable:s0
+/sys/devices/pci0000:00/0000:00:04.2/power/control          u:object_r:sysfs_uart_power_ctrl:s0
+/sys/devices/pci0000:00/0000:00:04.3/power/control          u:object_r:sysfs_uart_power_ctrl:s0
+/dev/mdm_ctrl(.*)?              u:object_r:tty_device:s0
+/dev/ttyACM(.*)?                u:object_r:tty_device:s0
+/dev/ttyXMM(.*)?                u:object_r:tty_device:s0
+
+# hdcpd
+/system/bin/hdcpd               u:object_r:hdcpd_exec:s0
+/data/hdcp(/.*)?                u:object_r:hdcpd_data_file:s0
+
+# sensorhubd
+/system/bin/sensorhubd          u:object_r:sensorhubd_exec:s0
+/sys/devices/platform/80860F41:04/i2c-5/5-0040/control  u:object_r:sysfs_hwmon_control:s0
+/dev/socket/sensorhubd          u:object_r:sensorhubd_socket:s0
+/dev/i2c(.*)?                   u:object_r:i2c_device:s0
+/sys/class/gpio/gpio59/value    u:object_r:sysfs_gpio_value:s0
+/sys/class/gpio/gpio95/value    u:object_r:sysfs_gpio_value:s0
+/sys/devices/pci0000:00/0000:00:16.1/control            u:object_r:sysfs_hwmon_control:s0
 
 # nvm_server
 /system/bin/nvm_server          u:object_r:nvm_server_exec:s0
 /dev/socket/nvm-ctl[0-9]*       u:object_r:nvm_ctl_socket:s0
 
-# coreu
-# /system/bin/coreu           u:object_r:coreu_exec:s0
-
-# sensor
-/dev/akm09911                           u:object_r:sensors_device:s0
-/dev/akm09911_dev                       u:object_r:sensors_device:s0
-/dev/cm3602                             u:object_r:sensors_device:s0
-/dev/kxtj9_dev                          u:object_r:sensors_device:s0
-/dev/asus_gsensor                       u:object_r:sensors_device:s0
-/dev/lightsensor                        u:object_r:sensors_device:s0
-/system/bin/akmd09911                   u:object_r:sensors_exec:s0
-/system/bin/a600cg_akmd09911            u:object_r:sensors_exec:s0
-/dev/i2c(.*)?                           u:object_r:i2c_device:s0
-
-# GPU
-/dev/pvr_sync               u:object_r:gpu_device:s0
+# ueventd
+/sys/devices/pci0000:00/0000:00:10.0/L2_autosuspend_enable             u:object_r:sysfs_autosuspend_enable:s0
 
 # crashlogd
 /system/bin/crashlogd           u:object_r:crashlogd_exec:s0
 
-# wlan_prov
-/system/bin/wlan_prov           u:object_r:wlan_prov_exec:s0
-
 # bd_prov (bluetooth)
 /system/bin/bd_prov             u:object_r:bd_prov_exec:s0
 
+# vw drm
+/sys/devices/pci0000:00/0000:00:02.0/resource0 u:object_r:sysfs_drm_resource:s0
+/sys/devices/pci0000:00/0000:00:02.0/drm/(.*)? u:object_r:sysfs_drm_resource:s0
+
 # thermal management
+/sys/devices/platform/coretemp.0/(.*)? u:object_r:sysfs_thermal_management:s0
 /sys/devices/virtual/thermal(.*)?      u:object_r:sysfs_thermal_management:s0
 /dev/socket/logconfig                  u:object_r:thermal_socket:s0
+/sys/devices/virtual/powercap/intel-rapl/intel-rapl:0(/.*)? u:object_r:sysfs_thermal_management:s0
+
+# CPU
+/dev/msr[0-3]                   u:object_r:msr_device:s0
 
 # healthd
 /dev/max170xx                   u:object_r:tty_device:s0
@@ -350,41 +356,44 @@
 # fg_conf
 /system/bin/fg_conf             u:object_r:fg_conf_exec:s0
 
+# wlan_prov
+/system/bin/wlan_prov           u:object_r:wlan_prov_exec:s0
+
 # bcu_cpufreqrel
 /system/bin/bcu_cpufreqrel      u:object_r:bcu_cpufreqrel_exec:s0
 
 # logcat for all the init scripts
 /system/bin/logcat              u:object_r:logcat_exec:s0
 
+# nfc
+/data/nfc(/.*)?                 u:object_r:nfc_data_file:s0
+
 # pvrsrvctl
+/system/bin/pvrsrvctl           u:object_r:pvrsrvctl_exec:s0
 /system/vendor/bin/pvrsrvctl    u:object_r:pvrsrvctl_exec:s0
 
 # dpstmgr
-/system/bin/dpstmgr		u:object_r:dpstmgr_exec:s0
+/system/bin/dpstmgr             u:object_r:dpstmgr_exec:s0
 
-# atproxy_usbreset
-/system/bin/atproxy_usbreset    u:object_r:atproxy_usbreset_exec:s0
+# rfid_monzaxd
+/system/bin/rfid_monzaxd        u:object_r:rfid_monzaxd_exec:s0
 
-# rild (clear, dump)
-/sys/kernel/modem_nvram(.*)?    u:object_r:radio_device:s0
+# rild
+/sys/kernel/modem_nvram/dump    u:object_r:radio_device:s0
 /dev/socket/rild[0-9]+          u:object_r:rild_socket:s0
 /dev/socket/rild-debug[0-9]+    u:object_r:rild_debug_socket:s0
 
-# voice
-/dev/audience_es305             u:object_r:audio_device:s0
-/dev/gsmtty(.*)?                u:object_r:tty_device:s0
+# sl_si_service
+/system/bin/sl_si_service       u:object_r:sl_si_service_exec:s0
 
-/dev/intel_sst_ctrl             u:object_r:intel_sst_ctrl_device:s0
-/dev/switch_ctrl                u:object_r:switch_ctrl_device:s0
-
-/dev/ttyIFX[0-1]                u:object_r:tty_device:s0
-/dev/ttyMFD(.*)?                u:object_r:tty_device:s0
-
-#rootfs
-/logs(/.*)?                     u:object_r:log_file:s0
-/config(/.*)?                   u:object_r:config_file:s0
+# factory files
 /factory(/.*)?                  u:object_r:factory_file:s0
 
-#gauge
-/system/bin/upi_ug31xx          u:object_r:gauge_exec:s0
-/dev/ug31xx                     u:object_r:gauge_device:s0
+# config files
+/config(/.*)?                   u:object_r:config_file:s0
+
+# log files
+/logs(/.*)?                     u:object_r:log_file:s0
+
+# system_server
+/dev/block/mmcblk0p9            u:object_r:tmpfs_block_device:s0

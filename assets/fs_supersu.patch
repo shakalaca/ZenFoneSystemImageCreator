@@ -1,0 +1,18 @@
+diff --git a/include/private/android_filesystem_config.h b/include/private/android_filesystem_config.h
+index 5d9c3ea..21ab7c7 100644
+--- a/include/private/android_filesystem_config.h
++++ b/include/private/android_filesystem_config.h
+@@ -223,6 +223,13 @@ static const struct fs_path_config android_dirs[] = {
+ ** and will allow partial matches.
+ */
+ static const struct fs_path_config android_files[] = {
++    { 00755, AID_ROOT,      AID_ROOT,      0, "system/etc/install-recovery.sh" },
++    { 00755, AID_ROOT,      AID_ROOT,      0, "system/xbin/daemonsu" },
++    { 00755, AID_ROOT,      AID_ROOT,      0, "system/xbin/sugote" },
++    { 00755, AID_ROOT,      AID_ROOT,      0, "system/xbin/sugote-mksh" },
++    { 00755, AID_ROOT,      AID_ROOT,      0, "system/xbin/supolicy" },
++    { 00755, AID_ROOT,      AID_ROOT,      0, "system/bin/.ext/.su" },
++
+     { 00440, AID_ROOT,      AID_SHELL,     0, "system/etc/init.goldfish.rc" },
+     { 00550, AID_ROOT,      AID_SHELL,     0, "system/etc/init.goldfish.sh" },
+     { 00440, AID_ROOT,      AID_SHELL,     0, "system/etc/init.trout.rc" },

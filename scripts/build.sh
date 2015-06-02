@@ -53,6 +53,9 @@ sudo ../scripts/link_and_set_perm_root
 
 if [ -n "$FILE_CONTEXT" ]; then
     FCOPT="-S ../assets/$FILE_CONTEXT"
+    if [ ! -z "$FIX_SU_NOTIFICATION" ]; then
+        FCOPT="$FCOPT"_fix
+    fi
 fi
     
 sudo ./make_ext4fs -s -l $SYSTEM_SIZE -a system $FCOPT system.img system
