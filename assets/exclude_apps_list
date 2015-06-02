@@ -191,7 +191,9 @@ FlashLight
 MicroFilm
 
 # ASUS apps
+AMDFirmwareUpgradeTool
 MyASUS
+AppLocker
 MyWater
 AWS
 ZenUIHelp
@@ -208,6 +210,7 @@ ZenCircle
 ZenTalkStub
 GameCenter
 BRapps
+AsusQuickSearch
 
 ########## Safe to remove ##########
 # Debug / Update or not-used-service
@@ -233,6 +236,8 @@ CleanMaster
 JawboneUP
 KKBOX
 Kindle
+KindleStub
+ThinkFree
 Tripadvisor
 YahooECShopping
 YahooMall
