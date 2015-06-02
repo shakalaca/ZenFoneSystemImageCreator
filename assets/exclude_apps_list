@@ -86,7 +86,7 @@ QuickMemoService
 #MobileManagerService
 #AsusInputDevices
 #DLNAService
-#ICEsoundService
+ICEsoundService
 #AsusAs
 #AsusBoost
 #AsusCellBroadcast
@@ -98,8 +98,8 @@ QuickMemoService
 AsusBackup
 #AsusSplendid
 #AsusSplendidCommandAgent
-#AudioWizard
-#AudioWizardView
+AudioWizard
+AudioWizardView
 #DeskClock
 # must installed with DeskClock
 #PowerSaving2
@@ -152,9 +152,9 @@ PhotoTable
 # Link tools
 PCLinkBinary
 # To use PCLink this should be in system
-PCLinkManager
+#PCLinkManager
 # Use with AsusCamera
-PartyRimBinary
+#PartyRimBinary
 RemoteLink
 ShareRimBinary
 
@@ -162,7 +162,7 @@ ShareRimBinary
 ASUSBrowser
 ASUSGallery
 # Use with AsusCamera
-ASUSGalleryBurst
+#ASUSGalleryBurst
 AsusCalculator
 AsusCalendar
 #AsusCamera

@@ -18,7 +18,7 @@ do
     APPS[$index]="$app"
     index=`expr $index + 1`
   fi
-done < ../scripts/exclude_apps_list
+done < ../assets/exclude_apps_list
 
 if [ ! -d excluded_apps ]; then
   $MKDIR -p excluded_apps/app

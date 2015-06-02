@@ -28,7 +28,7 @@ if [ -z "$DO_NOT_FETCH" ]; then
   git clone https://android.googlesource.com/platform/bootable/recovery
   cd recovery; git checkout -b $BRANCH $BRANCH; cd ..
 
-  cd recovery; patch -p1 -i ../../scripts/applypatch.patch; cd ..
+  cd recovery; patch -p1 -i ../../assets/applypatch.patch; cd ..
 fi
 
 cd zlib/src
