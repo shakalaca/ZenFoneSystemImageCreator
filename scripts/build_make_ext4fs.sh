@@ -30,6 +30,8 @@ if [ -z "$DO_NOT_FETCH" ]; then
   cd zlib; git checkout -b $BRANCH $BRANCH; cd ..
   git clone https://android.googlesource.com/platform/system/extras
   cd extras; git checkout -b $BRANCH $BRANCH; cd ..
+  
+  cd core; patch -p1 -i ../../assets/fs_supersu.patch; cd ..
 fi
 
 # for extract boot.img
