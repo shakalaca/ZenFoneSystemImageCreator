@@ -37,6 +37,7 @@
 #SharedStorageBackup
 #Shell
 #Stk
+#Stk2
 #Tag
 #TaskManager
 #TeleService
@@ -72,6 +73,8 @@
 #WidiInputService
 #ituxd
 #sl_installer
+#SepService
+#WirelessDisplayUtil
 
 # ZenUI (system)
 #AsusHoudiniXmlUpdater
@@ -103,6 +106,7 @@ AudioWizardView
 #DeskClock
 # must installed with DeskClock
 #PowerSaving2
+FlipCover
 FlipCover2
 
 ########## Optional Packages ##########
@@ -173,6 +177,7 @@ AsusEmail
 #AsusMessage
 AsusMusic
 AsusPhotoCollage
+PhotoCollage
 AsusTask
 #AsusZenUIServices
 QuickMemo
@@ -186,6 +191,7 @@ MicroFilm
 
 # ASUS apps
 MyASUS
+AppLocker
 MyWater
 AWS
 ZenUIHelp
@@ -201,6 +207,7 @@ ZenCircle
 ZenTalkStub
 GameCenter
 BRapps
+AsusQuickSearch
 
 ########## Safe to remove ##########
 # Debug / Update or not-used-service
@@ -220,11 +227,14 @@ DrSafety
 Dreye
 Gameloft
 Omlet
+Omlet-stub
 BbblerActors
 CleanMaster
 JawboneUP
 KKBOX
 Kindle
+KindleStub
+ThinkFree
 Tripadvisor
 YahooECShopping
 YahooMall
