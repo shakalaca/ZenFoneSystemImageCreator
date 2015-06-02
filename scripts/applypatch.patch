@@ -1,0 +1,152 @@
+diff --git a/applypatch/applypatch.c b/applypatch/applypatch.c
+index cb9bc23..6feed2c 100644
+--- a/applypatch/applypatch.c
++++ b/applypatch/applypatch.c
+@@ -20,7 +20,14 @@
+ #include <stdlib.h>
+ #include <string.h>
+ #include <sys/stat.h>
++
++#ifdef __APPLE__
++#include <sys/param.h>
++#include <sys/mount.h>
++#else
+ #include <sys/statfs.h>
++#endif
++
+ #include <sys/types.h>
+ #include <fcntl.h>
+ #include <unistd.h>
+@@ -30,7 +37,9 @@
+ #include "mtdutils/mtdutils.h"
+ #include "edify/expr.h"
+ 
++#ifndef __APPLE__
+ static int LoadPartitionContents(const char* filename, FileContents* file);
++#endif
+ static ssize_t FileSink(unsigned char* data, ssize_t len, void* token);
+ static int GenerateTarget(FileContents* source_file,
+                           const Value* source_patch_value,
+@@ -58,7 +67,11 @@ int LoadFileContents(const char* filename, FileContents* file,
+     // load the contents of a partition.
+     if (strncmp(filename, "MTD:", 4) == 0 ||
+         strncmp(filename, "EMMC:", 5) == 0) {
++#ifdef __APPLE__
++        return -1;
++#else
+         return LoadPartitionContents(filename, file);
++#endif
+     }
+ 
+     if (stat(filename, &file->st) != 0) {
+@@ -120,6 +133,7 @@ static int compare_size_indices(const void* a, const void* b) {
+     }
+ }
+ 
++#ifndef __APPLE__
+ // Load the contents of an MTD or EMMC partition into the provided
+ // FileContents.  filename should be a string of the form
+ // "MTD:<partition_name>:<size_1>:<sha1_1>:<size_2>:<sha1_2>:..."  (or
+@@ -320,7 +334,7 @@ static int LoadPartitionContents(const char* filename, FileContents* file) {
+ 
+     return 0;
+ }
+-
++#endif
+ 
+ // Save the contents of the given FileContents object under the given
+ // filename.  Return 0 on success.
+@@ -355,6 +369,7 @@ int SaveFileContents(const char* filename, const FileContents* file) {
+     return 0;
+ }
+ 
++#ifndef __APPLE__
+ // Write a memory buffer to 'target' partition, a string of the form
+ // "MTD:<partition>[:...]" or "EMMC:<partition_device>:".  Return 0 on
+ // success.
+@@ -519,6 +534,7 @@ int WriteToPartition(unsigned char* data, size_t len,
+     free(copy);
+     return 0;
+ }
++#endif
+ 
+ 
+ // Take a string 'str' of 40 hex digits and parse it into the 20
+@@ -1000,11 +1016,15 @@ static int GenerateTarget(FileContents* source_file,
+     }
+ 
+     if (output < 0) {
++#ifdef __APPLE__
++        return 1;
++#else
+         // Copy the temp file to the partition.
+         if (WriteToPartition(msi.buffer, msi.pos, target_filename) != 0) {
+             printf("write of patched data to %s failed\n", target_filename);
+             return 1;
+         }
++#endif
+         free(msi.buffer);
+     } else {
+         // Give the .patch file the same owner, group, and mode of the
+diff --git a/applypatch/applypatch.h b/applypatch/applypatch.h
+index f1f13a1..8f15c78 100644
+--- a/applypatch/applypatch.h
++++ b/applypatch/applypatch.h
+@@ -39,7 +39,7 @@ typedef struct _FileContents {
+ // it to free up space.  If the expected source file doesn't exist, or
+ // is corrupted, we look to see if this file contains the bits we want
+ // and use it as the source instead.
+-#define CACHE_TEMP_SOURCE "/cache/saved.file"
++#define CACHE_TEMP_SOURCE "saved.file"
+ 
+ typedef ssize_t (*SinkFn)(unsigned char*, ssize_t, void*);
+ 
+diff --git a/applypatch/bspatch.c b/applypatch/bspatch.c
+index 2e80f81..22bb71d 100644
+--- a/applypatch/bspatch.c
++++ b/applypatch/bspatch.c
+@@ -28,6 +28,10 @@
+ 
+ #include <bzlib.h>
+ 
++#ifdef __APPLE__
++#include <sys/types.h>
++#endif
++
+ #include "mincrypt/sha.h"
+ #include "applypatch.h"
+ 
+diff --git a/applypatch/freecache.c b/applypatch/freecache.c
+index 9827fda..d308a57 100644
+--- a/applypatch/freecache.c
++++ b/applypatch/freecache.c
+@@ -4,7 +4,14 @@
+ #include <stdlib.h>
+ #include <string.h>
+ #include <sys/stat.h>
++
++#ifdef __APPLE__
++#include <sys/param.h>
++#include <sys/mount.h>
++#else
+ #include <sys/statfs.h>
++#endif
++
+ #include <unistd.h>
+ #include <dirent.h>
+ #include <ctype.h>
+diff --git a/minelf/Retouch.h b/minelf/Retouch.h
+index 13bacd5..5231843 100644
+--- a/minelf/Retouch.h
++++ b/minelf/Retouch.h
+@@ -17,6 +17,10 @@
+ #ifndef _MINELF_RETOUCH
+ #define _MINELF_RETOUCH
+ 
++#ifdef __APPLE__
++#include <stdint.h>
++#endif
++
+ #include <stdbool.h>
+ #include <sys/types.h>
+ 
