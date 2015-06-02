@@ -77,6 +77,7 @@
 #AsusHoudiniXmlUpdater
 #AsusSettings
 AsusSetupWizard
+AsusSetupWizard2
 #AsusSystemUI
 #AsusSensorService
 QuickMemoService
@@ -109,11 +110,13 @@ FlipCover2
 # Google
 Books
 Chrome
+CloudPrint
 Drive
 DriveActivator
 Gmail2
 Hangouts
 Maps
+Magazines
 Music2
 Newsstand
 PlayGames
@@ -122,6 +125,7 @@ QuickSearch
 Street
 Velvet
 Videos
+VideoEditor
 YouTube
 talkback
 
@@ -131,6 +135,7 @@ HoloSpiralWallpaper
 NoiseField
 PhaseBeam
 VisualizationWallpapers
+MagicSmokeWallpapers
 
 # Dreams
 BasicDreams
@@ -179,6 +184,7 @@ QuickMemo
 SoundRecorder
 SuperNote
 WeatherTime
+WeatherTimeService
 WhatsNext
 #FileManager2
 FlashLight
@@ -194,6 +200,7 @@ PhotoFrameWidget
 AsusEasyLauncher
 AsusFMRadio
 AsusFMService
+FMRadio
 AsusKidsLauncher
 AsusMirror
 DataTransfor
@@ -213,6 +220,7 @@ DetectLogApp
 LogUploader
 AsusLiveDemoService
 AsusLiveDemoUI
+AsusLiveDemo
 
 # Bloatware (not ASUS)
 Ezding
@@ -231,3 +239,5 @@ YahooMall
 ZinioReader
 ZinioSettingsProvider
 eztable
+eReadingNow
+PubuBookBuffet
