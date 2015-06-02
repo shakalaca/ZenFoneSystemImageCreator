@@ -23,7 +23,6 @@
 #LiveWallpapers
 #LiveWallpapersPicker
 #LocationPicker
-#Lockscreen
 #MediaProvider
 #MmsService
 #NfcNci
@@ -94,6 +93,7 @@ ICEsoundService
 #AsusDrawRes
 #PAIStub
 #XT9IME
+#Lockscreen
 
 # ZenUI apps cannot working outside of system
 AsusBackup
