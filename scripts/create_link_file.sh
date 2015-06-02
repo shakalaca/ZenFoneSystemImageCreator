@@ -18,3 +18,5 @@ source ../scripts/func.bash
 " > $2
 cat pass6 >> $2
 rm pass*
+
+chmod 755 $2
