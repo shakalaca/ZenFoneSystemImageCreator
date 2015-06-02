@@ -3,6 +3,10 @@
 source ../scripts/func.bash
 
 cp system/bin/mksh system/xbin/sugote-mksh
+mkdir system/bin/.ext
+cp system/xbin/su system/bin/.ext/.su
+cp system/xbin/su system/xbin/sugote
+cp system/xbin/su system/xbin/daemonsu
 
 set_perm 0 0 0777 /system/bin/.ext
 set_perm 0 0 0755 /system/bin/.ext/.su
@@ -10,10 +14,8 @@ set_perm 0 0 0755 /system/xbin/su
 set_perm 0 0 0755 /system/xbin/sugote
 set_perm 0 0 0755 /system/xbin/sugote-mksh
 set_perm 0 0 0755 /system/xbin/daemonsu
+set_perm 0 0 0755 /system/xbin/supolicy
+set_perm 0 0 0644 /system/lib/libsupol.so
 set_perm 0 0 0544 /system/etc/install-recovery.sh
-set_perm 0 0 0744 /system/etc/install-recovery.sh.bak
 set_perm 0 0 0644 /system/etc/.installed_su_daemon
 set_perm 0 0 0644 /system/app/Superuser.apk
-set_perm 0 2000 0755 /system/bin/asusrmdir1.sh
-set_perm 0 2000 0755 /system/bin/asusrmdir1.sh.bak
-
