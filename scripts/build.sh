@@ -1,5 +1,13 @@
 #!/bin/sh
 
+apply_overlay() {
+  if [ -d ../assets/overlay ]; then
+    pushd ../assets/overlay > /dev/null
+      tar cf - . | (cd ../../work/system; sudo tar xfp -)
+    popd > /dev/null
+  fi
+}
+
 source scripts/setup.bash
 
 cd work
@@ -32,6 +40,8 @@ sudo ../scripts/link_and_set_perm_root
 #sudo ../scripts/exclude_apps.sh
 # Uncomment to enable sdcard write permission in platform.xml
 #sudo ../scripts/enable_sdcard_write.sh
+# Uncomment to override files in assets/overlay
+#apply_overlay
 
 if [ -n "$FILE_CONTEXT" ]; then
     FCOPT="-S ../assets/$FILE_CONTEXT"
