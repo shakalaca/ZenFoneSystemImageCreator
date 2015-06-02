@@ -3,7 +3,7 @@
 apply_overlay() {
   if [ -d ../assets/overlay ]; then
     pushd ../assets/overlay > /dev/null
-      tar cf - . | (cd ../../work/system; sudo tar xfp -)
+      tar cf - . | (cd ../../work/system; tar xfp -)
     popd > /dev/null
   fi
 }
@@ -39,15 +39,15 @@ rm -rf unzipped_rom
 
 cp -R ../root/* system
 
-read -p 'Press any key and enter sudo password to build system.img .. '
+read -p 'Press any key to build system.img .. '
 
-sudo ../scripts/$LINK_PERM_SETUP_FILE
-sudo ../scripts/apply_ota.sh
-sudo ../scripts/link_and_set_perm_root
+../scripts/$LINK_PERM_SETUP_FILE
+../scripts/apply_ota.sh
+../scripts/link_and_set_perm_root
 # Uncomment to remove apps listed in exclude_apps_list
-#sudo ../scripts/exclude_apps.sh
+#../scripts/exclude_apps.sh
 # Uncomment to enable sdcard write permission in platform.xml
-#sudo ../scripts/enable_sdcard_write.sh
+#../scripts/enable_sdcard_write.sh
 # Uncomment to override files in assets/overlay
 #apply_overlay
 
@@ -58,5 +58,5 @@ if [ -n "$FILE_CONTEXT" ]; then
     fi
 fi
     
-sudo ./make_ext4fs -s -l $SYSTEM_SIZE -a system $FCOPT system.img system
+./make_ext4fs -s -l $SYSTEM_SIZE -a system $FCOPT system.img system
 
