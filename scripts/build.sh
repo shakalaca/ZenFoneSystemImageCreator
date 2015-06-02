@@ -20,6 +20,7 @@ fi
 #cd ..
 
 mv unzipped_rom/system .
+../scripts/create_link_file.sh unzipped_rom/META-INF/com/google/android/updater-script ../scripts/$LINK_PERM_SETUP_FILE
 if [ -f $ZIP_FILE ]; then
   rm -rf $ZIP_FILE
 fi
