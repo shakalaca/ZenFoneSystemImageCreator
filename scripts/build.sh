@@ -36,6 +36,8 @@ read -p 'Press any key and enter sudo password to build system.img .. '
 sudo ../scripts/$LINK_PERM_SETUP_FILE
 sudo ../scripts/apply_ota.sh
 sudo ../scripts/link_and_set_perm_root
+# Uncomment to remove apps listed in exclude_apps_list
+#sudo ../scripts/exclude_apps.sh
 
 if [ -n "$FILE_CONTEXT" ]; then
     FCOPT="-S ../scripts/$FILE_CONTEXT"
