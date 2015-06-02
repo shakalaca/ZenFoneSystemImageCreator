@@ -29,7 +29,7 @@ for ((index = 0; index < ${#APPS[@]}; index++)); do
   app=${APPS[$index]}
   if [ -d system/app/$app ]; then
     $MV system/app/$app excluded_apps/app/
-  else
+  elif [ -d system/priv-app/$app ]; then
     $MV system/priv-app/$app excluded_apps/priv-app/
   fi
   echo "Excluding $app .."
