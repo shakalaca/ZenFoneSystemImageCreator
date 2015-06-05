@@ -25,7 +25,7 @@ delete() {
     TARGET=${TARGET:1}
     if [ -d $TARGET ]; then
       $RMDIR $TARGET
-    else
+    elif [ -f $TARGET ]; then
       $RM $TARGET
     fi
   done
@@ -120,12 +120,14 @@ if [ -d ota/recovery ]; then
   popd > /dev/null
 fi
 
-sed -e 's/rename(\"/rename /' -e 's/\", \"/ /g' -e 's/\");//' -e 's/\",//' rename_pass1 > rename.sh
+if [ -f rename_pass1 ]; then
+  sed -e 's/rename(\"/rename /' -e 's/\", \"/ /g' -e 's/\");//' -e 's/\",//' rename_pass1 > rename.sh
 
-. rename.sh
+  . rename.sh
 
-rm -f rename_pass*
-rm -f rename.sh
+  rm -f rename_pass*
+  rm -f rename.sh
+fi
 
 sed -e 's/set_metadata_recursive(\"/set_metadata_recursive /' -e 's/set_metadata(\"/set_metadata /' set_perm_pass1 >  set_perm_pass2
 sed -e 's/\", \"uid\",//' -e 's/, \"gid\",//' -e 's/, \"dmode\",//' -e 's/, \"fmode\",//' -e 's/, \"mode\",//' set_perm_pass2 > set_perm_pass3
