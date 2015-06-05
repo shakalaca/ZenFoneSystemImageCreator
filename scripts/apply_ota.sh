@@ -33,15 +33,15 @@ delete() {
 
 set_metadata_recursive() {
   TARGET=${1:1}
-  $CHOWN -R $2:$3 $TARGET
-  $FIND $TARGET -type d -exec chmod $4 {} +
-  $FIND $TARGET -type f -exec chmod $5 {} +
+#  $CHOWN -R $2:$3 $TARGET
+#  $FIND $TARGET -type d -exec chmod $4 {} +
+#  $FIND $TARGET -type f -exec chmod $5 {} +
 }
 
 set_metadata() {
   TARGET=${1:1}
-  $CHOWN $2:$3 $TARGET
-  $CHMOD $4 $TARGET
+#  $CHOWN $2:$3 $TARGET
+#  $CHMOD $4 $TARGET
 }
 
 rename() {
