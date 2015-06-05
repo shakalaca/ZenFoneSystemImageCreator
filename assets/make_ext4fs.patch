@@ -1,8 +1,18 @@
 diff --git a/core/libsparse/output_file.c b/core/libsparse/output_file.c
-index cd30800..1b14c86 100644
+index cd30800..8e24f3f 100644
 --- a/core/libsparse/output_file.c
 +++ b/core/libsparse/output_file.c
-@@ -48,6 +48,13 @@
+@@ -36,7 +36,9 @@
+ 
+ #ifndef USE_MINGW
+ #include <sys/mman.h>
++#ifndef O_BINARY
+ #define O_BINARY 0
++#endif
+ #else
+ #define ftruncate64 ftruncate
+ #endif
+@@ -48,6 +50,13 @@
  #define off64_t off_t
  #endif
  
@@ -33,15 +43,17 @@ index 8e188e9..baeb62a 100644
  #define SPARSE_HEADER_LEN       (sizeof(sparse_header_t))
  #define CHUNK_HEADER_LEN (sizeof(chunk_header_t))
 diff --git a/extras/ext4_utils/ext4_utils.h b/extras/ext4_utils/ext4_utils.h
-index 499753f..8a65460 100644
+index 499753f..08d67a1 100644
 --- a/extras/ext4_utils/ext4_utils.h
 +++ b/extras/ext4_utils/ext4_utils.h
-@@ -45,6 +45,11 @@ extern "C" {
+@@ -45,6 +45,13 @@ extern "C" {
  #define off64_t off_t
  #endif
  
 +#ifdef __CYGWIN__
 +#define lseek64 lseek
++#define ftruncate64 ftruncate
++#define mmap64 mmap
 +#define off64_t off_t
 +#endif
 +
