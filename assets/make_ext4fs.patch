@@ -1,0 +1,66 @@
+diff --git a/core/libsparse/output_file.c b/core/libsparse/output_file.c
+index cd30800..1b14c86 100644
+--- a/core/libsparse/output_file.c
++++ b/core/libsparse/output_file.c
+@@ -48,6 +48,13 @@
+ #define off64_t off_t
+ #endif
+ 
++#ifdef __CYGWIN__
++#define lseek64 lseek
++#define ftruncate64 ftruncate
++#define mmap64 mmap
++#define off64_t off_t
++#endif
++
+ #define min(a, b) \
+ 	({ typeof(a) _a = (a); typeof(b) _b = (b); (_a < _b) ? _a : _b; })
+ 
+diff --git a/core/libsparse/sparse_read.c b/core/libsparse/sparse_read.c
+index 8e188e9..baeb62a 100644
+--- a/core/libsparse/sparse_read.c
++++ b/core/libsparse/sparse_read.c
+@@ -40,6 +40,11 @@
+ #define off64_t off_t
+ #endif
+ 
++#ifdef __CYGWIN__
++#define lseek64 lseek
++#define off64_t off_t
++#endif
++
+ #define SPARSE_HEADER_MAJOR_VER 1
+ #define SPARSE_HEADER_LEN       (sizeof(sparse_header_t))
+ #define CHUNK_HEADER_LEN (sizeof(chunk_header_t))
+diff --git a/extras/ext4_utils/ext4_utils.h b/extras/ext4_utils/ext4_utils.h
+index 499753f..8a65460 100644
+--- a/extras/ext4_utils/ext4_utils.h
++++ b/extras/ext4_utils/ext4_utils.h
+@@ -45,6 +45,11 @@ extern "C" {
+ #define off64_t off_t
+ #endif
+ 
++#ifdef __CYGWIN__
++#define lseek64 lseek
++#define off64_t off_t
++#endif
++
+ #include "ext4_sb.h"
+ 
+ extern int force;
+diff --git a/extras/ext4_utils/ext4fixup.c b/extras/ext4_utils/ext4fixup.c
+index 184cd0d..11912ba 100644
+--- a/extras/ext4_utils/ext4fixup.c
++++ b/extras/ext4_utils/ext4fixup.c
+@@ -36,6 +36,11 @@
+ #define off64_t off_t
+ #endif
+ 
++#ifdef __CYGWIN__
++#define lseek64 lseek
++#define off64_t off_t
++#endif
++
+ /* The inode block count for a file/directory is in units of 512 byte blocks,
+  * _NOT_ the filesystem block size!
+  */

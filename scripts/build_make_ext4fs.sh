@@ -32,6 +32,10 @@ if [ -z "$DO_NOT_FETCH" ]; then
   cd extras; git checkout -b $BRANCH $BRANCH; cd ..
 
   cd core; patch -p1 -i ../../assets/fs_supersu.patch; cd ..
+
+  if [[ $(uname -s) == "CYGWIN"* ]]; then 
+    patch -p1 -i ../assets/make_ext4fs.patch
+  fi
 fi
 
 # for extract boot.img

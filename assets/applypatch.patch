@@ -1,7 +1,7 @@
-diff --git a/applypatch/applypatch.c b/applypatch/applypatch.c
+diff --git a/recovery/applypatch/applypatch.c b/recovery/applypatch/applypatch.c
 index 2c86e09..58d1596 100644
---- a/applypatch/applypatch.c
-+++ b/applypatch/applypatch.c
+--- a/recovery/applypatch/applypatch.c
++++ b/recovery/applypatch/applypatch.c
 @@ -20,7 +20,14 @@
  #include <stdlib.h>
  #include <string.h>
@@ -21,7 +21,7 @@ index 2c86e09..58d1596 100644
  #include "mtdutils/mtdutils.h"
  #include "edify/expr.h"
  
-+#ifndef __APPLE__
++#if !defined(__APPLE__) && !defined(__CYGWIN__)
  static int LoadPartitionContents(const char* filename, FileContents* file);
 +#endif
 +
@@ -32,7 +32,7 @@ index 2c86e09..58d1596 100644
      // load the contents of a partition.
      if (strncmp(filename, "MTD:", 4) == 0 ||
          strncmp(filename, "EMMC:", 5) == 0) {
-+#ifdef __APPLE__
++#if defined(__APPLE__) || defined(__CYGWIN__)
 +        return -1;
 +#else
          return LoadPartitionContents(filename, file);
@@ -44,7 +44,7 @@ index 2c86e09..58d1596 100644
      }
  }
  
-+#ifndef __APPLE__
++#if !defined(__APPLE__) && !defined(__CYGWIN__)
  // Load the contents of an MTD or EMMC partition into the provided
  // FileContents.  filename should be a string of the form
  // "MTD:<partition_name>:<size_1>:<sha1_1>:<size_2>:<sha1_2>:..."  (or
@@ -61,7 +61,7 @@ index 2c86e09..58d1596 100644
      return 0;
  }
  
-+#ifndef __APPLE__
++#if !defined(__APPLE__) && !defined(__CYGWIN__)
  // Write a memory buffer to 'target' partition, a string of the form
  // "MTD:<partition>[:...]" or "EMMC:<partition_device>:".  Return 0 on
  // success.
@@ -77,7 +77,7 @@ index 2c86e09..58d1596 100644
      }
  
      if (output < 0) {
-+#ifdef __APPLE__
++#if defined(__APPLE__) || defined(__CYGWIN__)
 +        return 1;
 +#else
          // Copy the temp file to the partition.
@@ -89,10 +89,10 @@ index 2c86e09..58d1596 100644
          free(msi.buffer);
      } else {
          // Give the .patch file the same owner, group, and mode of the
-diff --git a/applypatch/applypatch.h b/applypatch/applypatch.h
+diff --git a/recovery/applypatch/applypatch.h b/recovery/applypatch/applypatch.h
 index edec848..6cfa498 100644
---- a/applypatch/applypatch.h
-+++ b/applypatch/applypatch.h
+--- a/recovery/applypatch/applypatch.h
++++ b/recovery/applypatch/applypatch.h
 @@ -38,7 +38,7 @@ typedef struct _FileContents {
  // it to free up space.  If the expected source file doesn't exist, or
  // is corrupted, we look to see if this file contains the bits we want
@@ -102,10 +102,10 @@ index edec848..6cfa498 100644
  
  typedef ssize_t (*SinkFn)(const unsigned char*, ssize_t, void*);
  
-diff --git a/applypatch/bspatch.c b/applypatch/bspatch.c
+diff --git a/recovery/applypatch/bspatch.c b/recovery/applypatch/bspatch.c
 index b34ec2a..b9fb174 100644
---- a/applypatch/bspatch.c
-+++ b/applypatch/bspatch.c
+--- a/recovery/applypatch/bspatch.c
++++ b/recovery/applypatch/bspatch.c
 @@ -28,6 +28,10 @@
  
  #include <bzlib.h>
@@ -126,10 +126,10 @@ index b34ec2a..b9fb174 100644
  {
      off_t y;
 
-diff --git a/applypatch/freecache.c b/applypatch/freecache.c
+diff --git a/recovery/applypatch/freecache.c b/recovery/applypatch/freecache.c
 index 9827fda..d308a57 100644
---- a/applypatch/freecache.c
-+++ b/applypatch/freecache.c
+--- a/recovery/applypatch/freecache.c
++++ b/recovery/applypatch/freecache.c
 @@ -4,7 +4,14 @@
  #include <stdlib.h>
  #include <string.h>
@@ -146,10 +146,10 @@ index 9827fda..d308a57 100644
  #include <dirent.h>
  #include <ctype.h>
 
-diff --git a/applypatch/imgpatch.c b/applypatch/imgpatch.c
+diff --git a/recovery/applypatch/imgpatch.c b/recovery/applypatch/imgpatch.c
 index 33c4487..38cbbd8 100644
---- a/applypatch/imgpatch.c
-+++ b/applypatch/imgpatch.c
+--- a/recovery/applypatch/imgpatch.c
++++ b/recovery/applypatch/imgpatch.c
 @@ -36,7 +36,7 @@
   * file, and update the SHA context with the output data as well.
   * Return 0 on success.

@@ -28,7 +28,7 @@ if [ -z "$DO_NOT_FETCH" ]; then
   git clone https://android.googlesource.com/platform/bootable/recovery
   cd recovery; git checkout -b $BRANCH $BRANCH; cd ..
 
-  cd recovery; patch -p1 -i ../../assets/applypatch.patch; cd ..
+  patch -p1 -i ../assets/applypatch.patch
 fi
 
 cd zlib/src
@@ -50,7 +50,7 @@ gcc -c rsa.c sha.c sha256.c -I ../include
 ar rcs libmincrypt.a *.o
 cd ../..
 
-if [ "$(uname)" != "Darwin" ]; then
+if [ "$(uname)" != "Darwin" ] && [[ $(uname -s) != "CYGWIN"* ]]; then
   cd recovery/mtdutils
   gcc -O3 -DUSE_MMAP -c {mounts,mtdutils}.{h,c}
   ar rcs libmtdutils.a *.o
