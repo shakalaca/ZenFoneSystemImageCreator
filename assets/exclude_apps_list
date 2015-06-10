@@ -164,9 +164,10 @@ ShareRimBinary
 
 # ZenUI app
 ASUSBrowser
-ASUSGallery
-# Use with AsusCamera
+# Use with AsusCamera {
+#ASUSGallery
 #ASUSGalleryBurst
+# Use with AsusCamera }
 AsusCalculator
 AsusCalendar
 #AsusCamera
