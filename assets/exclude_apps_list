@@ -106,8 +106,8 @@ AudioWizardView
 #DeskClock
 # must installed with DeskClock
 #PowerSaving2
-FlipCover
-FlipCover2
+#FlipCover
+#FlipCover2
 
 ########## Optional Packages ##########
 # Google
