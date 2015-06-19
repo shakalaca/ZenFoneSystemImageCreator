@@ -12,6 +12,10 @@ add_new_vold() {
   apply_overlay new_vold
 }
 
+add_root_survival() {
+  apply_overlay root_survival
+}
+
 source scripts/setup.bash
 
 cd work
@@ -55,9 +59,13 @@ read -p 'Press any key to build system.img .. '
 # Uncomment to add vold with ntfs support
 #add_new_vold
 
+if [ ! -z "$ROOT_SURVIVAL" ]; then
+  add_root_survival
+fi
+
 if [ -n "$FILE_CONTEXT" ]; then
     FCOPT="-S ../assets/$FILE_CONTEXT"
-    if [ ! -z "$FIX_SU_NOTIFICATION" ]; then
+    if [ ! -z "$ROOT_SURVIVAL" ]; then
         FCOPT="$FCOPT"_fix
     fi
 fi

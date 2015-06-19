@@ -24,5 +24,5 @@ OTA_URL=http://fota.asus.com/delta_package/phone/WW_Z00A/formal/WW_2.18.40.12_20
 #SYSTEM_SIZE=1363148800
 #FILE_CONTEXT=file_contexts_t00g
 
-# Uncomment to remove supersu fix notification
-#FIX_SU_NOTIFICATION=1
+# Uncomment to add root survival function (fix su binary notification and preserve root after OTA upgrade)
+ROOT_SURVIVAL=1

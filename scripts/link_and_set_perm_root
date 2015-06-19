@@ -12,13 +12,6 @@ cp system/xbin/su system/xbin/daemonsu
 rm system/bin/app_process
 ln -s /system/xbin/daemonsu system/bin/app_process
 
-if [ ! -z "$FIX_SU_NOTIFICATION" ]; then
-  mv system/bin/app_process32 system/bin/app_process32_original
-  ln -s /system/xbin/daemonsu system/bin/app_process32
-  cp system/bin/app_process32_original system/bin/app_process_init
-  set_perm 0 2000 755 /system/bin/app_process_init
-fi
-
 set_perm 0 0 0777 /system/bin/.ext
 set_perm 0 0 0755 /system/bin/.ext/.su
 set_perm 0 0 0755 /system/xbin/su
@@ -31,7 +24,15 @@ set_perm 0 0 0755 /system/app/SuperSU
 set_perm 0 0 0644 /system/app/SuperSU/SuperSU.apk
 set_perm 0 0 0755 /system/etc/install-recovery.sh
 
-if [ ! -z "$FIX_SU_NOTIFICATION" ]; then
+if [ ! -z "$ROOT_SURVIVAL" ]; then
+  mv system/bin/app_process32 system/bin/app_process32_original
+  ln -s /system/xbin/daemonsu system/bin/app_process32
+  cp system/bin/app_process32_original system/bin/app_process_init
+  set_perm 0 2000 755 /system/bin/app_process_init
+  
+  set_perm 0 0 0755 /system/bin/ct_monitor
+  set_perm 0 0 0755 /system/etc/install-recovery.sh.bak
+  
   rm system/bin/install-recovery.sh
   ln -s /system/etc/install-recovery.sh system/bin/install-recovery.sh
 fi
