@@ -1,11 +1,15 @@
 #!/bin/sh
 
 apply_overlay() {
-  if [ -d ../assets/overlay ]; then
-    pushd ../assets/overlay > /dev/null
+  if [ -d ../assets/$1 ]; then
+    pushd ../assets/$1 > /dev/null
       tar cf - . | (cd ../../work/system; tar xfp -)
     popd > /dev/null
   fi
+}
+
+add_new_vold() {
+  apply_overlay new_vold
 }
 
 source scripts/setup.bash
@@ -48,8 +52,8 @@ read -p 'Press any key to build system.img .. '
 #../scripts/exclude_apps.sh
 # Uncomment to enable sdcard write permission in platform.xml
 #../scripts/enable_sdcard_write.sh
-# Uncomment to override files in assets/overlay
-#apply_overlay
+# Uncomment to add vold with ntfs support
+#add_new_vold
 
 if [ -n "$FILE_CONTEXT" ]; then
     FCOPT="-S ../assets/$FILE_CONTEXT"
