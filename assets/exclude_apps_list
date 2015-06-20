@@ -101,8 +101,8 @@ ICEsoundService
 AsusBackup
 #AsusSplendid
 #AsusSplendidCommandAgent
-AudioWizard
-AudioWizardView
+#AudioWizard
+#AudioWizardView
 #DeskClock
 # must installed with DeskClock
 #PowerSaving2
