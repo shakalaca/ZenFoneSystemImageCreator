@@ -52,12 +52,16 @@ read -p 'Press any key to build system.img .. '
 ../scripts/$LINK_PERM_SETUP_FILE
 ../scripts/apply_ota.sh
 ../scripts/link_and_set_perm_root
-# Uncomment to remove apps listed in exclude_apps_list
-#../scripts/exclude_apps.sh
-# Uncomment to enable sdcard write permission in platform.xml
-#../scripts/enable_sdcard_write.sh
-# Uncomment to add vold with ntfs support
-#add_new_vold
+if [ ! -z "$SLIM_DOWN" ]; then
+  # Remove apps listed in exclude_apps_list
+  ../scripts/exclude_apps.sh
+  # Enable sdcard write permission in platform.xml
+  ../scripts/enable_sdcard_write.sh
+  # Add vold with ntfs support
+  add_new_vold
+  # Slim down version do not need root survival
+  unset ROOT_SURVIVAL
+fi
 
 if [ ! -z "$ROOT_SURVIVAL" ]; then
   add_root_survival
