@@ -99,12 +99,13 @@ ICEsoundService
 AsusBackup
 #AsusSplendid
 #AsusSplendidCommandAgent
-AudioWizard
-AudioWizardView
+#AudioWizard
+#AudioWizardView
 #DeskClock
 # must installed with DeskClock
 #PowerSaving2
-FlipCover2
+#FlipCover
+#FlipCover2
 
 ########## Optional Packages ##########
 # Google
@@ -165,9 +166,10 @@ ShareRimBinary
 
 # ZenUI app
 ASUSBrowser
-ASUSGallery
-# Use with AsusCamera
+# Use with AsusCamera {
+#ASUSGallery
 #ASUSGalleryBurst
+# Use with AsusCamera }
 AsusCalculator
 AsusCalendar
 #AsusCamera
