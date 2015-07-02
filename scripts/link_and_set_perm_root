@@ -3,6 +3,8 @@
 source ../scripts/setup.bash
 source ../scripts/func.bash
 
+cp -R ../root/* system
+
 cp system/bin/sh system/xbin/sugote-mksh
 mkdir system/bin/.ext
 cp system/xbin/su system/bin/.ext/.su
@@ -12,29 +14,12 @@ cp system/xbin/su system/xbin/daemonsu
 rm system/bin/app_process
 ln -s /system/xbin/daemonsu system/bin/app_process
 
-set_perm 0 0 0777 /system/bin/.ext
-set_perm 0 0 0755 /system/bin/.ext/.su
-set_perm 0 0 0755 /system/xbin/su
-set_perm 0 0 0755 /system/xbin/sugote
-set_perm 0 0 0755 /system/xbin/sugote-mksh
-set_perm 0 0 0755 /system/xbin/supolicy
-set_perm 0 0 0644 /system/lib/libsupol.so
-set_perm 0 0 0755 /system/xbin/daemonsu
-set_perm 0 0 0755 /system/app/SuperSU
-set_perm 0 0 0644 /system/app/SuperSU/SuperSU.apk
-set_perm 0 0 0755 /system/etc/install-recovery.sh
-
-if [ ! -z "$ROOT_SURVIVAL" ]; then
+if [ ! -z "$ROOT_SURVIVAL" ] || [ ! -z "$SLIM_DOWN" ]; then
   mv system/bin/app_process32 system/bin/app_process32_original
   ln -s /system/xbin/daemonsu system/bin/app_process32
   cp system/bin/app_process32_original system/bin/app_process_init
-  set_perm 0 2000 755 /system/bin/app_process_init
   
-  set_perm 0 0 0755 /system/bin/ct_monitor
-  set_perm 0 0 0755 /system/etc/install-recovery.sh.bak
-  
-  rm system/bin/install-recovery.sh
+  cp system/etc/install-recovery.sh system/etc/install-recovery.sh.bak  
+  mv system/bin/install-recovery.sh system/etc/install-recovery-2.sh
   ln -s /system/etc/install-recovery.sh system/bin/install-recovery.sh
 fi
-
-set_perm 0 0 0644 /system/etc/.installed_su_daemon

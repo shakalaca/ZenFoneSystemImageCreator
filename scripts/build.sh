@@ -45,8 +45,6 @@ if [ -f $ZIP_FILE ]; then
 fi
 rm -rf unzipped_rom
 
-cp -R ../root/* system
-
 read -p 'Press any key to build system.img .. '
 
 ../scripts/$LINK_PERM_SETUP_FILE
@@ -71,7 +69,7 @@ fi
 
 if [ -n "$FILE_CONTEXT" ]; then
     FCOPT="-S ../assets/$FILE_CONTEXT"
-    if [ ! -z "$ROOT_SURVIVAL" ]; then
+    if [ ! -z "$ROOT_SURVIVAL" ] || [ ! -z "$SLIM_DOWN" ]; then
         FCOPT="$FCOPT"_fix
     fi
 fi
