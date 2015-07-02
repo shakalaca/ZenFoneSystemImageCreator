@@ -57,6 +57,8 @@ if [ ! -z "$SLIM_DOWN" ]; then
   ../scripts/exclude_apps.sh
   # Enable sdcard write permission in platform.xml
   ../scripts/enable_sdcard_write.sh
+  # Install Xposed
+  ../scripts/install_xposed.sh
   # Add vold with ntfs support
   add_new_vold
   # Slim down version do not need root survival
