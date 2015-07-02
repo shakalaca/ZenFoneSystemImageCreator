@@ -3,14 +3,14 @@ LINK_PERM_SETUP_FILE=link_and_set_perm_z00a
 ROM_URL=http://dlcdnet.asus.com/pub/ASUS/ZenFone/ZE551ML/UL-Z00A-WW-2.19.40.18-user.zip
 SYSTEM_SIZE=2415919104
 FILE_CONTEXT=file_contexts_z00a
-#OTA_URL=http://fota.asus.com/delta_package/phone/WW_Z00A/formal/WW_2.18.40.12_20150529_9543_user_rel-user-WW_Z00A-WW_2.19.40.18_20150612_1183_user_rel-user-WW_Z00A-20150612/WW_551_0529_0612_20150612.zip
+OTA_URL=http://fota.asus.com/delta_package/phone/WW_Z00A/formal/WW_2.19.40.18_20150612_1183_user_rel-user-WW_Z00A-WW_2.19.40.20_20150623_2193_user_rel-user-WW_Z00A-20150623/WW_551_0612_0623_20150623.zip
 
 # ZenFone 2 Z008
 #LINK_PERM_SETUP_FILE=link_and_set_perm_z008
 #ROM_URL=http://dlcdnet.asus.com/pub/ASUS/ZenFone/ZE550ML/UL-Z008-WW-2.19.40.12-user.zip
 #SYSTEM_SIZE=2415919104
 #FILE_CONTEXT=file_contexts_z008
-#OTA_URL=http://fota.asus.com/delta_package/phone/WW_Z008/formal/WW_2.17.40.6_20150515_9759_user_rel-user-WW_Z008-WW_2.18.40.7_20150601_3225_user_rel-user-WW_Z008-20150601/WW_550_0515_0601_20150601.zip
+#OTA_URL=http://fota.asus.com/delta_package/phone/WW_Z008/formal/WW_2.19.40.12_20150612_4176_user_rel-user-WW_Z008-WW_2.19.40.13_20150623_6113_user_rel-user-WW_Z008-20150625/WW_550_0612_0623_20150625.zip
 
 # ZenFone 5 T00F
 #LINK_PERM_SETUP_FILE=link_and_set_perm_t00f
