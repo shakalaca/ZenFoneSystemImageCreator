@@ -1,7 +1,6 @@
 #!/bin/bash
 
 source ../scripts/setup.bash
-source ../scripts/func.bash
 
 XPOSED_DIR=../xposed
 

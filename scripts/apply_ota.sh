@@ -1,15 +1,17 @@
 #!/bin/bash
 
-if [ ! -f ota.zip ]; then
-  echo ota.zip not found
-  exit
+STOCK_OTA="$1"
+
+if [ ! -f $STOCK_OTA ]; then
+  echo OTA package not found !
+  exit 1
 fi
+
+BASEDIR=$(pwd)
+UNZIPPED_STOCK_OTA_DIR=unzipped_ota
 
 ECHO=""
 APPLYPATCH="$ECHO ./applypatch"
-CHOWN="$ECHO chown"
-CHMOD="$ECHO chmod"
-FIND="$ECHO find"
 RM="$ECHO rm"
 RMDIR="$ECHO rmdir"
 RENAME="$ECHO mv"
@@ -47,19 +49,6 @@ delete() {
   done
 }
 
-set_metadata_recursive() {
-  TARGET=${1:1}
-#  $CHOWN -R $2:$3 $TARGET
-#  $FIND $TARGET -type d -exec chmod $4 {} +
-#  $FIND $TARGET -type f -exec chmod $5 {} +
-}
-
-set_metadata() {
-  TARGET=${1:1}
-#  $CHOWN $2:$3 $TARGET
-#  $CHMOD $4 $TARGET
-}
-
 rename() {
   SOURCE=$1
   TARGET=$2
@@ -71,15 +60,18 @@ rename() {
 }
 
 move_out_image() {
-  if [ -f ota/$1.img ]; then
-    mv ota/$1.img .
+  if [ -f $UNZIPPED_STOCK_OTA_DIR/$1.img ]; then
+    echo "Move out $1.img .. "
+    cp $UNZIPPED_STOCK_OTA_DIR/$1.img .
   fi
 }
 
 APPLY_PATCH_DONE=true
 DELETE_CMD_DONE=true
 
-unzip ota.zip -d ota
+echo "Unzipping OTA package .. "
+unzip -q $STOCK_OTA -d $UNZIPPED_STOCK_OTA_DIR
+
 move_out_image boot
 move_out_image droidboot
 move_out_image recovery
@@ -99,8 +91,6 @@ do
     fi
   elif [[ "$line" == "rename"* ]]; then
     echo $line >> rename_pass1
-  elif [[ "$line" == "set_metadata"* ]]; then
-    echo $line >> set_perm_pass1
   elif !($APPLY_PATCH_DONE); then
     APPLY_PATCH_CMD="$APPLY_PATCH_CMD $(echo $line | sed -e 's/\r//g')"
     if [[ "$line" == *"));" ]]; then
@@ -114,9 +104,10 @@ do
       echo $DELETE_CMD >> delete_pass1
     fi
   fi
-done < ota/META-INF/com/google/android/updater-script
+done < $UNZIPPED_STOCK_OTA_DIR/META-INF/com/google/android/updater-script
 
-sed -e 's/apply_patch(\"/apply_patch /' -e 's/, package_extract_file(\"/:ota\//' patch_pass1 > patch_pass2
+echo "Generating patch script .. "
+sed -e 's/apply_patch(\"/apply_patch /' -e 's/, package_extract_file(\"/:\$UNZIPPED_STOCK_OTA_DIR\//' patch_pass1 > patch_pass2
 sed -e 's/\", \"-\",//' -e 's/\"));//' -e 's/,//g' patch_pass2 > patch.sh
 
 . patch.sh
@@ -124,6 +115,7 @@ sed -e 's/\", \"-\",//' -e 's/\"));//' -e 's/,//g' patch_pass2 > patch.sh
 rm -f patch_pass*
 rm -f patch.sh
 
+echo "Generating delete script .. "
 sed -e 's/delete(//' -e 's/);//' -e 's/\", \"/\",\"/g' delete_pass1 | tr , '\n' | tac > delete_pass2
 sed -e 's/\"\/system/delete \/system/' -e 's/\"//g' delete_pass2 > delete.sh
 
@@ -132,18 +124,20 @@ sed -e 's/\"\/system/delete \/system/' -e 's/\"//g' delete_pass2 > delete.sh
 rm -f delete_pass*
 rm -f delete.sh
 
-if [ -d ota/system ]; then
-  pushd ota/system > /dev/null
-  tar cf - . | (cd ../../system; tar xfp -)
+if [ -d $UNZIPPED_STOCK_OTA_DIR/system ]; then
+  echo "Moving out full system files .. "
+  pushd $UNZIPPED_STOCK_OTA_DIR/system > /dev/null
+    tar cf - . | (cd $BASEDIR/system; tar xfp -)
   popd > /dev/null
 fi
 
-if [ -d ota/recovery ]; then
-  pushd ota/recovery > /dev/null
-  tar cf - . | (cd ../../system; tar xfp -)
+if [ -d $UNZIPPED_STOCK_OTA_DIR/recovery ]; then
+  pushd $UNZIPPED_STOCK_OTA_DIR/recovery > /dev/null
+    tar cf - . | (cd $BASEDIR/system; tar xfp -)
   popd > /dev/null
-  
-  grep "applypatch -b" ota/recovery/bin/install-recovery.sh >  build_recovery_pass1
+
+  echo "Generating recovery.img building script .. "  
+  grep "applypatch -b" $UNZIPPED_STOCK_OTA_DIR/recovery/bin/install-recovery.sh >  build_recovery_pass1
   sed -e 's/applypatch/apply_patch/' -e 's/\/system/system/g' -e 's/ \&\&.*//' build_recovery_pass1 > build_recovery.sh
   
   . build_recovery.sh 
@@ -153,6 +147,7 @@ if [ -d ota/recovery ]; then
 fi
 
 if [ -f rename_pass1 ]; then
+  echo "Renaming files .. "
   sed -e 's/rename(\"/rename /' -e 's/\", \"/ /g' -e 's/\");//' -e 's/\",//' rename_pass1 > rename.sh
 
   . rename.sh
@@ -160,14 +155,3 @@ if [ -f rename_pass1 ]; then
   rm -f rename_pass*
   rm -f rename.sh
 fi
-
-sed -e 's/set_metadata_recursive(\"/set_metadata_recursive /' -e 's/set_metadata(\"/set_metadata /' set_perm_pass1 >  set_perm_pass2
-sed -e 's/\", \"uid\",//' -e 's/, \"gid\",//' -e 's/, \"dmode\",//' -e 's/, \"fmode\",//' -e 's/, \"mode\",//' set_perm_pass2 > set_perm_pass3
-sed -e 's/\", \"/ /g' -e 's/\");//' -e 's/\",//' set_perm_pass3 > set_perm_pass4
-awk -F , '{print $1}' set_perm_pass4 > set_perm.sh
-
-. set_perm.sh
-
-rm -f set_perm_pass*
-rm -f set_perm.sh
-

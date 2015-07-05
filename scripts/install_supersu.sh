@@ -1,7 +1,6 @@
 #!/bin/bash
 
 source ../scripts/setup.bash
-source ../scripts/func.bash
 
 cp -R ../root/* system
 
