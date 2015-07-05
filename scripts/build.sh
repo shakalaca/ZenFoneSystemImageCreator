@@ -16,6 +16,12 @@ add_root_survival() {
   apply_overlay root_survival
 }
 
+move_out_image() {
+  if [ -f unzipped_rom/$1.img ]; then
+    mv unzipped_rom/$1.img .
+  fi
+}
+
 source scripts/setup.bash
 
 cd work
@@ -43,6 +49,27 @@ mv unzipped_rom/system .
 if [ -f $ZIP_FILE ]; then
   rm -rf $ZIP_FILE
 fi
+
+move_out_image boot
+move_out_image droidboot
+move_out_image recovery
+
+if [ -d unzipped_rom/recovery ]; then
+  pushd unzipped_rom/recovery > /dev/null
+  tar cf - . | (cd ../../system; tar xfp -)
+  popd > /dev/null
+  
+  grep "applypatch -b" unzipped_rom/recovery/bin/install-recovery.sh > build_recovery_pass1
+  sed -e 's/applypatch/.\/applypatch/' -e 's/\/system/system/g' build_recovery_pass1 > build_recovery_pass2
+  sed -e 's/EMMC:\/dev\/block\/by-name\/boot.*EMMC:\/dev\/block\/by-name\/recovery/boot.img recovery.img/' build_recovery_pass2 > build_recovery_pass3
+  sed -e 's/ \&\&.*//' build_recovery_pass3 > build_recovery.sh
+  
+  . build_recovery.sh 
+   
+  rm build_recovery_pass*
+  rm build_recovery.sh
+fi
+
 rm -rf unzipped_rom
 
 read -p 'Press any key to build system.img .. '

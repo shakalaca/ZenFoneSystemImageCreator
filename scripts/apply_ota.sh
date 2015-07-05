@@ -15,8 +15,24 @@ RMDIR="$ECHO rmdir"
 RENAME="$ECHO mv"
 
 apply_patch() {
-  TARGET=${1:1}
-  $APPLYPATCH $TARGET $TARGET $2 $3 $4
+  RES=""
+  if [ "$1" == "-b" ]; then
+    RES="-b ${2}"
+    shift
+    shift
+  fi
+  if [[ "$1" == "EMMC:/dev/block/by-name/boot"* ]]; then
+    SOURCE=boot.img
+  else
+    SOURCE=${1:1}
+  fi
+  if [ "$2" == "EMMC:/dev/block/by-name/recovery" ]; then
+    TARGET=recovery.img
+    shift
+  else
+    TARGET=$SOURCE
+  fi
+  $APPLYPATCH $RES $SOURCE $TARGET $2 $3 $4
 }
 
 delete() {
@@ -54,10 +70,19 @@ rename() {
   $RENAME $SOURCE $TARGET
 }
 
+move_out_image() {
+  if [ -f ota/$1.img ]; then
+    mv ota/$1.img .
+  fi
+}
+
 APPLY_PATCH_DONE=true
 DELETE_CMD_DONE=true
 
 unzip ota.zip -d ota
+move_out_image boot
+move_out_image droidboot
+move_out_image recovery
 
 while read line
 do
@@ -92,8 +117,7 @@ do
 done < ota/META-INF/com/google/android/updater-script
 
 sed -e 's/apply_patch(\"/apply_patch /' -e 's/, package_extract_file(\"/:ota\//' patch_pass1 > patch_pass2
-sed -e 's/\", \"-\",//' -e 's/\"));//' -e 's/,//g' patch_pass2 > patch_pass3
-grep -v 'EMMC:/dev/block/by-name/boot:' patch_pass3 >> patch.sh
+sed -e 's/\", \"-\",//' -e 's/\"));//' -e 's/,//g' patch_pass2 > patch.sh
 
 . patch.sh
 
@@ -118,6 +142,14 @@ if [ -d ota/recovery ]; then
   pushd ota/recovery > /dev/null
   tar cf - . | (cd ../../system; tar xfp -)
   popd > /dev/null
+  
+  grep "applypatch -b" ota/recovery/bin/install-recovery.sh >  build_recovery_pass1
+  sed -e 's/applypatch/apply_patch/' -e 's/\/system/system/g' -e 's/ \&\&.*//' build_recovery_pass1 > build_recovery.sh
+  
+  . build_recovery.sh 
+   
+  rm build_recovery_pass*
+  rm build_recovery.sh
 fi
 
 if [ -f rename_pass1 ]; then
