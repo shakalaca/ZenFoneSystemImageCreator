@@ -103,3 +103,9 @@ fi
     
 ./make_ext4fs -s -l $SYSTEM_SIZE -a system $FCOPT system.img system
 
+if [ ! -d $VERSION ]; then
+  mkdir $VERSION
+fi
+
+mv *.img $VERSION
+
