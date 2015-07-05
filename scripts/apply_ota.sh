@@ -10,12 +10,6 @@ fi
 BASEDIR=$(pwd)
 UNZIPPED_STOCK_OTA_DIR=unzipped_ota
 
-ECHO=""
-APPLYPATCH="$ECHO ./applypatch"
-RM="$ECHO rm"
-RMDIR="$ECHO rmdir"
-RENAME="$ECHO mv"
-
 apply_patch() {
   RES=""
   if [ "$1" == "-b" ]; then
@@ -34,7 +28,7 @@ apply_patch() {
   else
     TARGET=$SOURCE
   fi
-  $APPLYPATCH $RES $SOURCE $TARGET $2 $3 $4
+  ./applypatch $RES $SOURCE $TARGET $2 $3 $4
 }
 
 delete() {
@@ -42,9 +36,9 @@ delete() {
   do
     TARGET=${TARGET:1}
     if [ -d $TARGET ]; then
-      $RMDIR $TARGET
+      rmdir $TARGET
     elif [ -f $TARGET ]; then
-      $RM $TARGET
+      rm $TARGET
     fi
   done
 }
@@ -56,7 +50,7 @@ rename() {
   if [ ! -d $XPATH ]; then
     mkdir -p $XPATH
   fi
-  $RENAME $SOURCE $TARGET
+  mv $SOURCE $TARGET
 }
 
 move_out_image() {
@@ -66,15 +60,15 @@ move_out_image() {
   fi
 }
 
-APPLY_PATCH_DONE=true
-DELETE_CMD_DONE=true
-
 echo "Unzipping OTA package .. "
 unzip -q $STOCK_OTA -d $UNZIPPED_STOCK_OTA_DIR
 
 move_out_image boot
 move_out_image droidboot
 move_out_image recovery
+
+APPLY_PATCH_DONE=true
+DELETE_CMD_DONE=true
 
 while read line
 do
@@ -106,7 +100,7 @@ do
   fi
 done < $UNZIPPED_STOCK_OTA_DIR/META-INF/com/google/android/updater-script
 
-echo "Generating patch script .. "
+echo "Patching system files .."
 sed -e 's/apply_patch(\"/apply_patch /' -e 's/, package_extract_file(\"/:\$UNZIPPED_STOCK_OTA_DIR\//' patch_pass1 > patch_pass2
 sed -e 's/\", \"-\",//' -e 's/\"));//' -e 's/,//g' patch_pass2 > patch.sh
 
@@ -115,32 +109,35 @@ sed -e 's/\", \"-\",//' -e 's/\"));//' -e 's/,//g' patch_pass2 > patch.sh
 rm -f patch_pass*
 rm -f patch.sh
 
-echo "Generating delete script .. "
-sed -e 's/delete(//' -e 's/);//' -e 's/\", \"/\",\"/g' delete_pass1 | tr , '\n' | tac > delete_pass2
-sed -e 's/\"\/system/delete \/system/' -e 's/\"//g' delete_pass2 > delete.sh
+if [ -f delete_pass1 ]; then
+  echo "Removing unneeded files .."
+  sed -e 's/delete(//' -e 's/);//' -e 's/\", \"/\",\"/g' delete_pass1 | tr , '\n' | tac > delete_pass2
+  sed -e 's/\"\/system/delete \/system/' -e 's/\"//g' delete_pass2 > delete.sh
 
-. delete.sh
+  . delete.sh
 
-rm -f delete_pass*
-rm -f delete.sh
+  rm -f delete_pass*
+  rm -f delete.sh
+fi
 
 if [ -d $UNZIPPED_STOCK_OTA_DIR/system ]; then
-  echo "Moving out full system files .. "
+  echo "Unpacking new system files .."
   pushd $UNZIPPED_STOCK_OTA_DIR/system > /dev/null
     tar cf - . | (cd $BASEDIR/system; tar xfp -)
   popd > /dev/null
 fi
 
 if [ -d $UNZIPPED_STOCK_OTA_DIR/recovery ]; then
+  echo "Unpacking new recovery .."
   pushd $UNZIPPED_STOCK_OTA_DIR/recovery > /dev/null
     tar cf - . | (cd $BASEDIR/system; tar xfp -)
   popd > /dev/null
 
-  echo "Generating recovery.img building script .. "  
+  echo "Building new recovery.img .."  
   grep "applypatch -b" $UNZIPPED_STOCK_OTA_DIR/recovery/bin/install-recovery.sh >  build_recovery_pass1
   sed -e 's/applypatch/apply_patch/' -e 's/\/system/system/g' -e 's/ \&\&.*//' build_recovery_pass1 > build_recovery.sh
   
-  . build_recovery.sh 
+  . build_recovery.sh > /dev/null
    
   rm build_recovery_pass*
   rm build_recovery.sh

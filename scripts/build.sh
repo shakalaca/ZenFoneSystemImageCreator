@@ -39,7 +39,7 @@ build_recovery_from_patch() {
       -e 's/EMMC:\/dev\/block\/by-name\/boot.*EMMC:\/dev\/block\/by-name\/recovery/boot.img recovery.img/' \
       -e 's/ \&\&.*//' build_recovery_pass1 > build_recovery.sh
 
-  . build_recovery.sh 
+  . build_recovery.sh > /dev/null
  
   # Clean up
   rm build_recovery_pass*
@@ -176,3 +176,7 @@ fi
 
 mv *.img $VERSION
 
+# ZIP and md5sum
+if [ -n "$SPLIT_SIZE" ]; then
+  $SCRIPTDIR/prepare_upload.sh
+fi
