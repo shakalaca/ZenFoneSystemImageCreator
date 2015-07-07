@@ -86,7 +86,8 @@ QuickMemoService
 #MobileManagerService
 #AsusInputDevices
 #DLNAService
-ICEsoundService
+#ICEsoundService
+#Transformer
 #AsusAs
 #AsusBoost
 #AsusCellBroadcast
@@ -220,7 +221,6 @@ AsusQuickSearch
 DMClient
 SystemUpdate
 UpdateLauncher
-Transformer
 SMMI_TEST
 DetectLogApp
 LogUploader
