@@ -25,14 +25,6 @@ if [ ! -x /system/etc/install-recovery.sh.bak ]; then
   chown 0.0 /system/xbin/supolicy
   chcon u:object_r:zygote_exec:s0 /system/xbin/sugote
 
-  # for 4.4
-  if [ ! -f /system/bin/install-recovery.sh ]; then
-    mv /system/etc/install-recovery.sh /system/etc/install-recovery-2.sh
-    cp /system/etc/install-recovery.sh.bak /system/etc/install-recovery.sh
-    chmod 755 /system/etc/install-recovery.sh
-    /system/etc/install-recovery.sh    
-  fi
-    
   # link app_process
   rm /system/bin/app_process
   ln -s /system/xbin/daemonsu /system/bin/app_process
