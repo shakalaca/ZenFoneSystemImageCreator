@@ -3,7 +3,6 @@
 # OTA update will change permission of all files under /system/etc to 644
 if [ ! -x /system/etc/install-recovery.sh.bak ]; then
   # setup environment
-  API=$(cat /system/build.prop | grep "ro.build.version.sdk=" | dd bs=1 skip=21 count=2)
   ABILONG=$(cat /system/build.prop /default.prop | grep -m 1 "ro.product.cpu.abi=" | dd bs=1 skip=19)
   APP_PROCESS=app_process32
   APP_PROCESS_ORIGINAL=app_process32_original
@@ -25,44 +24,33 @@ if [ ! -x /system/etc/install-recovery.sh.bak ]; then
   chown 0.0 /system/xbin/sugote-mksh
   chown 0.0 /system/xbin/supolicy
   chcon u:object_r:zygote_exec:s0 /system/xbin/sugote
-  
-  if [ "$API" -lt "21" ]; then
-    chmod 544 /system/etc/install-recovery.sh
-    /system/etc/install-recovery.sh
-  else
-    # backup original recovery updating program
-    if [ -L /system/bin/install-recovery.sh ]; then
-      mv /system/etc/install-recovery.sh /system/bin/install-recovery-2.sh
-    else 
-      mv /system/bin/install-recovery.sh /system/bin/install-recovery-2.sh
-      ln -s /system/etc/install-recovery.sh /system/bin/install-recovery.sh
-    fi
+
+  # for 4.4
+  if [ ! -f /system/bin/install-recovery.sh ]; then
+    mv /system/etc/install-recovery.sh /system/etc/install-recovery-2.sh
     cp /system/etc/install-recovery.sh.bak /system/etc/install-recovery.sh
     chmod 755 /system/etc/install-recovery.sh
-    
-    # update recovery
-    chmod 755 /system/bin/install-recovery-2.sh
-    chcon u:object_r:system_file:s0 /system/bin/install-recovery-2.sh
-    /system/bin/install-recovery-2.sh
-
-    # link app_process
-    rm /system/bin/app_process
-    ln -s /system/xbin/daemonsu /system/bin/app_process
-  
-    if [ ! -f "/system/bin/$APP_PROCESS_ORIGINAL" ]; then
-      mv /system/bin/$APP_PROCESS /system/bin/$APP_PROCESS_ORIGINAL
-    else
-      rm /system/bin/$APP_PROCESS
-    fi
-    ln -s /system/xbin/daemonsu /system/bin/$APP_PROCESS
-    if [ ! -f "/system/bin/app_process_init" ]; then
-      cp /system/bin/$APP_PROCESS_ORIGINAL /system/bin/app_process_init
-      chown 0.2000 /system/bin/app_process_init
-      chmod 755 /system/bin/app_process_init
-    fi
-    
-    chcon u:object_r:zygote_exec:s0 /system/bin/$APP_PROCESS_ORIGINAL
-    chcon u:object_r:zygote_exec:s0 /system/bin/app_process_init
+    /system/etc/install-recovery.sh    
   fi
+    
+  # link app_process
+  rm /system/bin/app_process
+  ln -s /system/xbin/daemonsu /system/bin/app_process
+
+  if [ ! -f "/system/bin/$APP_PROCESS_ORIGINAL" ]; then
+    mv /system/bin/$APP_PROCESS /system/bin/$APP_PROCESS_ORIGINAL
+  else
+    rm /system/bin/$APP_PROCESS
+  fi
+  ln -s /system/xbin/daemonsu /system/bin/$APP_PROCESS
+  if [ ! -f "/system/bin/app_process_init" ]; then
+    cp /system/bin/$APP_PROCESS_ORIGINAL /system/bin/app_process_init
+    chown 0.2000 /system/bin/app_process_init
+    chmod 755 /system/bin/app_process_init
+  fi
+  
+  chcon u:object_r:zygote_exec:s0 /system/bin/$APP_PROCESS_ORIGINAL
+  chcon u:object_r:zygote_exec:s0 /system/bin/app_process_init
+
   mount -r -o remount /system
 fi

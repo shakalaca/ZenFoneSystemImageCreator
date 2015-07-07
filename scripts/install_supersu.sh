@@ -19,6 +19,4 @@ if [ ! -z "$ROOT_SURVIVAL" ] || [ ! -z "$SLIM_DOWN" ]; then
   cp system/bin/app_process32_original system/bin/app_process_init
   
   cp system/etc/install-recovery.sh system/etc/install-recovery.sh.bak  
-  mv system/bin/install-recovery.sh system/etc/install-recovery-2.sh
-  ln -s /system/etc/install-recovery.sh system/bin/install-recovery.sh
 fi
