@@ -5,12 +5,14 @@
 #SYSTEM_SIZE=1363148800
 
 # ZenFone 5
+VERSION=T00F_TW_2.22.40.54
 LINK_PERM_SETUP_FILE=link_and_set_perm_zenfone_5
-ROM_URL=http://dlcdnet.asus.com/pub/ASUS/ZenFone/A500CG/UL-ASUS_T00F-TW-2.22.40.53-user.zip
+ROM_URL=http://dlcdnet.asus.com/pub/ASUS/ZenFone/UL-ASUS_T00F-TW-2.22.40.54-user.zip
 SYSTEM_SIZE=1363148800
 FILE_CONTEXT=file_contexts_zenfone
 
 # ZenFone 6
+#VERSION=T00G_TW_2.22.40.44
 #LINK_PERM_SETUP_FILE=link_and_set_perm_zenfone_6
 #ROM_URL=http://dlcdnet.asus.com/pub/ASUS/ZenFone/A600CG/UL-ASUS_T00G-TW-2.22.40.44-user.zip
 #SYSTEM_SIZE=1363148800

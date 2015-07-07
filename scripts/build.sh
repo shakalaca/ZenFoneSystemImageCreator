@@ -1,9 +1,9 @@
 #!/bin/sh
 
 apply_overlay() {
-  if [ -d ../assets/$1 ]; then
-    pushd ../assets/$1 > /dev/null
-      tar cf - . | (cd ../../work/system; tar xfp -)
+  if [ -d $ASSETSDIR/$1 ]; then
+    pushd $ASSETSDIR/$1 > /dev/null
+      tar cf - . | (cd $BASEDIR/system; tar xfp -)
     popd > /dev/null
   fi
 }
@@ -12,54 +12,105 @@ add_new_vold() {
   apply_overlay new_vold
 }
 
+move_out_image() {
+  if [ -f $UNZIPPED_STOCK_ROM_DIR/$1.img ]; then
+    echo "Move out stock $1.img .. "
+    cp $UNZIPPED_STOCK_ROM_DIR/$1.img .
+  fi
+}
+
+link_system_files() {
+  UPDATER_SCRIPT=$1
+  
+  cat $1 | sed 's/        /symlink("toolbox", /' > link_pass1
+  grep 'symlink' link_pass1 > link_pass2
+  cat link_pass2 | sed -e 's/symlink(\"/symlink /' -e 's/\", \"/ /g' -e 's/\");//' -e 's/\",//' > link.sh
+  
+  . link.sh
+
+  rm link_pass*
+  rm link.sh
+}
+
+symlink() {
+  SOURCE=$1
+  shift
+  for TARGET in "$@"
+  do
+    TARGET=${TARGET:1}
+    XPATH=${TARGET%/*}
+    XFILE=${TARGET##*/}
+    
+    if [ ! -d $XPATH ]; then
+      mkdir -p $XPATH
+    fi
+
+    pushd $XPATH > /dev/null
+      ln -s $SOURCE $XFILE
+    popd > /dev/null
+  done
+}
+
 source scripts/setup.bash
 
 cd work
 
-# change version here
-wget -c $ROM_URL -O dl_rom.zip
-if [ -n "$OTA_URL" ]; then
-  wget -c $OTA_URL -O ota.zip
+BASEDIR=$(pwd)
+SCRIPTDIR=../scripts
+ASSETSDIR=../assets
+UNZIPPED_STOCK_ROM_DIR=unzipped_rom
+
+STOCK_ROM=dl_rom.zip
+
+if [ ! -d system ]; then
+  # Download stock ROM
+  wget -c $ROM_URL -O $STOCK_ROM
+
+  echo "Extracting stock ROM .. "
+  unzip -q $STOCK_ROM -d $UNZIPPED_STOCK_ROM_DIR
+
+  echo "Move out system directory .."
+  mv $UNZIPPED_STOCK_ROM_DIR/system .
+
+  move_out_image boot
+  move_out_image fastboot
+  move_out_image recovery
+
+  echo "Link system files .. "
+  link_system_files $UNZIPPED_STOCK_ROM_DIR/META-INF/com/google/android/updater-script
+
+  echo "Clean up .. "
+  rm -rf $UNZIPPED_STOCK_ROM_DIR
+
+  read -p 'Press any key to build system.img .. '
 fi
-if [ -n "$ZIP_FILE" ]; then
-  unzip dl_rom.zip
-  unzip $ZIP_FILE -d unzipped_rom
-else
-  unzip dl_rom.zip -d unzipped_rom
-fi
 
-# just to get file_contexts
-#./unpack_intel UL-ASUS_T00F-WW-1.17.40.16-user/boot.img bzImage ramdisk.cpio.gz
-#mkdir ramdisk; cd ramdisk
-#gzcat ../ramdisk.cpio.gz | cpio -i
-#cd ..
+echo "Install SuperSU .. "
+$SCRIPTDIR/install_supersu.sh
 
-mv unzipped_rom/system .
-../scripts/create_link_file.sh unzipped_rom/META-INF/com/google/android/updater-script ../scripts/$LINK_PERM_SETUP_FILE
-if [ -f $ZIP_FILE ]; then
-  rm -rf $ZIP_FILE
-fi
-rm -rf unzipped_rom
-
-cp -R ../root/* system
-
-read -p 'Press any key to build system.img .. '
-
-../scripts/$LINK_PERM_SETUP_FILE
-../scripts/apply_ota.sh
-../scripts/link_and_set_perm_root
+# For slim down version
 if [ ! -z "$SLIM_DOWN" ]; then
-  # Remove apps listed in exclude_apps_list
-  ../scripts/exclude_apps.sh
-  # Enable sdcard write permission in platform.xml
-  ../scripts/enable_sdcard_write.sh
-  # Add vold with ntfs support
-  add_new_vold
+  echo "Remove apps listed in exclude_apps_list .. "
+  $SCRIPTDIR/exclude_apps.sh
+  
+  echo "Enable sdcard write permission in platform.xml .. "
+  $SCRIPTDIR/enable_sdcard_write.sh
+
+  # echo "Add vold with ntfs support .. "
+  #add_new_vold
 fi
 
+# Set the right file_context file for SELinux permission
 if [ -n "$FILE_CONTEXT" ]; then
-    FCOPT="-S ../assets/$FILE_CONTEXT"
+  FCOPT="-S $ASSETSDIR/$FILE_CONTEXT"
 fi
-    
+
+echo "Build system.img .. "    
 ./make_ext4fs -s -l $SYSTEM_SIZE -a system $FCOPT system.img system
 
+echo "Finish building $VERSION .. "
+if [ ! -d $VERSION ]; then
+  mkdir $VERSION
+fi
+
+mv *.img $VERSION
