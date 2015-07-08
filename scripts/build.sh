@@ -36,7 +36,7 @@ build_recovery_from_patch() {
   grep "applypatch -b" $RECOVERY_DIRECTORY/bin/install-recovery.sh > build_recovery_pass1
   sed -e 's/applypatch/.\/applypatch/' \
       -e 's/\/system/system/g' \
-      -e 's/EMMC:\/dev\/block\/by-name\/boot.*EMMC:\/dev\/block\/by-name\/recovery/boot.img recovery.img/' \
+      -e 's/EMMC\|OSIP:\/dev\/block\/by-name\/boot.*:\/dev\/block\/by-name\/recovery/boot.img recovery.img/' \
       -e 's/ \&\&.*//' build_recovery_pass1 > build_recovery.sh
 
   . build_recovery.sh > /dev/null
