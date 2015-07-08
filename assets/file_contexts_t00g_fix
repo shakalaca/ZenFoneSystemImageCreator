@@ -153,6 +153,7 @@
 /system/xbin/sugote	u:object_r:zygote_exec:s0
 /system/bin/app_process32_original	u:object_r:zygote_exec:s0
 /system/bin/app_process_init	u:object_r:zygote_exec:s0
+/system/bin/app_process32_xposed	u:object_r:zygote_exec:s0
 #
 /system/vendor/bin/gpsd u:object_r:gpsd_exec:s0
 /system/bin/dnsmasq     u:object_r:dnsmasq_exec:s0
