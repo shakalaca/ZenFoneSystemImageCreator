@@ -83,6 +83,16 @@ gcc -DHOST -DANDROID \
        ../../core/libsparse/libsparse.a \
        ../../zlib/src/libz.a
 cp make_ext4fs $WORK_DIR
+gcc -DANDROID \
+    -I../../libselinux/include -I../../core/libsparse/include -I../../core/include/ \
+    -o ext2simg \
+       ext2simg.c \
+       make_ext4fs.c ext4fixup.c ext4_utils.c allocate.c contents.c extent.c \
+       indirect.c uuid.c sha1.c wipe.c crc16.c ext4_sb.c \
+       ../../libselinux/src/libselinux.a \
+       ../../core/libsparse/libsparse.a \
+       ../../zlib/src/libz.a
+cp ext2simg $WORK_DIR
 cd ../..
 
 #cd intel-boot-tools
