@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 apply_overlay() {
   if [ -d $ASSETSDIR/$1 ]; then
