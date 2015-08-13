@@ -59,7 +59,7 @@ if [ "$(uname)" != "Darwin" ] && [[ $(uname -s) != "CYGWIN"* ]]; then
 fi
 
 cd recovery/applypatch
-gcc -I ../../core/include -I .. \
+gcc -I ../../core/include -I .. -I../../bzip2 \
     -o applypatch \
     main.c applypatch.c bsdiff.c freecache.c imgpatch.c utils.c bspatch.c \
     ../../core/libmincrypt/libmincrypt.a \
