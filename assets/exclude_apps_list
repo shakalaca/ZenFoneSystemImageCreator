@@ -109,6 +109,7 @@ AsusBackup
 #PowerSaving2
 #FlipCover
 #FlipCover2
+#ASUSZenUIPCSuite
 
 ########## Optional Packages ##########
 # Google
@@ -232,6 +233,7 @@ Omlet
 Omlet-stub
 BbblerActors
 CleanMaster
+CMSKeyV2
 JawboneUP
 KKBOX
 Kindle
