@@ -178,6 +178,6 @@ fi
 mv *.img $VERSION
 
 # ZIP and md5sum
-if [ -n "$SPLIT_SIZE" ]; then
+if [ -n "$SPLIT_SIZE" ] || [ -n "$SLIM_DOWN" ]; then
   $SCRIPTDIR/prepare_upload.sh
 fi
