@@ -19,6 +19,7 @@ install_overwrite() {
 cp $XPOSED_DIR/system/xposed.prop system/
 cp $XPOSED_DIR/system/framework/XposedBridge.jar system/framework/
 cp $XPOSED_DIR/system/bin/app_process32_xposed system/bin/
+cp $XPOSED_DIR/system/bin/app_process64_xposed system/bin/
 cp -r $XPOSED_DIR/system/app/XposedInstaller system/app/
 
 install_overwrite /system/bin/dex2oat
@@ -29,3 +30,9 @@ install_overwrite /system/lib/libart-compiler.so
 install_overwrite /system/lib/libart-disassembler.so
 install_overwrite /system/lib/libsigchain.so
 install_overwrite /system/lib/libxposed_art.so
+
+install_overwrite /system/lib64/libart.so
+install_overwrite /system/lib64/libart-compiler.so
+install_overwrite /system/lib64/libart-disassembler.so
+install_overwrite /system/lib64/libsigchain.so
+install_overwrite /system/lib64/libxposed_art.so
