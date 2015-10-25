@@ -24,20 +24,11 @@ move_out_image() {
 }
 
 build_recovery_from_patch() {
-  RECOVERY_DIRECTORY=$1
-  SYSTEM_DIRECTORY=$2
-
-  # Move out files
-  pushd $RECOVERY_DIRECTORY > /dev/null
-    tar cf - . | (cd $SYSTEM_DIRECTORY; tar xfp -)
-  popd > /dev/null
-
   # Prepare script
-  grep "applypatch -b" $RECOVERY_DIRECTORY/bin/install-recovery.sh > build_recovery_pass1
+  grep "applypatch -b" system/bin/install-recovery.sh > build_recovery_pass1
   sed -e 's/applypatch/.\/applypatch/' \
       -e 's/\/system/system/g' \
-      -e 's/EMMC:\/dev\/block\/by-name\/boot.*EMMC:\/dev\/block\/by-name\/recovery/boot.img recovery.img/' \
-      -e 's/OSIP:\/dev\/block\/by-name\/boot.*OSIP:\/dev\/block\/by-name\/recovery/boot.img recovery.img/' \
+      -e 's/EMMC:\/dev\/block\/bootdevice\/by-name\/boot.*EMMC:\/dev\/block\/bootdevice\/by-name\/recovery/boot.img recovery.img/' \
       -e 's/ \&\&.*//' build_recovery_pass1 > build_recovery.sh
 
   . build_recovery.sh > /dev/null
@@ -102,34 +93,38 @@ if [ ! -d system ]; then
   fi
 
   echo "Extracting stock ROM .. "
-  if [ -n "$ZIP_FILE" ]; then
-    unzip -q $STOCK_ROM
-    unzip -q $ZIP_FILE -d $UNZIPPED_STOCK_ROM_DIR
-  else
-    unzip -q $STOCK_ROM -d $UNZIPPED_STOCK_ROM_DIR
-  fi
+  unzip -q $STOCK_ROM -d $UNZIPPED_STOCK_ROM_DIR
 
-  echo "Move out system directory .."
-  mv $UNZIPPED_STOCK_ROM_DIR/system .
+  echo "Move out system images .. "
+  mv $UNZIPPED_STOCK_ROM_DIR/system.* .
   
   move_out_image boot
-  move_out_image droidboot
-  move_out_image recovery
-
-  if [ -d $UNZIPPED_STOCK_ROM_DIR/recovery ]; then
-    echo "Build recovery.img .. "
-    build_recovery_from_patch $UNZIPPED_STOCK_ROM_DIR/recovery $BASEDIR/system
-  fi
-  
-  echo "Link system files .. "
-  link_system_files $UNZIPPED_STOCK_ROM_DIR/META-INF/com/google/android/updater-script
 
   echo "Clean up .. "
-  if [ -n "$ZIP_FILE" ]; then
-    rm -f $ZIP_FILE
-  fi
   rm -rf $UNZIPPED_STOCK_ROM_DIR
 
+  echo "Converting system.new.dat to raw ext4 image .. "
+  $SCRIPTDIR/sdat2img.py system.transfer.list system.new.dat system.img.ext4
+  rm -f system.transfer.list system.new.dat system.patch.dat
+  
+  echo "Mount raw image .. "
+  mkdir mnt
+  sudo mount -o loop system.img.ext4 mnt
+
+  echo "Copy system directory .. "
+  sudo cp -r mnt system  
+  
+  echo "Un-mount raw image .. "
+  sudo umount mnt
+  rmdir mnt
+  
+  echo "Converting ext4 to sparse image (for fastboot) .. "
+#  ./ext2simg system.img.ext4 system-origin.img
+#  rm system.img.ext4
+
+  echo "Building recovery .. "
+  build_recovery_from_patch
+  
   read -p 'Press any key to build system.img .. '
 fi
 
@@ -150,21 +145,12 @@ if [ ! -z "$SLIM_DOWN" ]; then
   $SCRIPTDIR/enable_sdcard_write.sh
   
   echo "Install Xposed .. "
-  $SCRIPTDIR/install_xposed.sh
-  
-  echo "Add vold with ntfs support .. "
-  add_new_vold
-else
-  echo "Add root survival program .. "
-  add_root_survival
+  $SCRIPTDIR/install_xposed.sh  
 fi
 
 # Set the right file_context file for SELinux permission
 if [ -n "$FILE_CONTEXT" ]; then
   FCOPT="-S $ASSETSDIR/$FILE_CONTEXT"
-  if [ ! -z "$ROOT_SURVIVAL" ] || [ ! -z "$SLIM_DOWN" ]; then
-    FCOPT="$FCOPT"_fix
-  fi
 fi
 
 echo "Build system.img .. "
