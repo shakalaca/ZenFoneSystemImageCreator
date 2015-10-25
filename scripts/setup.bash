@@ -1,6 +1,6 @@
 # ZenFone Selfie
 VERSION=Z00T_WW_1.12.40.382
-ROM_URL=http://dlcdnet.asus.com/pub/ASUS/ZenFone/ZE551ML/UL-Z00A-WW-2.20.40.97-user.zip
+ROM_URL=http://dlcdnet.asus.com/pub/ASUS/ZenFone/ZD551KL/UL-Z00T-WW-1.12.40.382-user.zip
 SYSTEM_SIZE=3221225472
 FILE_CONTEXT=file_contexts_z00t
 
