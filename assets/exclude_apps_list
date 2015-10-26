@@ -240,7 +240,7 @@ ZenFlash
 DMClient
 SystemUpdate
 UpdateLauncher
-SMMI_TEST
+#SMMI_TEST
 DetectLogApp
 LogUploader
 AsusLiveDemoService
