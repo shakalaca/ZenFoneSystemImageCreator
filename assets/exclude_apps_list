@@ -75,6 +75,24 @@
 #SepService
 #WirelessDisplayUtil
 
+# Qualcomm stuff
+SystemAgent
+#xdivert
+#colorservice
+#QtiBackupAgent
+#shutdownlistener
+#qcrilmsgtunnel
+#fastdormancy
+#SVIService
+#QComQMIPermissions
+#InterfacePermissions
+#GsmTuneAway
+#CABLService
+#BluetoothExt
+#AntHalService
+#com.qualcomm.location
+#CNEService
+
 # ZenUI (system)
 #AsusHoudiniXmlUpdater
 #AsusSettings
@@ -110,6 +128,7 @@ AsusBackup
 #FlipCover
 #FlipCover2
 #ASUSZenUIPCSuite
+#LaserRuler
 
 ########## Optional Packages ##########
 # Google
@@ -130,6 +149,8 @@ Velvet
 Videos
 YouTube
 talkback
+Photos
+AndroidForWork
 
 # Live Wallpapers 
 Galaxy4
@@ -249,3 +270,5 @@ eztable
 eReadingNow
 PubuBookBuffet
 YahooAuction
+PuffinBrowser
+eMusic
