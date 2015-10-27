@@ -15,18 +15,16 @@ cd src
 #DO_NOT_FETCH=1
 
 if [ -z "$DO_NOT_FETCH" ]; then
-  BRANCH=android-5.0.0_r7
-  #BRANCH=android-4.4.4_r2
-  #BRANCH=android-4.3_r3
+  BRANCH=LA.BR.1.1.3.c1
 
-  git clone https://android.googlesource.com/platform/system/core
-  cd core; git checkout -b $BRANCH $BRANCH; cd ..
-  git clone https://android.googlesource.com/platform/external/bzip2
-  cd bzip2; git checkout -b $BRANCH $BRANCH; cd ..
-  git clone https://android.googlesource.com/platform/external/zlib
-  cd zlib; git checkout -b $BRANCH $BRANCH; cd ..
-  git clone https://android.googlesource.com/platform/bootable/recovery
-  cd recovery; git checkout -b $BRANCH $BRANCH; cd ..
+  git clone git://codeaurora.org/quic/la/platform/system/core
+  cd core; git checkout -b $BRANCH origin/$BRANCH; cd ..
+  git clone git://codeaurora.org/quic/la/platform/external/bzip2
+  cd bzip2; git checkout -b $BRANCH origin/$BRANCH; cd ..
+  git clone git://codeaurora.org/quic/la/platform/external/zlib
+  cd zlib; git checkout -b $BRANCH origin/$BRANCH; cd ..
+  git clone git://codeaurora.org/quic/la/platform/bootable/recovery
+  cd recovery; git checkout -b $BRANCH origin/$BRANCH; cd ..
 
   patch -p1 -i ../assets/applypatch.patch
 fi

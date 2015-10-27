@@ -15,8 +15,6 @@ cd src
 #DO_NOT_FETCH=1
 
 if [ -z "$DO_NOT_FETCH" ]; then
-  #BRANCH=android-5.0.0_r7
-  #BRANCH=android-4.3_r3
   BRANCH=LA.BR.1.1.3.c1
 
   #git clone -b $BRANCH https://android.googlesource.com/platform/external/libselinux
@@ -55,7 +53,6 @@ gcc -DHAVE_CONFIG_H -I. -Idist -I../core/include \
     dist/pcre_refcount.c dist/pcre_string_utils.c dist/pcre_study.c \
     dist/pcre_tables.c dist/pcre_ucd.c dist/pcre_valid_utf8.c \
     dist/pcre_version.c dist/pcre_xclass.c
-ar rcs libpcre.a *.o
 cd ../
     
 cd libselinux/src
@@ -63,10 +60,10 @@ CFLAGS=-DHOST
 if [ "$(uname)" == "Darwin" ]; then
   CFLAGS="$CFLAGS -DDARWIN"
 fi
-gcc $CFLAGS -I../include -I../../core/include \
+gcc $CFLAGS -I../include -I../../core/include -I../../pcre \
     -c callbacks.c check_context.c freecon.c init.c label.c label_file.c \
        label_android_property.c
-ar rcs libselinux.a *.o
+ar rcs libselinux.a *.o ../../pcre/*.o
 cd ../..
  
 cd zlib/src
@@ -95,7 +92,6 @@ gcc -DHOST -DANDROID \
        make_ext4fs_main.c make_ext4fs.c ext4fixup.c ext4_utils.c \
        allocate.c contents.c extent.c indirect.c uuid.c sha1.c wipe.c crc16.c \
        ext4_sb.c canned_fs_config.c \
-       ../../pcre/libpcre.a \
        ../../libselinux/src/libselinux.a \
        ../../core/libsparse/libsparse.a \
        ../../zlib/src/libz.a
@@ -106,7 +102,6 @@ gcc -DANDROID \
        ext2simg.c \
        make_ext4fs.c ext4fixup.c ext4_utils.c allocate.c contents.c extent.c \
        indirect.c uuid.c sha1.c wipe.c crc16.c ext4_sb.c \
-       ../../pcre/libpcre.a \
        ../../libselinux/src/libselinux.a \
        ../../core/libsparse/libsparse.a \
        ../../zlib/src/libz.a
