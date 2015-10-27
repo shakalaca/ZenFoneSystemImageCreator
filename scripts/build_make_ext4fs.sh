@@ -15,21 +15,24 @@ cd src
 #DO_NOT_FETCH=1
 
 if [ -z "$DO_NOT_FETCH" ]; then
-  BRANCH=android-5.0.0_r7
+  #BRANCH=android-5.0.0_r7
   #BRANCH=android-4.3_r3
+  BRANCH=LA.BR.1.1.3.c1
 
   #git clone -b $BRANCH https://android.googlesource.com/platform/external/libselinux
   #git clone -b $BRANCH https://android.googlesource.com/platform/system/core
   #git clone -b $BRANCH https://android.googlesource.com/platform/external/zlib
   #git clone -b $BRANCH https://android.googlesource.com/platform/system/extras
-  git clone https://android.googlesource.com/platform/external/libselinux
-  cd libselinux; git checkout -b $BRANCH $BRANCH; cd ..
-  git clone https://android.googlesource.com/platform/system/core
-  cd core; git checkout -b $BRANCH $BRANCH; cd ..
-  git clone https://android.googlesource.com/platform/external/zlib
-  cd zlib; git checkout -b $BRANCH $BRANCH; cd ..
-  git clone https://android.googlesource.com/platform/system/extras
-  cd extras; git checkout -b $BRANCH $BRANCH; cd ..
+  git clone git://codeaurora.org/quic/la/platform/external/libselinux
+  cd libselinux; git checkout -b $BRANCH origin/$BRANCH; cd ..
+  git clone git://codeaurora.org/quic/la/platform/external/pcre
+  cd pcre; git checkout -b $BRANCH origin/$BRANCH; cd ..
+  git clone git://codeaurora.org/quic/la/platform/system/core
+  cd core; git checkout -b $BRANCH origin/$BRANCH; cd ..
+  git clone git://codeaurora.org/quic/la/platform/external/zlib
+  cd zlib; git checkout -b $BRANCH origin/$BRANCH; cd ..
+  git clone git://codeaurora.org/quic/la/platform/system/extras
+  cd extras; git checkout -b $BRANCH origin/$BRANCH; cd ..
 
   cd core; patch -p1 -i ../../assets/fs_supersu.patch; cd ..
 
@@ -42,6 +45,19 @@ fi
 #git clone https://github.com/xiaolu/intel-boot-tools.git
 
 # build for make_ext4fs
+cd pcre
+gcc -DHAVE_CONFIG_H -I. -Idist -I../core/include \
+    -c pcre_chartables.c \
+    dist/pcre_byte_order.c dist/pcre_compile.c dist/pcre_config.c \
+    dist/pcre_dfa_exec.c dist/pcre_exec.c dist/pcre_fullinfo.c \
+    dist/pcre_get.c dist/pcre_globals.c dist/pcre_jit_compile.c \
+    dist/pcre_maketables.c dist/pcre_newline.c dist/pcre_ord2utf8.c \
+    dist/pcre_refcount.c dist/pcre_string_utils.c dist/pcre_study.c \
+    dist/pcre_tables.c dist/pcre_ucd.c dist/pcre_valid_utf8.c \
+    dist/pcre_version.c dist/pcre_xclass.c
+ar rcs libpcre.a *.o
+cd ../
+    
 cd libselinux/src
 CFLAGS=-DHOST
 if [ "$(uname)" == "Darwin" ]; then
@@ -79,6 +95,7 @@ gcc -DHOST -DANDROID \
        make_ext4fs_main.c make_ext4fs.c ext4fixup.c ext4_utils.c \
        allocate.c contents.c extent.c indirect.c uuid.c sha1.c wipe.c crc16.c \
        ext4_sb.c canned_fs_config.c \
+       ../../pcre/libpcre.a \
        ../../libselinux/src/libselinux.a \
        ../../core/libsparse/libsparse.a \
        ../../zlib/src/libz.a
@@ -89,6 +106,7 @@ gcc -DANDROID \
        ext2simg.c \
        make_ext4fs.c ext4fixup.c ext4_utils.c allocate.c contents.c extent.c \
        indirect.c uuid.c sha1.c wipe.c crc16.c ext4_sb.c \
+       ../../pcre/libpcre.a \
        ../../libselinux/src/libselinux.a \
        ../../core/libsparse/libsparse.a \
        ../../zlib/src/libz.a
