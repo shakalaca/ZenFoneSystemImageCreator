@@ -92,20 +92,25 @@ if [ ! -d system ]; then
     wget -c $OTA_URL -O $STOCK_OTA
   fi
 
-  echo "Extracting stock ROM .. "
-  unzip -q $STOCK_ROM -d $UNZIPPED_STOCK_ROM_DIR
+  if [ ! -f system.img.ext4 ]; then
+    echo "Extracting stock ROM .. "
+    unzip -q $STOCK_ROM -d $UNZIPPED_STOCK_ROM_DIR
 
-  echo "Move out system images .. "
-  mv $UNZIPPED_STOCK_ROM_DIR/system.* .
-  
-  move_out_image boot
+    echo "Move out system images .. "
+    mv $UNZIPPED_STOCK_ROM_DIR/system.* .
+    
+    move_out_image boot
 
-  echo "Clean up .. "
-  rm -rf $UNZIPPED_STOCK_ROM_DIR
+    echo "Clean up .. "
+    rm -rf $UNZIPPED_STOCK_ROM_DIR
 
-  echo "Converting system.new.dat to raw ext4 image .. "
-  $SCRIPTDIR/sdat2img.py system.transfer.list system.new.dat system.img.ext4
-  rm -f system.transfer.list system.new.dat system.patch.dat
+    echo "Converting system.new.dat to raw ext4 image .. "
+    $SCRIPTDIR/sdat2img.py system.transfer.list system.new.dat system.img.ext4
+    rm -f system.transfer.list system.new.dat system.patch.dat
+  else
+    echo "Move out stock boot.img .. "
+    unzip -q $STOCK_ROM boot.img
+  fi
   
   echo "Mount raw image .. "
   mkdir mnt
