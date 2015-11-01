@@ -11,8 +11,8 @@ mv META-INF/com/google/android/update-binary .
 echo "Extracting boot.img .. "
 unzip -q dl_rom.zip boot.img
 
-DO_SKIP_PATCHING_UPDATER_SCRIPT=1
-DO_SKIP_UPLOADING_ZIP_FILE=1
+#DO_SKIP_PATCHING_UPDATER_SCRIPT=1
+#DO_SKIP_UPLOADING_ZIP_FILE=1
 
 if [ -z "$DO_SKIP_PATCHING_UPDATER_SCRIPT" ]; then
 
