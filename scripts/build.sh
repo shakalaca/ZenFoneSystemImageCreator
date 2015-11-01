@@ -146,11 +146,6 @@ if [ ! -d system ]; then
   read -p 'Press any key to build system.img .. '
 fi
 
-if [ -f $STOCK_OTA ]; then
-  echo "Apply OTA patch .. "
-  $SCRIPTDIR/apply_ota.sh $STOCK_OTA
-fi
-
 echo "Install SuperSU .. "
 $SCRIPTDIR/install_supersu.sh
 
