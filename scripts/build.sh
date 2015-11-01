@@ -105,6 +105,9 @@ if [ ! -d system ]; then
 
       echo "Move out system images .. "
       mv $UNZIPPED_STOCK_ROM_DIR/system.* .
+
+      echo "Move out modem images .. "      
+      mv $UNZIPPED_STOCK_ROM_DIR/firmware-update .
       
       move_out_image boot
 
