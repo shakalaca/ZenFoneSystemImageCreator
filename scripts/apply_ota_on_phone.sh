@@ -21,6 +21,12 @@ if [ -z "$DO_SKIP_PATCHING_UPDATER_SCRIPT" ]; then
   cp updater-script META-INF/com/google/android
   zip -q -u dl_rom.zip META-INF/com/google/android/updater-script
 
+  # move out modem related files
+  if [ ! -d firmware-update ]; then
+    echo "Moving out firmware-update folder .. "
+    unzip -j -q dl_ota.zip -d firmware-update "firmware-update/*"
+  fi
+  
   # patch updater-script of OTA
   echo "Patching updater-script of OTA package .. "
   unzip -q -o dl_ota.zip META-INF/com/google/android/updater-script
