@@ -6,10 +6,10 @@ adb wait-for-device
 # prepare
 mkdir -p META-INF/com/google/android
 cp ../assets/updater-script .
-unzip dl_rom.zip META-INF/com/google/android/update-binary
+unzip -q dl_rom.zip META-INF/com/google/android/update-binary
 mv META-INF/com/google/android/update-binary .
 echo "Extracting boot.img .. "
-unzip dl_rom.zip boot.img
+unzip -q dl_rom.zip boot.img
 
 DO_SKIP_PATCHING_UPDATER_SCRIPT=1
 DO_SKIP_UPLOADING_ZIP_FILE=1
