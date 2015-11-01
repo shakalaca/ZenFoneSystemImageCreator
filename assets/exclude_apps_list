@@ -115,6 +115,7 @@ QuickMemoService
 #PAIStub
 #XT9IME
 #Lockscreen
+AsusConfigUpdater
 
 # ZenUI apps cannot working outside of system
 AsusBackup
