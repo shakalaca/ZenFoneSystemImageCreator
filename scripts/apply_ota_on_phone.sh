@@ -46,10 +46,14 @@ if [ -z "$DO_SKIP_PATCHING_UPDATER_SCRIPT" ]; then
     fi
   done < META-INF/com/google/android/updater-script
 
-  sed -e 's/EMMC:\/dev\/block\/bootdevice\/by-name\/boot.*\", \"-\"/\/data\/local\/tmp\/boot.img\", \"-\"/' patch_pass1 >> updater-script
-  echo "Updating OTA package .. "
-  cp updater-script META-INF/com/google/android
-  zip -u dl_ota.zip META-INF/com/google/android/updater-script
+  if [ -f patch_pass1 ]; then
+    sed -e 's/EMMC:\/dev\/block\/bootdevice\/by-name\/boot.*\", \"-\"/\/data\/local\/tmp\/boot.img\", \"-\"/' patch_pass1 >> updater-script
+    echo "Updating OTA package .. "
+    cp updater-script META-INF/com/google/android
+    zip -q -u dl_ota.zip META-INF/com/google/android/updater-script
+  else
+    echo "OTA package already patched .. "
+  fi
 
 fi # DO_SKIP_PATCHING_UPDATER_SCRIPT
 
