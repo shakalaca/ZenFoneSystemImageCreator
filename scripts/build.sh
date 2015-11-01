@@ -85,11 +85,15 @@ STOCK_OTA=dl_ota.zip
 
 if [ ! -d system ]; then
   # Download stock ROM
-  wget -c $ROM_URL -O $STOCK_ROM
+  if [ ! -f $STOCK_ROM ]; then
+    wget -c $ROM_URL -O $STOCK_ROM
+  fi
   
   # Download OTA package
   if [ -n "$OTA_URL" ]; then
-    wget -c $OTA_URL -O $STOCK_OTA
+    if [ ! -f $STOCK_OTA ]; then
+      wget -c $OTA_URL -O $STOCK_OTA
+    fi
   fi
 
   if [ ! -f system.img.ext4 ]; then
