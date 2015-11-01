@@ -19,11 +19,11 @@ if [ -z "$DO_SKIP_PATCHING_UPDATER_SCRIPT" ]; then
   # patch updater-script of full ROM
   echo "Updating stock ROM .. "
   cp updater-script META-INF/com/google/android
-  zip -u dl_rom.zip META-INF/com/google/android/updater-script
+  zip -q -u dl_rom.zip META-INF/com/google/android/updater-script
 
   # patch updater-script of OTA
   echo "Patching updater-script of OTA package .. "
-  unzip -o dl_ota.zip META-INF/com/google/android/updater-script
+  unzip -q -o dl_ota.zip META-INF/com/google/android/updater-script
 
   APPLY_PATCH_DONE=true
   while read line
