@@ -122,6 +122,11 @@ if [ ! -d system ]; then
     echo "Move out stock boot.img .. "
     unzip -q $STOCK_ROM boot.img
   fi
+
+  echo "Making backup header of system.img.ext4 .. "
+  # to restore header:
+  # dd if=header.bak of=system.img.ext4 conv=notrunc
+  dd if=system.img.ext4 of=header.bak count=1 bs=4096
   
   echo "Mount raw image .. "
   mkdir mnt
