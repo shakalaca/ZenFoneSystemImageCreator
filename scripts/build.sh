@@ -125,7 +125,7 @@ if [ ! -d system ]; then
   
   echo "Mount raw image .. "
   mkdir mnt
-  sudo mount -o loop system.img.ext4 mnt
+  sudo mount -o loop,ro system.img.ext4 mnt
 
   echo "Copy system directory .. "
   sudo cp -r mnt system  
