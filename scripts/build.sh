@@ -177,6 +177,9 @@ if [ ! -d $VERSION ]; then
   mkdir $VERSION
 fi
 
+if [ -d firmware-update ]; then
+  mv firmware-update $VERSION
+fi
 mv *.img $VERSION
 
 # ZIP and md5sum
