@@ -16,6 +16,11 @@ add_root_survival() {
   apply_overlay root_survival
 }
 
+cleanup_launcher() {
+  find system/vendor -name default_allapp.xml -delete
+  find system/vendor -name phone_workspace.xml -exec cp $ASSETSDIR/phone_workspace.xml {} \;
+}
+
 move_out_image() {
   if [ -f $UNZIPPED_STOCK_ROM_DIR/$1.img ]; then
     echo "Move out stock $1.img .. "
@@ -169,7 +174,10 @@ if [ ! -z "$SLIM_DOWN" ]; then
   $SCRIPTDIR/enable_sdcard_write.sh
   
   echo "Install Xposed .. "
-  $SCRIPTDIR/install_xposed.sh  
+  $SCRIPTDIR/install_xposed.sh
+
+  echo "Clean up launcher workspace .. "
+  cleanup_launcher
 fi
 
 # Set the right file_context file for SELinux permission
