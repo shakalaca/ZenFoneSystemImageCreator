@@ -1,4 +1,4 @@
-version=75
+version=75 (custom build 20151113)
 arch=arm64
 minsdk=21
 maxsdk=21
