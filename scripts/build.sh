@@ -123,6 +123,9 @@ if [ ! -d system ]; then
     unzip -q $STOCK_ROM boot.img
   fi
 
+  echo "Update SYSTEM_SIZE to $SYSTEM_SIZE .. "
+  SYSTEM_SIZE=$(stat -c%s system.img.ext4)
+
   echo "Making backup header of system.img.ext4 .. "
   # to restore header:
   # dd if=header.bak of=system.img.ext4 conv=notrunc
