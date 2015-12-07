@@ -131,10 +131,10 @@ if [ ! -d system ]; then
   SYSTEM_SIZE=$(stat -c%s system.img.ext4)
   echo "Update SYSTEM_SIZE to $SYSTEM_SIZE .. "
 
-  echo "Making backup header of system.img.ext4 .. "
+#  echo "Making backup header of system.img.ext4 .. "
   # to restore header:
   # dd if=header.bak of=system.img.ext4 conv=notrunc
-  dd if=system.img.ext4 of=header.bak count=1 bs=4096
+#  dd if=system.img.ext4 of=header.bak count=1 bs=4096
   
   echo "Mount raw image .. "
   mkdir mnt
@@ -152,7 +152,7 @@ if [ ! -d system ]; then
   sudo umount mnt
   rmdir mnt
   
-  echo "Converting ext4 to sparse image (for fastboot) .. "
+#  echo "Converting ext4 to sparse image (for fastboot) .. "
 #  ./ext2simg system.img.ext4 system-origin.img
 #  rm system.img.ext4
 
