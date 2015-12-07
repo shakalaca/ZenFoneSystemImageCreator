@@ -128,9 +128,6 @@ if [ ! -d system ]; then
     unzip -q $STOCK_ROM boot.img
   fi
 
-  SYSTEM_SIZE=$(stat -c%s system.img.ext4)
-  echo "Update SYSTEM_SIZE to $SYSTEM_SIZE .. "
-
 #  echo "Making backup header of system.img.ext4 .. "
   # to restore header:
   # dd if=header.bak of=system.img.ext4 conv=notrunc
@@ -160,6 +157,11 @@ if [ ! -d system ]; then
   build_recovery_from_patch
   
   read -p 'Press any key to build system.img .. '
+fi
+
+if [ -f system.img.ext4 ]; then
+  SYSTEM_SIZE=$(stat -c%s system.img.ext4)
+  echo "Update SYSTEM_SIZE to $SYSTEM_SIZE .. "
 fi
 
 echo "Install SuperSU .. "
