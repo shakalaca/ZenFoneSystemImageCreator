@@ -129,7 +129,7 @@ AsusBackup
 #FlipCover
 #FlipCover2
 #ASUSZenUIPCSuite
-#LaserRuler
+LaserRuler
 
 ########## Optional Packages ##########
 # Google
@@ -223,8 +223,8 @@ ZenUIHelp
 MyFrame
 PhotoFrameWidget
 AsusEasyLauncher
-AsusFMRadio
-AsusFMService
+#AsusFMRadio
+#AsusFMService
 AsusKidsLauncher
 AsusMirror
 DataTransfor
