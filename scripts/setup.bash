@@ -11,4 +11,10 @@ FILE_CONTEXT=file_contexts_z00t
 #SYSTEM_SIZE=3221225472
 #FILE_CONTEXT=file_contexts_z00l
 
+# ZenFone 2 Laser ZE601KL
+#VERSION=Z00L_WW_1.14.40.647
+#ROM_URL=http://dlcdnet.asus.com/pub/ASUS/ZenFone/ZE601KL/UL-Z00T-WW-1.14.40.647-user.zip
+#SYSTEM_SIZE=3221225472
+#FILE_CONTEXT=file_contexts_z00l
+
 #SPLIT_SIZE=200m
