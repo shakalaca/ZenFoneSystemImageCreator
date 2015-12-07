@@ -2,6 +2,7 @@
 
 source ../scripts/setup.bash
 
+if [ ! -f system/etc/.installed_su_daemon ]; then
 cp -R ../root/* system
 
 cp system/bin/sh system/xbin/sugote-mksh
@@ -21,4 +22,5 @@ fi
 ln -s /system/xbin/daemonsu system/bin/app_process64
 if [ ! -f system/bin/app_process_init ]; then
   cp system/bin/app_process64_original system/bin/app_process_init
+fi
 fi
