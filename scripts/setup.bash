@@ -6,8 +6,8 @@ SYSTEM_SIZE=3221225472
 FILE_CONTEXT=file_contexts_z00t
 
 # ZenFone 2 Laser ZE550KL
-#VERSION=Z00L_WW_1.15.40.639
-#ROM_URL=http://dlcdnet.asus.com/pub/ASUS/ZenFone/ZE550KL/UL-Z00L-WW-1.15.40.639-user.zip
+#VERSION=Z00L_WW_1.16.40.763
+#ROM_URL=http://dlcdnet.asus.com/pub/ASUS/ZenFone/ZE550KL/UL-Z00L-WW-1.16.40.763-user.zip
 #SYSTEM_SIZE=3221225472
 #FILE_CONTEXT=file_contexts_z00l
 
