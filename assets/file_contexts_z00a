@@ -192,6 +192,7 @@
 /data/gps(/.*)?		u:object_r:gps_data_file:s0
 /data/resource-cache(/.*)? u:object_r:resourcecache_data_file:s0
 /data/themepack-module(/.*)? u:object_r:themepack_module_file:s0
+/data/themepack-exchange(/.*)? u:object_r:themepack_exchange_file:s0
 /data/dalvik-cache(/.*)? u:object_r:dalvikcache_data_file:s0
 /data/dalvik-cache/profiles(/.*)? u:object_r:dalvikcache_profiles_data_file:s0
 /data/anr(/.*)?		u:object_r:anr_data_file:s0
@@ -266,13 +267,15 @@
 #############################
 # APD files
 #
-/apd(/.*)?		u:object_r:system_file:s0
-#line 1 "device/intel/moorefield/mofd_v1/config/logtool/sepolicy/file_contexts"
+/APD(/.*)?		u:object_r:demoapp_file:s0
+/ADF(/.*)?		u:object_r:demoapp_file:s0
+
+#line 1 "vendor/asus/tools/logtool/sepolicy/file_contexts"
 #logtool
-/system/bin/asuslogcat  u:object_r:logtoold_exec:s0
+/system/bin/asuslogcat  u:object_r:dumpstate_exec:s0
 /system/bin/fdcmts      u:object_r:logtoold_exec:s0
-/system/bin/logkmsg     u:object_r:logtoold_exec:s0
-/system/bin/logcontrol  u:object_r:logtoold_exec:s0
+/system/bin/logkmsg     u:object_r:dumpstate_exec:s0
+/system/bin/logcontrol  u:object_r:dumpstate_exec:s0
 /system/bin/logcommand  u:object_r:logtoold_exec:s0
 /system/bin/toolcommand u:object_r:fdctool_exec:s0
 /system/bin/toolconnect           u:object_r:logtoold_exec:s0
@@ -302,6 +305,7 @@
 
 # mmgr
 /dev/socket/mmgr[0-9]*          u:object_r:mmgr_socket:s0
+/dev/mdm_apcdmp0                u:object_r:radio_device:s0
 /system/bin/mmgr                u:object_r:mmgr_exec:s0
 /sys/devices/pci0000:00/0000:00:10.0/hsic/hsic0/hsic_enable u:object_r:sysfs_hsic_enable:s0
 /sys/devices/pci0000:00/0000:00:10.0/hsic_enable            u:object_r:sysfs_hsic_enable:s0
@@ -332,7 +336,7 @@
 /sys/devices/pci0000:00/0000:00:10.0/L2_autosuspend_enable             u:object_r:sysfs_autosuspend_enable:s0
 
 # crashlogd
-/system/bin/crashlogd           u:object_r:crashlogd_exec:s0
+/system/bin/crashlogd           u:object_r:dumpstate_exec:s0
 
 # bd_prov (bluetooth)
 /system/bin/bd_prov             u:object_r:bd_prov_exec:s0
@@ -401,3 +405,6 @@
 
 # system_server
 /dev/block/mmcblk0p9            u:object_r:tmpfs_block_device:s0
+
+#Bug Reporter
+/system/etc/packlogs.sh         u:object_r:dumpstate_exec:s0
