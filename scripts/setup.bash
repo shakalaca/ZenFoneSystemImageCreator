@@ -1,10 +1,11 @@
 # ZenFone 2 Z00A
-VERSION=Z00A_WW_2.20.40.156
+VERSION=Z00A_WW_2.20.40.160
 LINK_PERM_SETUP_FILE=link_and_set_perm_z00a
 ROM_URL=http://dlcdnet.asus.com/pub/ASUS/ZenFone/ZE551ML/UL-Z00A-WW-2.20.40.139-user.zip
 SYSTEM_SIZE=2415919104
 FILE_CONTEXT=file_contexts_z00a
-OTA_URL=http://fota.asus.com/delta_package/phone/WW_Z00A/formal/WW_2.20.40.139_20151104_2652_user_rel-user-WW_Z00A-WW_2.20.40.156_20151218_8265_user_rel-user-WW_Z00A-20151218/WW_551_1104_1218_20151218.zip
+#OTA_URL=http://fota.asus.com/delta_package/phone/WW_Z00A/formal/WW_2.20.40.156_20151218_8265_user_rel-user-WW_Z00A-WW_2.20.40.160_20151225_1227_user_rel-user-WW_Z00A-20151225/WW_Z00A-20151218-20151225-20151225.zip
+OTA_URL=http://fota.asus.com/delta_package/phone/WW_Z00A/formal/WW_2.20.40.139_20151104_2652_user_rel-user-WW_Z00A-WW_2.20.40.160_20151225_1227_user_rel-user-WW_Z00A-20151225/WW_Z00A-20151104-20151225-20151225.zip
 
 # ZenFone 2 Z008
 #VERSION=Z008_WW_2.20.40.135
