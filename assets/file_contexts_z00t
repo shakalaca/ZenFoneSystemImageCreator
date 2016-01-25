@@ -492,7 +492,9 @@
 /sys/bus/msm_subsys/devices/subsys3/restart_level                   u:object_r:sysfs_ssr_toggle:s0
 /sys/bus/msm_subsys/devices/subsys4/restart_level                   u:object_r:sysfs_ssr_toggle:s0
 /sys/devices/soc0/.*                                                u:object_r:sysfs_socinfo:s0
-
+/sys/bus/iio/devices/iio:device0(/.*)?                              u:object_r:sysfs_gsensor:s0
+/sys/devices/soc.0/78b6000.i2c/i2c-0/0-0068/iio:device0(/.*)?       u:object_r:sysfs_gsensor:s0
+ 
 ###################################
 # data files
 #
@@ -504,7 +506,7 @@
 /data/rfs.*                                                         u:object_r:rfs_data_file:s0
 /data/camera(/.*)?                                                  u:object_r:camera_socket:s0
 /data/system/sensors(/.*)?                                          u:object_r:sensors_data_file:s0
-/data/time/*                                                        u:object_r:time_data_file:s0
+/data/time(/.*)?                                                    u:object_r:time_data_file:s0
 /data/nfc(/.*)?                                                     u:object_r:nfc_data_file:s0
 /data/system/perfd(/.*)?                                            u:object_r:mpctl_data_file:s0
 /data/misc/perfd(/.*)?                                              u:object_r:mpctl_socket:s0
