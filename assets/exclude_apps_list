@@ -235,6 +235,8 @@ GameCenter
 BRapps
 AsusQuickSearch
 ZenFlash
+AppCloud
+ASUSAppInstallationService
 
 ########## Safe to remove ##########
 # Debug / Update or not-used-service
