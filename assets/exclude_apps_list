@@ -212,6 +212,8 @@ GameCenter
 BRapps
 AsusQuickSearch
 ZenFlash
+ASUSAppInstallationService
+SystemMonitor
 
 ########## Safe to remove ##########
 # Debug / Update or not-used-service
@@ -250,3 +252,4 @@ eReadingNow
 PubuBookBuffet
 YahooAuction
 Asphalt
+CMSecurity
