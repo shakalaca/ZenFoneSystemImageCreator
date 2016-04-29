@@ -2,12 +2,13 @@ diff --git a/include/private/android_filesystem_config.h b/include/private/andro
 index cced309..176ed14 100644
 --- a/include/private/android_filesystem_config.h
 +++ b/include/private/android_filesystem_config.h
-@@ -230,6 +230,16 @@ static const struct fs_path_config android_dirs[] = {
+@@ -230,6 +230,22 @@ static const struct fs_path_config android_dirs[] = {
  ** and will allow partial matches.
  */
  static const struct fs_path_config android_files[] = {
 +    { 00755, AID_ROOT,      AID_ROOT,      0, "system/etc/install-recovery.sh" },
 +    { 00755, AID_ROOT,      AID_ROOT,      0, "system/xbin/daemonsu" },
++    { 00755, AID_ROOT,      AID_ROOT,      0, "system/xbin/su" },
 +    { 00755, AID_ROOT,      AID_ROOT,      0, "system/xbin/sugote" },
 +    { 00755, AID_ROOT,      AID_ROOT,      0, "system/xbin/sugote-mksh" },
 +    { 00755, AID_ROOT,      AID_ROOT,      0, "system/xbin/supolicy" },
@@ -15,7 +16,20 @@ index cced309..176ed14 100644
 +    { 00777, AID_ROOT,      AID_ROOT,      0, "system/etc/init.asus.audbg.sh" },
 +    { 00770, AID_ROOT,      AID_ROOT,      0, "system/etc/init.asus.cam.ditlib.sh" },
 +    { 00770, AID_ROOT,      AID_ROOT,      0, "system/etc/init.asus.check_asdf.sh" },
++    { 00770, AID_ROOT,      AID_ROOT,      0, "system/etc/savelogs.sh" },
++    { 00770, AID_ROOT,      AID_ROOT,      0, "system/etc/check_sd.sh" },
++    { 00770, AID_ROOT,      AID_ROOT,      0, "system/etc/ins_module.sh" },
++    { 00770, AID_ROOT,      AID_ROOT,      0, "system/etc/init.asus.checkaudbg.sh" },
++    { 00770, AID_ROOT,      AID_ROOT,      0, "system/etc/init.asus.keycamera.sh" },
 +
      { 00440, AID_ROOT,      AID_SHELL,     0, "system/etc/init.goldfish.rc" },
      { 00550, AID_ROOT,      AID_SHELL,     0, "system/etc/init.goldfish.sh" },
      { 00440, AID_ROOT,      AID_SHELL,     0, "system/etc/init.trout.rc" },
+@@ -251,7 +266,6 @@ static const struct fs_path_config android_files[] = {
+ 
+     /* the following five files are INTENTIONALLY set-uid, but they
+      * are NOT included on user builds. */
+-    { 04750, AID_ROOT,      AID_SHELL,     0, "system/xbin/su" },
+     { 06755, AID_ROOT,      AID_ROOT,      0, "system/xbin/librank" },
+     { 06755, AID_ROOT,      AID_ROOT,      0, "system/xbin/procrank" },
+     { 06755, AID_ROOT,      AID_ROOT,      0, "system/xbin/procmem" },
