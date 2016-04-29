@@ -31,7 +31,7 @@ move_out_image() {
 build_recovery_from_patch() {
   # Prepare script
   grep "applypatch -b" system/bin/install-recovery.sh > build_recovery_pass1
-  sed -e 's/applypatch/.\/applypatch/' \
+  sed -e 's/applypatch/$BIN_DIR\/applypatch/' \
       -e 's/\/system/system/g' \
       -e 's/EMMC:\/dev\/block\/bootdevice\/by-name\/boot.*EMMC:\/dev\/block\/bootdevice\/by-name\/recovery/boot.img recovery.img/' \
       -e 's/ \&\&.*//' build_recovery_pass1 > build_recovery.sh
@@ -76,6 +76,8 @@ symlink() {
 }
 
 source scripts/setup.bash
+
+BIN_DIR=$(pwd)/bin/$(uname)
 
 cd work
 
@@ -188,7 +190,7 @@ if [ -n "$FILE_CONTEXT" ]; then
 fi
 
 echo "Build system.img .. "
-./make_ext4fs -s -l $SYSTEM_SIZE -a system $FCOPT system.img system
+$BIN_DIR/make_ext4fs -s -l $SYSTEM_SIZE -a system $FCOPT system.img system
 
 echo "Finish building $VERSION .. "
 if [ ! -d $VERSION ]; then
