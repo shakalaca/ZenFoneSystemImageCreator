@@ -1,9 +1,9 @@
 #!/bin/bash
 
-WORK_DIR=$(pwd)/work
+BIN_DIR=$(pwd)/bin/$(uname)
 
-if [ ! -d $WORK_DIR ]; then
-  mkdir $WORK_DIR
+if [ ! -d $BIN_DIR ]; then
+  mkdir -p $BIN_DIR
 fi
 
 if [ ! -d src ]; then
@@ -69,7 +69,7 @@ ar rcs libsparse.a *.o
 gcc -Iinclude -I../../zlib \
     -o simg2img simg2img.c sparse_crc32.c \
     libsparse.a ../../zlib/src/libz.a
-cp simg2img $WORK_DIR
+cp simg2img $BIN_DIR
 cd ../..
  
 cd extras/ext4_utils
@@ -82,7 +82,7 @@ gcc -DHOST -DANDROID \
        ../../libselinux/src/libselinux.a \
        ../../core/libsparse/libsparse.a \
        ../../zlib/src/libz.a
-cp make_ext4fs $WORK_DIR
+cp make_ext4fs $BIN_DIR
 gcc -DANDROID \
     -I../../libselinux/include -I../../core/libsparse/include -I../../core/include/ \
     -o ext2simg \
@@ -92,11 +92,11 @@ gcc -DANDROID \
        ../../libselinux/src/libselinux.a \
        ../../core/libsparse/libsparse.a \
        ../../zlib/src/libz.a
-cp ext2simg $WORK_DIR
+cp ext2simg $BIN_DIR
 cd ../..
 
 #cd intel-boot-tools
 #make
-#mv unpack_intel $WORK_DIR
-#mv pack_intel $WORK_DIR
+#mv unpack_intel $BIN_DIR
+#mv pack_intel $BIN_DIR
 #cd ..

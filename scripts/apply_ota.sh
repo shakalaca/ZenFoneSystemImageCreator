@@ -1,6 +1,7 @@
 #!/bin/bash
 
 STOCK_OTA="$1"
+BIN_DIR=$(pwd)/../bin/$(uname)
 
 if [ ! -f $STOCK_OTA ]; then
   echo OTA package not found !
@@ -28,7 +29,7 @@ apply_patch() {
   else
     TARGET=$SOURCE
   fi
-  ./applypatch $RES $SOURCE $TARGET $2 $3 $4
+  $BIN_DIR/applypatch $RES $SOURCE $TARGET $2 $3 $4
 }
 
 delete() {

@@ -8,12 +8,12 @@ Create system.img for ZenFone
 1. run `scripts/build_make_ext4fs.sh`
   - Fetch required source tree from AOSP to `src` directory
   - Build `make_ext4fs` binary for packing `system.img`
-  - `make_ext4fs` will be in `work` directory
+  - `make_ext4fs` will be in `bin` directory
 
 2. run `scripts/build_applypatch.sh`
   - Fetch required source tree from AOSP to `src` directory
   - Build `applypatch` binary for applying delta OTA updates
-  - `applypatch` will be in `work` directory
+  - `applypatch` will be in `bin` directory
 
 3. run `scripts/build.sh`
   - Fetch ROM file of ZenFone 5 (1.17.40.16, WW version) to `work` directory

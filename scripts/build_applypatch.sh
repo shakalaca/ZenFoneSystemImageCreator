@@ -1,9 +1,9 @@
 #!/bin/bash
 
-WORK_DIR=$(pwd)/work
+BIN_DIR=$(pwd)/bin/$(uname)
 
-if [ ! -d $WORK_DIR ]; then
-  mkdir $WORK_DIR
+if [ ! -d $BIN_DIR ]; then
+  mkdir -p $BIN_DIR
 fi
 
 if [ ! -d src ]; then
@@ -65,5 +65,5 @@ gcc -I ../../core/include -I .. -I../../bzip2 \
     ../../core/libmincrypt/libmincrypt.a \
     ../../zlib/src/libz.a \
     ../../bzip2/libbz.a $LIB_MTDUTILS
-cp applypatch $WORK_DIR
+cp applypatch $BIN_DIR
 cd ../..
