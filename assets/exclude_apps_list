@@ -208,12 +208,14 @@ AsusMirror
 DataTransfor
 ZenCircle
 ZenTalkStub
+ZenTalk
 GameCenter
 BRapps
 AsusQuickSearch
 ZenFlash
 ASUSAppInstallationService
 SystemMonitor
+AppCloud
 
 ########## Safe to remove ##########
 # Debug / Update or not-used-service
