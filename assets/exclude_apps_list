@@ -201,8 +201,8 @@ ZenUIHelp
 MyFrame
 PhotoFrameWidget
 AsusEasyLauncher
-AsusFMRadio
-AsusFMService
+#AsusFMRadio
+#AsusFMService
 AsusKidsLauncher
 AsusMirror
 DataTransfor
