@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <favorites>
 
+    <favorite
+        className="com.asus.themeapp.ThemeAppActivity"
+        packageName="com.asus.themeapp"
+        screen="1"
+        x="0"
+        y="4" />
+
     <!-- Hotseat (We use the screen as the position of the item in the hotseat) -->
     <favorite
         className="com.android.contacts.activities.DialtactsActivity"
