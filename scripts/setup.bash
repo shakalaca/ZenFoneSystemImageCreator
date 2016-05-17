@@ -11,10 +11,11 @@ FILE_CONTEXT=file_contexts_z00t
 #FILE_CONTEXT=file_contexts_z00t
 
 # ZenFone 2 Laser ZE601KL
-#VERSION=Z00T_WW_1.16.40.1020
-#ROM_URL=http://dlcdnet.asus.com/pub/ASUS/ZenFone/ZE601KL/UL-Z00T-WW-1.16.40.1020-user.zip
+#VERSION=Z00T_WW_1.16.40.1524
+#ROM_URL=http://dlcdnet.asus.com/pub/ASUS/ZenFone/ZE601KL/UL-Z00T-WW-1.16.40.1338-user.zip
 #SYSTEM_SIZE=
 #FILE_CONTEXT=file_contexts_z00t
+#OTA_URL=http://fota.asus.com/delta_package/phone/WW_Z011/formal/WW_user_1.16.40.1338_20160324-user-WW_Z011-WW_user_1.16.40.1524_20160426-user-WW_Z011-20160427/update.zip
 
 # ZenFone 2 Laser ZE550KL
 #VERSION=Z00L_WW_1.17.40.1234
