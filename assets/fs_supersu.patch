@@ -1,8 +1,16 @@
 diff --git a/include/private/android_filesystem_config.h b/include/private/android_filesystem_config.h
-index cced309..176ed14 100644
+index cced309..3d29ac2 100644
 --- a/include/private/android_filesystem_config.h
 +++ b/include/private/android_filesystem_config.h
-@@ -230,6 +230,22 @@ static const struct fs_path_config android_dirs[] = {
+@@ -215,6 +215,7 @@ static const struct fs_path_config android_dirs[] = {
+     { 00771, AID_SYSTEM, AID_SYSTEM, 0, "data" },
+     { 00750, AID_ROOT,   AID_SHELL,  0, "sbin" },
+     { 00755, AID_ROOT,   AID_SHELL,  0, "system/bin" },
++    { 00777, AID_ROOT,   AID_ROOT,   0, "system/bin/.ext" },
+     { 00755, AID_ROOT,   AID_SHELL,  0, "system/vendor" },
+     { 00755, AID_ROOT,   AID_SHELL,  0, "system/xbin" },
+     { 00755, AID_ROOT,   AID_ROOT,   0, "system/etc/ppp" },
+@@ -230,6 +231,38 @@ static const struct fs_path_config android_dirs[] = {
  ** and will allow partial matches.
  */
  static const struct fs_path_config android_files[] = {
@@ -13,19 +21,35 @@ index cced309..176ed14 100644
 +    { 00755, AID_ROOT,      AID_ROOT,      0, "system/xbin/sugote-mksh" },
 +    { 00755, AID_ROOT,      AID_ROOT,      0, "system/xbin/supolicy" },
 +    { 00755, AID_ROOT,      AID_ROOT,      0, "system/bin/.ext/.su" },
-+    { 00777, AID_ROOT,      AID_ROOT,      0, "system/etc/init.asus.audbg.sh" },
++
++    { 00755, AID_ROOT,      AID_ROOT,      0, "system/etc/init.asus.audbg.sh" },
 +    { 00770, AID_ROOT,      AID_ROOT,      0, "system/etc/init.asus.cam.ditlib.sh" },
 +    { 00770, AID_ROOT,      AID_ROOT,      0, "system/etc/init.asus.check_asdf.sh" },
++    { 00755, AID_ROOT,      AID_ROOT,      0, "system/etc/init.asus.checkaudbg.sh" },
++    { 00770, AID_SYSTEM,    AID_SYSTEM,    0, "system/etc/init.asus.checkdatalog.sh" },
++    { 00770, AID_ROOT,      AID_ROOT,      0, "system/etc/init.asus.checklogsize.sh" },
++    { 00755, AID_ROOT,      AID_ROOT,      0, "system/etc/init.asus.gesture.sh" },
++    { 00770, AID_ROOT,      AID_ROOT,      0, "system/etc/init.asus.kernelmessage.sh" },
++    { 00755, AID_ROOT,      AID_ROOT,      0, "system/etc/init.asus.keycamera.sh" },
++    { 00770, AID_SYSTEM,    AID_SYSTEM,    0, "system/etc/init.asus.piq.sh" },
++    { 00770, AID_ROOT,      AID_ROOT,      0, "system/etc/init.asus.ramdump.sh" },
++    { 00755, AID_ROOT,      AID_ROOT,      0, "system/etc/init.asus.set_time.sh" },
++    { 06755, AID_ROOT,      AID_ROOT,      0, "system/etc/init.asus.thermal_conf" },
++    { 00755, AID_ROOT,      AID_ROOT,      0, "system/etc/ins_module.sh" },
++    { 00770, AID_ROOT,      AID_ROOT,      0, "system/etc/prepare_asusdebug.sh" },
++    { 00755, AID_ROOT,      AID_ROOT,      0, "system/etc/pwr-balance.sh" },
++    { 00755, AID_ROOT,      AID_ROOT,      0, "system/etc/pwr-normal.sh" },
++    { 00755, AID_ROOT,      AID_ROOT,      0, "system/etc/pwr-ultra.sh" },
++    { 00770, AID_ROOT,      AID_ROOT,      0, "system/etc/savelogmtp.sh" },
++    { 00770, AID_SYSTEM,    AID_ROOT,      0, "system/etc/savelogs_complete.sh" },
 +    { 00770, AID_ROOT,      AID_ROOT,      0, "system/etc/savelogs.sh" },
++    { 00770, AID_ROOT,      AID_ROOT,      0, "system/etc/saveramdump.sh" },
 +    { 00770, AID_ROOT,      AID_ROOT,      0, "system/etc/check_sd.sh" },
-+    { 00770, AID_ROOT,      AID_ROOT,      0, "system/etc/ins_module.sh" },
-+    { 00770, AID_ROOT,      AID_ROOT,      0, "system/etc/init.asus.checkaudbg.sh" },
-+    { 00770, AID_ROOT,      AID_ROOT,      0, "system/etc/init.asus.keycamera.sh" },
 +
      { 00440, AID_ROOT,      AID_SHELL,     0, "system/etc/init.goldfish.rc" },
      { 00550, AID_ROOT,      AID_SHELL,     0, "system/etc/init.goldfish.sh" },
      { 00440, AID_ROOT,      AID_SHELL,     0, "system/etc/init.trout.rc" },
-@@ -251,7 +266,6 @@ static const struct fs_path_config android_files[] = {
+@@ -251,7 +284,6 @@ static const struct fs_path_config android_files[] = {
  
      /* the following five files are INTENTIONALLY set-uid, but they
       * are NOT included on user builds. */
