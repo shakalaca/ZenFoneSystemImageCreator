@@ -1,8 +1,9 @@
 # ZenFone Selfie
-VERSION=Z00T_WW_1.15.40.1238
-ROM_URL=http://dlcdnet.asus.com/pub/ASUS/ZenFone/ZD551KL/UL-Z00T-WW-1.15.40.1238-user.zip
+VERSION=Z00T_WW_1.15.40.1582
+ROM_URL=http://dlcdnet.asus.com/pub/ASUS/ZenFone/ZD551KL/UL-Z00T-WW-1.15.40.1582-user.zip
 SYSTEM_SIZE=3221225472
 FILE_CONTEXT=file_contexts_z00t
+#OTA_URL=http://fota.asus.com/delta_package/phone/WW_Z00U/formal/WW_user_1.14.40.695_20151114-user-WW_Z00U-WW_user_1.15.40.1238_20160305-user-WW_Z00U-20160307/WW_551_1114_0305_20160307.zip
 
 # ZenFone 2 Laser ZE551KL
 #VERSION=Z00T_WW_1.17.40.1106
@@ -18,8 +19,8 @@ FILE_CONTEXT=file_contexts_z00t
 #OTA_URL=http://fota.asus.com/delta_package/phone/WW_Z011/formal/WW_user_1.16.40.1338_20160324-user-WW_Z011-WW_user_1.16.40.1524_20160426-user-WW_Z011-20160427/update.zip
 
 # ZenFone 2 Laser ZE550KL
-#VERSION=Z00L_WW_1.17.40.1234
-#ROM_URL=http://dlcdnet.asus.com/pub/ASUS/ZenFone/ZE550KL/UL-Z00L-WW-1.17.40.1234-user.zip
+#VERSION=Z00L_WW_1.17.40.1531
+#ROM_URL=http://dlcdnet.asus.com/pub/ASUS/ZenFone/ZE550KL/UL-Z00L-WW-1.17.40.1531-user.zip
 #SYSTEM_SIZE=
 #FILE_CONTEXT=file_contexts_z00l
 
@@ -35,4 +36,4 @@ FILE_CONTEXT=file_contexts_z00t
 #SYSTEM_SIZE=
 #FILE_CONTEXT=file_contexts_z010
 
-#SPLIT_SIZE=200m
+SPLIT_SIZE=200m
