@@ -163,8 +163,8 @@ if [ -f $STOCK_OTA ]; then
   $SCRIPTDIR/apply_ota.sh $STOCK_OTA
 fi
 
-echo "Install SuperSU .. "
-$SCRIPTDIR/install_supersu.sh
+#echo "Install SuperSU .. "
+#$SCRIPTDIR/install_supersu.sh
 
 # For slim down version
 if [ ! -z "$SLIM_DOWN" ]; then
@@ -182,9 +182,9 @@ if [ ! -z "$SLIM_DOWN" ]; then
   
   echo "Clean up launcher workspace .. "
   cleanup_launcher
-else
-  echo "Add root survival program .. "
-  add_root_survival
+#else
+#  echo "Add root survival program .. "
+#  add_root_survival
 fi
 
 # Set the right file_context file for SELinux permission
