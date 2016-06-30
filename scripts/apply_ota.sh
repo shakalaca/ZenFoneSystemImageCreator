@@ -136,13 +136,18 @@ if [ -d $UNZIPPED_STOCK_OTA_DIR/recovery ]; then
 
   echo "Building new recovery.img .."  
   grep "applypatch -b" $UNZIPPED_STOCK_OTA_DIR/recovery/bin/install-recovery.sh >  build_recovery_pass1
-  sed -e 's/applypatch/apply_patch/' -e 's/\/system/system/g' -e 's/ \&\&.*//' build_recovery_pass1 > build_recovery.sh
+else
+  echo "Building new recovery.img .."  
+  grep "applypatch -b" $BASEDIR/system/bin/install-recovery.sh > build_recovery_pass1
+fi  
+
+sed -e 's/applypatch/apply_patch/' -e 's/\/system/system/g' -e 's/ \&\&.*//' build_recovery_pass1 > build_recovery.sh
   
-  . build_recovery.sh > /dev/null
+. build_recovery.sh > /dev/null
    
-  rm build_recovery_pass*
-  rm build_recovery.sh
-fi
+rm build_recovery_pass*
+rm build_recovery.sh
+##
 
 if [ -f rename_pass1 ]; then
   echo "Renaming files .. "
