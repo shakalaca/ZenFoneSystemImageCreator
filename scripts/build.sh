@@ -54,10 +54,28 @@ build_recovery_from_patch() {
 
 link_system_files() {
   UPDATER_SCRIPT=$1
+
+  SYMLINK_DONE=true
+
+  while read line
+  do
+    if [[ "$line" == "symlink("* ]]; then
+      if [[ "$line" == *");" ]]; then
+        echo $line >> link_pass1
+      else
+        SYMLINK_CMD=$(echo $line | sed -e 's/\r//g')
+        SYMLINK_DONE=false
+      fi
+    elif !($SYMLINK_DONE); then
+      SYMLINK_CMD="$SYMLINK_CMD $(echo $line | sed -e 's/\r//g')"
+      if [[ "$line" == *");" ]]; then
+        SYMLINK_DONE=true
+        echo $SYMLINK_CMD >> link_pass1
+      fi
+    fi
+  done < $1
   
-  cat $1 | sed 's/        /symlink("toolbox", /' > link_pass1
-  grep 'symlink' link_pass1 > link_pass2
-  cat link_pass2 | sed -e 's/symlink(\"/symlink /' -e 's/\", \"/ /g' -e 's/\");//' -e 's/\",//' > link.sh
+  cat link_pass1 | sed -e 's/symlink(\"/symlink /' -e 's/\", \"/ /g' -e 's/\");//' -e 's/\",//' > link.sh
   
   . link.sh
 
