@@ -167,10 +167,6 @@ if [ ! -d system ]; then
   sudo umount mnt
   rmdir mnt
   
-#  echo "Converting ext4 to sparse image (for fastboot) .. "
-#  ./ext2simg system.img.ext4 system-origin.img
-#  rm system.img.ext4
-
   echo "Building recovery .. "
   build_recovery_from_patch
   
@@ -214,6 +210,7 @@ if [ -n "$FILE_CONTEXT" ]; then
 fi
 
 echo "Build system.img .. "
+echo $BIN_DIR/make_ext4fs -s -l $SYSTEM_SIZE -a system $FCOPT system.img system
 $BIN_DIR/make_ext4fs -s -l $SYSTEM_SIZE -a system $FCOPT system.img system
 
 echo "Finish building $VERSION .. "
