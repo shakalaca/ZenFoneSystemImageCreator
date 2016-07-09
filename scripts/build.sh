@@ -122,8 +122,10 @@ if [ ! -d system ]; then
       rm -rf $UNZIPPED_STOCK_ROM_DIR
 
       echo "Converting system.new.dat to raw ext4 image .. "
+      mv system.transfer.list system.transfer.list.orig
+      grep -v zero system.transfer.list.orig > system.transfer.list
       $SCRIPTDIR/sdat2img.py system.transfer.list system.new.dat system.img.ext4
-      rm -f system.transfer.list system.new.dat system.patch.dat
+      rm -f system.transfer.list.orig system.transfer.list system.new.dat system.patch.dat
     fi
   elif [ ! -f boot.img ]; then
     echo "Move out stock boot.img .. "
