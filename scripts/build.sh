@@ -144,10 +144,12 @@ if [ ! -d system ]; then
   echo "Copy system directory .. "
   sudo cp -r mnt system  
 
-  echo "Removing SystemUpdate & DMClient by default .. "
-  mkdir -p excluded_apps/app
-  mv -f system/app/SystemUpdate excluded_apps/app
-  mv -f system/app/DMClient excluded_apps/app
+  if [ ! -z "$EXCLUDE_UPDATE" ]; then 
+    echo "Removing SystemUpdate & DMClient by default .. "
+    mkdir -p excluded_apps/app
+    mv -f system/app/SystemUpdate excluded_apps/app
+    mv -f system/app/DMClient excluded_apps/app
+  fi
   
   echo "Un-mount raw image .. "
   sudo umount mnt
