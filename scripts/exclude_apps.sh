@@ -16,7 +16,7 @@ do
   app=$(trim $line);
   if ! [[ "$app" == "#"* ]] && ! [[ -z $app ]]; then
     APPS[$index]="$app"
-    index=`expr $index + 1`
+    index=$index+1
   fi
 done < ../assets/exclude_apps_list
 
