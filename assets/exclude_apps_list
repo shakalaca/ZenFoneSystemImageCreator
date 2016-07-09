@@ -124,6 +124,7 @@ AsusBackup
 #AudioWizard
 #AudioWizardView
 #DeskClock
+#AsusDeskClock
 # must installed with DeskClock
 #PowerSaving2
 #FlipCover
@@ -152,6 +153,8 @@ YouTube
 talkback
 Photos
 AndroidForWork
+#Bugle
+CalendarGoogle
 
 # Live Wallpapers 
 Galaxy4
@@ -185,6 +188,7 @@ PCLinkBinary
 #PartyRimBinary
 RemoteLink
 ShareRimBinary
+ShareRim
 
 # ZenUI app
 ASUSBrowser
@@ -213,6 +217,8 @@ WhatsNext
 #FileManager2
 FlashLight
 MicroFilm
+AsusFlashLight
+AsusSoundRecorder
 
 # ASUS apps
 MyASUS
@@ -237,6 +243,8 @@ AsusQuickSearch
 ZenFlash
 AppCloud
 ASUSAppInstallationService
+WebStorage
+#AppManager
 
 ########## Safe to remove ##########
 # Debug / Update or not-used-service
@@ -260,6 +268,7 @@ BbblerActors
 CleanMaster
 CMSKeyV2
 CMSKeyV3
+CMSKey
 JawboneUP
 KKBOX
 Kindle
@@ -278,3 +287,8 @@ PuffinBrowser
 eMusic
 CMSecurity
 DrBooster
+facebook-appmanager
+Instagram
+Facebook
+facebook-installer
+Messenger
