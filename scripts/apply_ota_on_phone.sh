@@ -83,7 +83,7 @@ adb shell "chmod 755 /data/local/tmp/do_patch.sh"
 
 # do patch !
 echo "Do the work ! "
-adb shell /data/local/tmp/do_patch.sh
+adb shell su -c /data/local/tmp/do_patch.sh
 
 # pull system.img
 echo "Get boot.img and system.img.ext4 from phone .. "
