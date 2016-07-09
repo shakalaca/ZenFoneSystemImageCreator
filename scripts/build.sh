@@ -20,9 +20,17 @@ add_byeselinux() {
   cp $ASSETSDIR/byeselinux/byselinux.ko $1
 }
 
+add_stop_service() {
+  apply_overlay stop_service
+}
+
 cleanup_launcher() {
   find system/vendor -name default_allapp.xml -delete
   find system/vendor -name phone_workspace.xml -exec cp $ASSETSDIR/phone_workspace.xml {} \;
+}
+
+force_adoptable_storage() {
+  echo "persist.fw.force_adoptable=true" >> system/build.prop
 }
 
 move_out_image() {
@@ -188,11 +196,16 @@ if [ ! -z "$SLIM_DOWN" ]; then
   echo "Enable sdcard write permission in platform.xml .. "
   $SCRIPTDIR/enable_sdcard_write.sh
   
+  echo "Clean up launcher workspace .. "
+  cleanup_launcher
+  
   echo "Install Xposed .. "
   $SCRIPTDIR/install_xposed.sh
 
-  echo "Clean up launcher workspace .. "
-  cleanup_launcher
+#  echo "Enable Adoptable Storage .. "
+#  force_adoptable_storage
+
+  add_stop_service
 fi
 
 # Set the right file_context file for SELinux permission
