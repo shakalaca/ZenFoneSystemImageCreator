@@ -18,10 +18,12 @@ fi
 
 if [ -z "$DO_SKIP_PATCHING_UPDATER_SCRIPT" ]; then
 
-  # patch updater-script of full ROM
-  echo "Updating stock ROM .. "
-  cp updater-script META-INF/com/google/android
-  zip -q -u dl_rom.zip META-INF/com/google/android/updater-script
+  if [ ! -f "system.img.ext4" ]; then
+    # patch updater-script of full ROM
+    echo "Updating stock ROM .. "
+    cp updater-script META-INF/com/google/android
+    zip -q -u dl_rom.zip META-INF/com/google/android/updater-script
+  fi
 
   # move out modem related files
   if [ ! -d firmware-update ]; then
