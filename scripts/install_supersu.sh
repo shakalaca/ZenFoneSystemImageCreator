@@ -5,11 +5,11 @@ source ../scripts/setup.bash
 if [ ! -f system/etc/.installed_su_daemon ]; then
 cp -R ../root/* system
 
-cp system/bin/sh system/xbin/sugote-mksh
+#cp system/bin/sh system/xbin/sugote-mksh
 mkdir system/bin/.ext
-cp system/xbin/su system/bin/.ext/.su
-cp system/xbin/su system/xbin/sugote
-cp system/xbin/su system/xbin/daemonsu
+cp system/xbin/daemonsu system/bin/.ext/.su
+#cp system/xbin/su system/xbin/sugote
+#cp system/xbin/su system/xbin/daemonsu
 
 rm system/bin/app_process
 ln -s /system/xbin/daemonsu system/bin/app_process
