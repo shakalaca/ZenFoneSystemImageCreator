@@ -64,7 +64,12 @@ fi # DO_SKIP_PATCHING_UPDATER_SCRIPT
 if [ -z "$DO_SKIP_UPLOADING_ZIP_FILE" ]; then
   # push files to phone
   echo "Pushing stock ROM to phone .. "
-  adb push dl_rom.zip /data/local/tmp/
+  if [ -f "system.img.ext4" ]; then
+    adb push system.img.ext4 /data/local/tmp/system.img
+    mv system.img.ext4 system.img.ext4.orig
+  else
+    adb push dl_rom.zip /data/local/tmp/
+  fi
   echo "Pushing OTA package to phone .. "
   adb push dl_ota.zip /data/local/tmp/
 fi # DO_SKIP_UPLOADING_ZIP_FILE
