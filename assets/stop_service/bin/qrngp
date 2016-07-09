@@ -1,0 +1,4 @@
+#!/system/bin/sh
+
+stop fuse_uicc0
+stop qcomsysd
