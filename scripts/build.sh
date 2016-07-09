@@ -16,6 +16,10 @@ add_root_survival() {
   apply_overlay root_survival
 }
 
+add_byeselinux() {
+  cp $ASSETSDIR/byeselinux/byselinux.ko $1
+}
+
 cleanup_launcher() {
   find system/vendor -name default_allapp.xml -delete
   find system/vendor -name phone_workspace.xml -exec cp $ASSETSDIR/phone_workspace.xml {} \;
@@ -169,6 +173,9 @@ if [ -f system.img.ext4 ]; then
   SYSTEM_SIZE=$(stat -c%s system.img.ext4)
   echo "Update SYSTEM_SIZE to $SYSTEM_SIZE .. "
 fi
+
+#echo "Disable SELinux .. "
+#add_byeselinux system/lib/modules/adsprpc.ko
 
 echo "Install SuperSU .. "
 $SCRIPTDIR/install_supersu.sh
