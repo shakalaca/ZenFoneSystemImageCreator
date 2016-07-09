@@ -8,8 +8,10 @@ mkdir -p META-INF/com/google/android
 cp ../assets/updater-script .
 unzip -q dl_rom.zip META-INF/com/google/android/update-binary
 mv META-INF/com/google/android/update-binary .
-echo "Extracting boot.img .. "
-unzip -q dl_rom.zip boot.img
+if [ ! -f boot.img ]; then
+  echo "Extracting boot.img .. "
+  unzip -q dl_rom.zip boot.img
+fi
 
 #DO_SKIP_PATCHING_UPDATER_SCRIPT=1
 #DO_SKIP_UPLOADING_ZIP_FILE=1
