@@ -17,9 +17,9 @@
         x="0"
         y="0" />
     <favorite
-        className="com.android.mms.ui.ConversationList"
+        className="com.google.android.apps.messaging.ui.ConversationListActivity"
         container="-103"
-        packageName="com.asus.message"
+        packageName="com.google.android.apps.messaging"
         screen="1"
         x="1"
         y="0" />
