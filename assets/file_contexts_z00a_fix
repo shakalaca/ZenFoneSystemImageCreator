@@ -271,14 +271,14 @@
 #line 1 "vendor/asus/tools/logtool/sepolicy/file_contexts"
 #logtool
 /system/bin/asuslogcat  u:object_r:dumpstate_exec:s0
-/system/bin/fdcmts      u:object_r:logtoold_exec:s0
+/system/bin/fdcmts      u:object_r:dumpstate_exec:s0
 /system/bin/logkmsg     u:object_r:dumpstate_exec:s0
 /system/bin/logcontrol  u:object_r:dumpstate_exec:s0
-/system/bin/logcommand  u:object_r:logtoold_exec:s0
+/system/bin/logcommand  u:object_r:dumpstate_exec:s0
 /system/bin/toolcommand u:object_r:fdctool_exec:s0
-/system/bin/toolconnect           u:object_r:logtoold_exec:s0
-/dev/socket/toolconnect           u:object_r:logtoold_socket:s0
-/dev/socket/fdcmdm[0-9]*          u:object_r:logtoold_socket:s0
+/system/bin/toolconnect           u:object_r:dumpstate_exec:s0
+/dev/socket/toolconnect           u:object_r:dumpstate_socket:s0
+/dev/socket/fdcmdm[0-9]*          u:object_r:dumpstate_socket:s0
 #line 1 "device/intel/common/sepolicy/file_contexts"
 # Additional file_contexts
 # ASF securityfile service
