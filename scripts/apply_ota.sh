@@ -38,7 +38,7 @@ delete() {
     TARGET=${TARGET:1}
     if [ -d $TARGET ]; then
       rmdir $TARGET
-    elif [ -f $TARGET ]; then
+    elif [ -f $TARGET ] || [ -L $TARGET ]; then
       rm $TARGET
     fi
   done
