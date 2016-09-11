@@ -15,13 +15,16 @@ cd src
 #DO_NOT_FETCH=1
 
 if [ -z "$DO_NOT_FETCH" ]; then
-  BRANCH=android-5.0.0_r7
+  BRANCH=android-6.0.1_r8
+  #BRANCH=android-5.0.0_r7
   #BRANCH=android-4.3_r3
 
   #git clone -b $BRANCH https://android.googlesource.com/platform/external/libselinux
   #git clone -b $BRANCH https://android.googlesource.com/platform/system/core
   #git clone -b $BRANCH https://android.googlesource.com/platform/external/zlib
   #git clone -b $BRANCH https://android.googlesource.com/platform/system/extras
+  git clone https://android.googlesource.com/platform/external/pcre
+  cd pcre; git checkout -b $BRANCH $BRANCH; cd ..
   git clone https://android.googlesource.com/platform/external/libselinux
   cd libselinux; git checkout -b $BRANCH $BRANCH; cd ..
   git clone https://android.googlesource.com/platform/system/core
@@ -42,6 +45,16 @@ fi
 #git clone https://github.com/xiaolu/intel-boot-tools.git
 
 # build for make_ext4fs
+cd pcre
+gcc -DHAVE_CONFIG_H -I . -I dist -c pcre_chartables.c \
+    dist/pcre_byte_order.c dist/pcre_compile.c dist/pcre_config.c dist/pcre_dfa_exec.c \
+    dist/pcre_exec.c dist/pcre_fullinfo.c dist/pcre_get.c dist/pcre_globals.c \
+    dist/pcre_jit_compile.c dist/pcre_maketables.c dist/pcre_newline.c dist/pcre_ord2utf8.c \
+    dist/pcre_refcount.c dist/pcre_study.c dist/pcre_tables.c \
+    dist/pcre_ucd.c dist/pcre_valid_utf8.c dist/pcre_version.c dist/pcre_xclass.c
+ar rcs libpcre.a *.o
+cd ..
+
 cd libselinux/src
 CFLAGS=-DHOST
 if [ "$(uname)" == "Darwin" ]; then
@@ -73,25 +86,32 @@ cp simg2img $BIN_DIR
 cd ../..
  
 cd extras/ext4_utils
-gcc -DHOST -DANDROID \
+gcc -DHOST -DANDROID -Wno-format \
     -I../../libselinux/include -I../../core/libsparse/include -I../../core/include/ \
+    -I../../pcre \
     -o make_ext4fs \
        make_ext4fs_main.c make_ext4fs.c ext4fixup.c ext4_utils.c \
-       allocate.c contents.c extent.c indirect.c uuid.c sha1.c wipe.c crc16.c \
+       allocate.c contents.c extent.c indirect.c sha1.c wipe.c crc16.c \
        ext4_sb.c canned_fs_config.c \
+       ../../core/libcutils/fs_config.c \
        ../../libselinux/src/libselinux.a \
        ../../core/libsparse/libsparse.a \
-       ../../zlib/src/libz.a
+       ../../zlib/src/libz.a \
+       ../../pcre/libpcre.a
+
 cp make_ext4fs $BIN_DIR
-gcc -DANDROID \
+gcc -DANDROID -Wno-format \
     -I../../libselinux/include -I../../core/libsparse/include -I../../core/include/ \
+    -I../../pcre \
     -o ext2simg \
        ext2simg.c \
        make_ext4fs.c ext4fixup.c ext4_utils.c allocate.c contents.c extent.c \
-       indirect.c uuid.c sha1.c wipe.c crc16.c ext4_sb.c \
+       indirect.c sha1.c wipe.c crc16.c ext4_sb.c \
        ../../libselinux/src/libselinux.a \
        ../../core/libsparse/libsparse.a \
-       ../../zlib/src/libz.a
+       ../../zlib/src/libz.a \
+       ../../pcre/libpcre.a
+
 cp ext2simg $BIN_DIR
 cd ../..
 
