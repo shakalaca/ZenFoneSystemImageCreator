@@ -159,11 +159,11 @@ if [ -f $STOCK_OTA ]; then
   $SCRIPTDIR/apply_ota.sh $STOCK_OTA
 fi
 
-echo "Install SuperSU .. "
-$SCRIPTDIR/install_supersu.sh
-
 # For slim down version
 if [ ! -z "$SLIM_DOWN" ]; then
+  echo "Install SuperSU .. "
+  $SCRIPTDIR/install_supersu.sh
+
   echo "Remove apps listed in exclude_apps_list .. "
   $SCRIPTDIR/exclude_apps.sh
   
