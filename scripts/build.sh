@@ -12,10 +12,6 @@ add_new_vold() {
   apply_overlay new_vold
 }
 
-add_root_survival() {
-  apply_overlay root_survival
-}
-
 cleanup_launcher() {
   find system/vendor -name default_allapp.xml -delete
   find system/vendor -name phone_workspace.xml -exec cp $ASSETSDIR/phone_workspace.xml {} \;
@@ -171,9 +167,6 @@ if [ ! -z "$SLIM_DOWN" ]; then
   echo "Remove apps listed in exclude_apps_list .. "
   $SCRIPTDIR/exclude_apps.sh
   
-  echo "Enable sdcard write permission in platform.xml .. "
-  $SCRIPTDIR/enable_sdcard_write.sh
-  
   echo "Install Xposed .. "
   $SCRIPTDIR/install_xposed.sh
   
@@ -181,10 +174,7 @@ if [ ! -z "$SLIM_DOWN" ]; then
   add_new_vold
   
   echo "Clean up launcher workspace .. "
-  cleanup_launcher
-#else
-#  echo "Add root survival program .. "
-#  add_root_survival
+#  cleanup_launcher
 fi
 
 # Set the right file_context file for SELinux permission
