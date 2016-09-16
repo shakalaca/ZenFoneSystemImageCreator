@@ -1,0 +1,22 @@
+#!/system/bin/sh
+
+supolicy --live "allow vold fuse_device chr_file { getattr write open read }"
+supolicy --live "allow vold unlabeled filesystem { mount unmount } "
+supolicy --live "allow vold vold capability { setuid setgid } "
+
+supolicy --live "allow fsck_untrusted block_device dir { getattr } "
+supolicy --live "allow fsck_untrusted fsck_untrusted capability { sys_admin }"
+supolicy --live "allow fsck vold_device blk_file { getattr write open }"
+supolicy --live "allow fsck block_device dir { getattr }"
+
+supolicy --live "allow sdcardd unlabeled filesystem { getattr }"
+supolicy --live "allow sdcardd unlabeled dir { getattr search read write open add_name }"
+supolicy --live "allow sdcardd unlabeled file { getattr open read }"
+
+supolicy --live "allow blkid_untrusted init fifo_file { getattr write read }"
+supolicy --live "allow untrusted_app unlabeled dir { search }"
+supolicy --live "allow untrusted_app unlabeled file { read open }"
+
+supolicy --live "allow platform_app unlabeled dir { search }"
+
+supolicy --live "allow unlabeled unlabeled filesystem { associate }"
