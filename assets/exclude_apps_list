@@ -225,11 +225,12 @@ WebStorage
 DMClient
 SystemUpdate
 UpdateLauncher
-SMMI_TEST
+#SMMI_TEST
 DetectLogApp
 LogUploader
 AsusLiveDemoService
 AsusLiveDemoUI
+#AppManager
 
 # Bloatware (not ASUS)
 Ezding
