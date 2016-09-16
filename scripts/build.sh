@@ -174,7 +174,7 @@ if [ ! -z "$SLIM_DOWN" ]; then
   add_new_vold
   
   echo "Clean up launcher workspace .. "
-#  cleanup_launcher
+  cleanup_launcher
 fi
 
 # Set the right file_context file for SELinux permission
