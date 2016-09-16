@@ -183,6 +183,7 @@ if [ -n "$FILE_CONTEXT" ]; then
 fi
 
 echo "Build system.img .. "
+echo $BIN_DIR/make_ext4fs -s -l $SYSTEM_SIZE -a system $FCOPT system.img system
 $BIN_DIR/make_ext4fs -s -l $SYSTEM_SIZE -a system $FCOPT system.img system
 
 echo "Finish building $VERSION .. "
