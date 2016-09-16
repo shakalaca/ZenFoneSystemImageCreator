@@ -180,6 +180,9 @@ fi
 # Set the right file_context file for SELinux permission
 if [ -n "$FILE_CONTEXT" ]; then
   FCOPT="-S $ASSETSDIR/$FILE_CONTEXT"
+  if [ ! -z "$SLIM_DOWN" ]; then
+    FCOPT="$FCOPT"_fix
+  fi
 fi
 
 echo "Build system.img .. "

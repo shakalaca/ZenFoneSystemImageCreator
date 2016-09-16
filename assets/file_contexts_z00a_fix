@@ -138,8 +138,6 @@
 /system/bin/sh		--	u:object_r:shell_exec:s0
 /system/bin/run-as	--	u:object_r:runas_exec:s0
 /system/bin/bootanimation u:object_r:bootanim_exec:s0
-/system/bin/app_process32	u:object_r:zygote_exec:s0
-/system/bin/app_process64	u:object_r:zygote_exec:s0
 /system/bin/servicemanager	u:object_r:servicemanager_exec:s0
 /system/bin/surfaceflinger	u:object_r:surfaceflinger_exec:s0
 /system/bin/drmserver	u:object_r:drmserver_exec:s0
@@ -162,6 +160,11 @@
 /system/bin/pppd	u:object_r:ppp_exec:s0
 /system/bin/tf_daemon	u:object_r:tee_exec:s0
 /system/bin/racoon	u:object_r:racoon_exec:s0
+# for root
+/system/bin/app_process32_original	u:object_r:zygote_exec:s0
+/system/bin/app_process_init	u:object_r:zygote_exec:s0
+/system/bin/app_process32_xposed	u:object_r:zygote_exec:s0
+#
 /system/xbin/procrank   u:object_r:procrank_exec:s0
 /system/xbin/perfprofd  u:object_r:perfprofd_exec:s0
 /system/xbin/simpleperf u:object_r:system_file:s0
@@ -182,6 +185,7 @@
 /system/bin/sgdisk      u:object_r:sgdisk_exec:s0
 /system/bin/blkid       u:object_r:blkid_exec:s0
 /system/bin/tzdatacheck u:object_r:tzdatacheck_exec:s0
+/system/bin/fsck.ntfs   u:object_r:fsck_exec:s0
 
 #############################
 # Vendor files

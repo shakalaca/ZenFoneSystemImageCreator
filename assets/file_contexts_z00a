@@ -162,12 +162,6 @@
 /system/bin/pppd	u:object_r:ppp_exec:s0
 /system/bin/tf_daemon	u:object_r:tee_exec:s0
 /system/bin/racoon	u:object_r:racoon_exec:s0
-# for root
-/system/xbin/sugote	u:object_r:zygote_exec:s0
-/system/bin/app_process32_original	u:object_r:zygote_exec:s0
-/system/bin/app_process_init	u:object_r:zygote_exec:s0
-/system/bin/app_process32_xposed	u:object_r:zygote_exec:s0
-#
 /system/xbin/procrank   u:object_r:procrank_exec:s0
 /system/xbin/perfprofd  u:object_r:perfprofd_exec:s0
 /system/xbin/simpleperf u:object_r:system_file:s0
@@ -188,7 +182,6 @@
 /system/bin/sgdisk      u:object_r:sgdisk_exec:s0
 /system/bin/blkid       u:object_r:blkid_exec:s0
 /system/bin/tzdatacheck u:object_r:tzdatacheck_exec:s0
-/system/bin/fsck.ntfs   u:object_r:fsck_exec:s0
 
 #############################
 # Vendor files
