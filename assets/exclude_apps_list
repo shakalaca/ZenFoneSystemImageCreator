@@ -130,6 +130,8 @@ Velvet
 Videos
 YouTube
 talkback
+Photos
+CalendarGoogle
 
 # Live Wallpapers 
 Galaxy4
@@ -216,6 +218,7 @@ ZenFlash
 ASUSAppInstallationService
 SystemMonitor
 AppCloud
+WebStorage
 
 ########## Safe to remove ##########
 # Debug / Update or not-used-service
@@ -256,3 +259,8 @@ YahooAuction
 Asphalt
 CMSecurity
 ZenChoice
+facebook-installer
+facebook-appmanager
+Instagram
+Facebook
+FacebookMessenger
