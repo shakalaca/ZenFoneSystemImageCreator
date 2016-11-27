@@ -1,7 +1,7 @@
 # ZenFone 2 Z00A
-VERSION=Z00A_WW_2.20.40.196
+VERSION=Z00A_WW_2.20.40.198
 LINK_PERM_SETUP_FILE=link_and_set_perm_z00a
-ROM_URL=http://dlcdnet.asus.com/pub/ASUS/ZenFone/ZE551ML/UL-Z00A-WW-2.20.40.196-user.zip
+ROM_URL=http://dlcdnet.asus.com/pub/ASUS/ZenFone/ZE551ML/UL-Z00A-WW-2.20.40.198-user.zip
 SYSTEM_SIZE=2415919104
 FILE_CONTEXT=file_contexts_z00a
 
