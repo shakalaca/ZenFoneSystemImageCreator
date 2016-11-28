@@ -1,5 +1,5 @@
 diff --git a/include/private/android_filesystem_config.h b/include/private/android_filesystem_config.h
-index cced309..3d29ac2 100644
+index cced309..e2166e2 100644
 --- a/include/private/android_filesystem_config.h
 +++ b/include/private/android_filesystem_config.h
 @@ -215,6 +215,7 @@ static const struct fs_path_config android_dirs[] = {
@@ -10,7 +10,7 @@ index cced309..3d29ac2 100644
      { 00755, AID_ROOT,   AID_SHELL,  0, "system/vendor" },
      { 00755, AID_ROOT,   AID_SHELL,  0, "system/xbin" },
      { 00755, AID_ROOT,   AID_ROOT,   0, "system/etc/ppp" },
-@@ -230,6 +231,38 @@ static const struct fs_path_config android_dirs[] = {
+@@ -230,6 +231,48 @@ static const struct fs_path_config android_dirs[] = {
  ** and will allow partial matches.
  */
  static const struct fs_path_config android_files[] = {
@@ -46,10 +46,29 @@ index cced309..3d29ac2 100644
 +    { 00770, AID_ROOT,      AID_ROOT,      0, "system/etc/saveramdump.sh" },
 +    { 00770, AID_ROOT,      AID_ROOT,      0, "system/etc/check_sd.sh" },
 +
++    /* ZenFone 3 */
++    { 00755, AID_ROOT,      AID_ROOT,      0, "system/etc/asus_dfps.sh" },
++    { 00770, AID_ROOT,      AID_ROOT,      0, "system/etc/cscclearlog.sh" },
++    { 00755, AID_ROOT,      AID_ROOT,      0, "system/etc/improve_sd.sh" },
++    { 00755, AID_ROOT,      AID_ROOT,      0, "system/etc/select_mic.sh" },
++    { 00755, AID_ROOT,      AID_ROOT,      0, "system/etc/select_output.sh" },
++    { 00755, AID_ROOT,      AID_ROOT,      0, "system/etc/spkampcal.sh" },
++    { 00770, AID_ROOT,      AID_ROOT,      0, "system/etc/procrankdump.sh" },
++    { 06755, AID_ROOT,      AID_ROOT,      0, "system/bin/onFgAppChanged" },
++
      { 00440, AID_ROOT,      AID_SHELL,     0, "system/etc/init.goldfish.rc" },
      { 00550, AID_ROOT,      AID_SHELL,     0, "system/etc/init.goldfish.sh" },
      { 00440, AID_ROOT,      AID_SHELL,     0, "system/etc/init.trout.rc" },
-@@ -251,7 +284,6 @@ static const struct fs_path_config android_files[] = {
+@@ -243,7 +286,7 @@ static const struct fs_path_config android_files[] = {
+     { 00644, AID_MEDIA_RW,  AID_MEDIA_RW,  0, "data/media/*" },
+     { 00644, AID_SYSTEM,    AID_SYSTEM,    0, "data/app-private/*" },
+     { 00644, AID_APP,       AID_APP,       0, "data/data/*" },
+-    { 00755, AID_ROOT,      AID_ROOT,      0, "system/bin/ping" },
++    { 00755, AID_ROOT,      AID_SYSTEM,    0, "system/bin/ping" },
+ 
+     /* the following file is INTENTIONALLY set-gid and not set-uid.
+      * Do not change. */
+@@ -251,7 +294,6 @@ static const struct fs_path_config android_files[] = {
  
      /* the following five files are INTENTIONALLY set-uid, but they
       * are NOT included on user builds. */
