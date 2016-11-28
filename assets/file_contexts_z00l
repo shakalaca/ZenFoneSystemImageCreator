@@ -164,7 +164,9 @@
 /system/bin/racoon	u:object_r:racoon_exec:s0
 # for root
 /system/bin/app_process64_original	u:object_r:zygote_exec:s0
+/system/bin/app_process32_original	u:object_r:zygote_exec:s0
 /system/bin/app_process_init	u:object_r:zygote_exec:s0
+/system/bin/app_process32_xposed	u:object_r:zygote_exec:s0
 /system/bin/app_process64_xposed	u:object_r:zygote_exec:s0
 #
 /system/xbin/procrank   u:object_r:procrank_exec:s0
